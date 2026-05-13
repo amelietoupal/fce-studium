@@ -1,1910 +1,590 @@
 <!DOCTYPE html>
 
-<html lang="cs">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FCE Study Hub · B2 First</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>FCE Study Hub ✦</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Mulish:wght@300;400;500;600&display=swap');
-
 :root {
-–bg:       #080a0f;
-–s1:       #0f1118;
-–s2:       #161922;
-–s3:       #1e2130;
-–border:   #252a3a;
-–border2:  #2e3448;
-–a1:       #6c8eff;   /* blue accent */
-–a2:       #ff7eb3;   /* pink accent */
-–a3:       #52d9a0;   /* green accent */
-–a4:       #ffc55a;   /* gold */
-–a5:       #ff6b6b;   /* red */
-–text:     #dde2f0;
-–muted:    #5c6480;
-–muted2:   #8890b0;
-–r:        10px;
+  --bg:       #f7f4ef;
+  --white:    #ffffff;
+  --ink:      #1a1714;
+  --muted:    #8a8178;
+  --line:     #e2ddd6;
+  --c1:       #e8956a;
+  --c1l:      #fdf0e8;
+  --c2:       #5b8dd9;
+  --c2l:      #eaf1fb;
+  --c3:       #6abf8a;
+  --c3l:      #e8f7ee;
+  --c4:       #b97fd4;
+  --c4l:      #f3eafa;
+  --c5:       #c9a84c;
+  --c5l:      #fdf8e0;
+  --c6:       #e06b8b;
+  --c6l:      #fdedf2;
 }
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-
-html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
 background: var(–bg);
-color: var(–text);
-font-family: ‘Mulish’, sans-serif;
-font-size: 14px;
-line-height: 1.65;
+color: var(–ink);
+font-family: ‘DM Sans’, sans-serif;
+font-size: 16px;
+line-height: 1.6;
 min-height: 100vh;
-overflow-x: hidden;
 }
 
-/* Background glow */
-body::before {
-content:’’;
-position:fixed;
-inset:0;
-background:
-radial-gradient(ellipse 60% 40% at 10% 5%,  rgba(108,142,255,.07) 0%, transparent 60%),
-radial-gradient(ellipse 50% 35% at 90% 90%,  rgba(82,217,160,.05) 0%, transparent 60%),
-radial-gradient(ellipse 40% 30% at 50% 50%,  rgba(255,126,179,.03) 0%, transparent 60%);
-pointer-events:none; z-index:0;
-}
-
-/* ════════════════════ SIDEBAR ════════════════════ */
-.sidebar {
-position: fixed;
-left: 0; top: 0; bottom: 0;
-width: 220px;
-background: var(–s1);
-border-right: 1px solid var(–border);
-display: flex;
-flex-direction: column;
-z-index: 100;
-padding: 0 0 24px;
-}
-
-.logo {
-padding: 28px 22px 24px;
-border-bottom: 1px solid var(–border);
-margin-bottom: 16px;
-}
-
-.logo-text {
-font-family: ‘Syne’, sans-serif;
-font-size: 20px;
-font-weight: 800;
-color: #fff;
-letter-spacing: -0.5px;
-}
-
-.logo-text span { color: var(–a1); }
-
-.logo-sub {
-font-size: 11px;
-color: var(–muted);
-letter-spacing: 1px;
-text-transform: uppercase;
-margin-top: 3px;
-}
-
-.nav-group {
-padding: 0 12px;
-margin-bottom: 6px;
-}
-
-.nav-label {
-font-size: 10px;
-font-weight: 700;
-letter-spacing: 1.5px;
-text-transform: uppercase;
-color: var(–muted);
-padding: 0 10px;
-margin-bottom: 4px;
-}
-
-.nav-item {
-display: flex;
-align-items: center;
-gap: 10px;
-padding: 9px 12px;
-border-radius: 8px;
-cursor: pointer;
-color: var(–muted2);
-font-size: 13px;
-font-weight: 500;
-transition: all .15s;
-margin-bottom: 2px;
-user-select: none;
-}
-
-.nav-item:hover { background: var(–s2); color: var(–text); }
-.nav-item.active { background: rgba(108,142,255,.12); color: var(–a1); }
-.nav-item.active .nav-icon { color: var(–a1); }
-
-.nav-icon { font-size: 16px; flex-shrink: 0; }
-
-.sidebar-footer {
-margin-top: auto;
-padding: 16px 22px 0;
-border-top: 1px solid var(–border);
-}
-
-.progress-ring-wrap { text-align: center; }
-
-.xp-label {
-font-size: 11px;
-color: var(–muted);
-text-transform: uppercase;
-letter-spacing: 1px;
-margin-bottom: 8px;
-}
-
-.xp-bar-track {
-height: 5px;
-background: var(–border);
-border-radius: 100px;
-overflow: hidden;
-margin-bottom: 5px;
-}
-
-.xp-bar-fill {
-height: 100%;
-background: linear-gradient(90deg, var(–a1), var(–a2));
-border-radius: 100px;
-transition: width .6s ease;
-}
-
-.xp-nums { font-size: 12px; color: var(–muted2); text-align: right; }
-
-/* ════════════════════ MAIN ════════════════════ */
-.main {
-margin-left: 220px;
-min-height: 100vh;
-position: relative;
-z-index: 1;
-}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(–bg); }
+::-webkit-scrollbar-thumb { background: var(–line); border-radius: 2px; }
 
 .topbar {
-position: sticky;
-top: 0;
-background: rgba(8,10,15,.85);
-backdrop-filter: blur(12px);
-border-bottom: 1px solid var(–border);
-padding: 14px 32px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-z-index: 50;
+position: sticky; top: 0; z-index: 100;
+background: rgba(247,244,239,0.92);
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+border-bottom: 1.5px solid var(–line);
+height: 54px;
+display: flex; align-items: center;
+padding: 0 2rem; gap: 1rem;
 }
 
-.page-title {
+.topbar-logo {
 font-family: ‘Syne’, sans-serif;
-font-size: 18px;
-font-weight: 700;
-color: #fff;
+font-weight: 800; font-size: 1.05rem;
+letter-spacing: -0.02em;
+display: flex; align-items: center; gap: 0.4rem;
 }
 
-.topbar-right {
-display: flex;
-align-items: center;
-gap: 12px;
-}
-
-.streak-chip {
-display: flex;
-align-items: center;
-gap: 6px;
-background: rgba(255,197,90,.1);
-border: 1px solid rgba(255,197,90,.2);
-border-radius: 100px;
-padding: 5px 12px;
-font-size: 12px;
-font-weight: 700;
-color: var(–a4);
-}
-
-.content {
-padding: 32px;
-}
-
-/* ════════════════════ SECTIONS ════════════════════ */
-.section { display: none; }
-.section.active { display: block; }
-
-/* ════════════════════ DASHBOARD ════════════════════ */
-.dash-greeting {
-margin-bottom: 28px;
-}
-
-.dash-greeting h1 {
-font-family: ‘Syne’, sans-serif;
-font-size: clamp(26px, 3vw, 36px);
-font-weight: 800;
-color: #fff;
-margin-bottom: 4px;
-}
-
-.dash-greeting p { color: var(–muted2); font-size: 14px; }
-
-.stats-row {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 14px;
-margin-bottom: 28px;
-}
-
-.stat-card {
-background: var(–s1);
-border: 1px solid var(–border);
-border-radius: var(–r);
-padding: 18px 20px;
-position: relative;
-overflow: hidden;
-}
-
-.stat-card::before {
-content: ‘’;
-position: absolute;
-top: 0; left: 0; right: 0;
-height: 2px;
-}
-
-.stat-card.c1::before { background: var(–a1); }
-.stat-card.c2::before { background: var(–a2); }
-.stat-card.c3::before { background: var(–a3); }
-.stat-card.c4::before { background: var(–a4); }
-
-.stat-num {
-font-family: ‘Syne’, sans-serif;
-font-size: 28px;
-font-weight: 800;
-color: #fff;
-line-height: 1;
-margin-bottom: 4px;
-}
-
-.stat-label { font-size: 12px; color: var(–muted); }
-
-.dash-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 18px;
-margin-bottom: 28px;
-}
-
-.panel {
-background: var(–s1);
-border: 1px solid var(–border);
-border-radius: var(–r);
-overflow: hidden;
-}
-
-.panel-head {
-padding: 16px 20px;
-border-bottom: 1px solid var(–border);
-display: flex;
-align-items: center;
-justify-content: space-between;
-}
-
-.panel-head h3 {
-font-family: ‘Syne’, sans-serif;
-font-size: 14px;
-font-weight: 700;
-color: #fff;
-}
-
-.panel-body { padding: 16px 20px; }
-
-/* skill bars in dashboard */
-.skill-line {
-display: flex;
-align-items: center;
-gap: 10px;
-margin-bottom: 12px;
-}
-
-.skill-line:last-child { margin-bottom: 0; }
-
-.skill-nm { font-size: 12px; color: var(–muted2); min-width: 130px; }
-
-.sk-track {
-flex: 1;
-height: 6px;
-background: var(–border);
-border-radius: 100px;
-overflow: hidden;
-}
-
-.sk-fill {
-height: 100%;
-border-radius: 100px;
-width: 0;
-transition: width 1.2s cubic-bezier(.4,0,.2,1) .3s;
-}
-
-.skill-pct { font-size: 11px; font-weight: 700; min-width: 30px; text-align: right; }
-
-/* activity feed */
-.activity-item {
-display: flex;
-align-items: flex-start;
-gap: 10px;
-padding: 10px 0;
-border-bottom: 1px solid var(–border);
-font-size: 13px;
-}
-.activity-item:last-child { border-bottom: none; padding-bottom: 0; }
-
-.act-dot {
+.dot {
 width: 8px; height: 8px;
-border-radius: 50%;
-flex-shrink: 0;
-margin-top: 5px;
+background: var(–c1); border-radius: 50%;
+animation: pulse 2s ease-in-out infinite;
 }
 
-.act-text { color: var(–muted2); line-height: 1.5; }
-.act-text strong { color: var(–text); }
-.act-time { font-size: 11px; color: var(–muted); margin-left: auto; white-space: nowrap; }
-
-/* ════════════════════ PLAN ════════════════════ */
-.plan-phase {
-margin-bottom: 32px;
+@keyframes pulse {
+0%,100% { transform: scale(1); opacity: 1; }
+50% { transform: scale(1.4); opacity: 0.7; }
 }
 
-.phase-header {
-display: flex;
-align-items: center;
-gap: 14px;
-margin-bottom: 16px;
+.search-wrap { flex: 1; max-width: 320px; position: relative; }
+.search-wrap svg {
+position: absolute; left: 0.65rem; top: 50%; transform: translateY(-50%);
+width: 13px; height: 13px; opacity: 0.35; pointer-events: none;
+fill: none; stroke: var(–ink); stroke-width: 2; stroke-linecap: round;
 }
 
-.phase-header h2 {
-font-family: ‘Syne’, sans-serif;
-font-size: 18px;
-font-weight: 700;
-color: #fff;
+#search {
+width: 100%; background: var(–white);
+border: 1.5px solid var(–line); border-radius: 50px;
+padding: 0.38rem 0.85rem 0.38rem 2rem;
+font-family: ‘DM Mono’, monospace; font-size: 0.68rem;
+letter-spacing: 0.03em; color: var(–ink); outline: none;
+transition: border-color 0.2s;
+}
+#search:focus { border-color: var(–c1); }
+#search::placeholder { color: var(–muted); }
+
+.topbar-right { margin-left: auto; }
+
+.pill-btn {
+font-family: ‘DM Mono’, monospace; font-size: 0.62rem;
+letter-spacing: 0.1em; text-transform: uppercase;
+background: var(–ink); color: var(–white);
+border: none; padding: 0.45rem 1.1rem;
+border-radius: 50px; cursor: pointer;
+transition: background 0.15s, transform 0.1s; white-space: nowrap;
+}
+.pill-btn:hover { background: var(–c1); }
+.pill-btn:active { transform: scale(0.97); }
+
+.hero {
+padding: 3rem 2.5rem 2rem;
+max-width: 1200px; margin: 0 auto;
 }
 
-.phase-divider { flex: 1; height: 1px; background: var(–border); }
-
-.phase-badge {
-font-size: 10px;
-font-weight: 700;
-letter-spacing: 1.5px;
-text-transform: uppercase;
-padding: 4px 12px;
-border-radius: 100px;
+.hero-tag {
+display: inline-flex; align-items: center; gap: 0.5rem;
+background: var(–c1l); border: 1px solid var(–c1);
+color: var(–c1); font-family: ‘DM Mono’, monospace;
+font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+padding: 0.3rem 0.8rem; border-radius: 50px; margin-bottom: 1rem;
 }
 
-.plan-weeks {
+.hero h1 {
+font-family: ‘Syne’, sans-serif; font-weight: 800;
+font-size: clamp(2.5rem, 6vw, 4.5rem);
+line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 0.75rem;
+}
+.hero h1 span { color: var(–c1); }
+
+.hero-sub {
+font-size: 1rem; color: var(–muted); font-weight: 300;
+margin-bottom: 2rem; max-width: 500px;
+}
+
+.stats-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+
+.stat-chip {
+background: var(–white); border: 1.5px solid var(–line);
+border-radius: 12px; padding: 0.85rem 1.25rem;
+display: flex; flex-direction: column; gap: 0.1rem; min-width: 100px;
+}
+.stat-chip-val { font-family: ‘Syne’, sans-serif; font-weight: 700; font-size: 1.7rem; line-height: 1; }
+.stat-chip-label { font-family: ‘DM Mono’, monospace; font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(–muted); }
+.stat-chip.accent { background: var(–c1); border-color: var(–c1); }
+.stat-chip.accent .stat-chip-val { color: white; }
+.stat-chip.accent .stat-chip-label { color: rgba(255,255,255,0.7); }
+
+.progress-row { display: flex; align-items: center; gap: 1rem; max-width: 500px; }
+.progress-bar { flex: 1; height: 6px; background: var(–line); border-radius: 6px; overflow: hidden; }
+.progress-fill {
+height: 100%; background: linear-gradient(90deg, var(–c1), var(–c6));
+border-radius: 6px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); width: 0%;
+}
+.progress-pct { font-family: ‘Syne’, sans-serif; font-weight: 700; font-size: 0.9rem; color: var(–c1); min-width: 3rem; }
+
+.tabs-wrap {
+border-bottom: 1.5px solid var(–line);
+padding: 0 2.5rem; max-width: 1200px; margin: 0 auto;
+display: flex; gap: 0; overflow-x: auto;
+}
+
+.tab {
+font-family: ‘DM Mono’, monospace; font-size: 0.65rem;
+letter-spacing: 0.1em; text-transform: uppercase;
+background: transparent; border: none; color: var(–muted);
+padding: 0.85rem 1.25rem; cursor: pointer;
+border-bottom: 2px solid transparent; margin-bottom: -1.5px;
+transition: color 0.15s, border-color 0.15s; white-space: nowrap;
+display: flex; align-items: center; gap: 0.5rem;
+}
+.tab:hover { color: var(–ink); }
+.tab.active { color: var(–ink); border-bottom-color: var(–ink); font-weight: 500; }
+
+.tab-badge {
+font-size: 0.5rem; padding: 0.1rem 0.4rem;
+border-radius: 50px; background: var(–line); color: var(–muted);
+}
+.tab.active .tab-badge { background: var(–ink); color: white; }
+
+.grid-wrap { max-width: 1200px; margin: 0 auto; padding: 2rem 2.5rem; }
+
+.topics-grid {
 display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 14px;
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+gap: 1rem;
 }
 
-.week-card {
-background: var(–s1);
-border: 1px solid var(–border);
-border-radius: var(–r);
-overflow: hidden;
-transition: border-color .2s, transform .2s;
+.topic-card {
+background: var(–white); border: 1.5px solid var(–line);
+border-radius: 16px; padding: 1.25rem 1.25rem 1rem;
+display: flex; flex-direction: column; gap: 0.75rem;
+transition: transform 0.2s, box-shadow 0.2s;
+animation: popIn 0.3s cubic-bezier(0.34,1.4,0.64,1) forwards;
+opacity: 0; position: relative; overflow: hidden;
 }
 
-.week-card:hover { transform: translateY(-2px); border-color: var(–border2); }
-
-.wk-top {
-padding: 14px 18px 12px;
-border-bottom: 1px solid var(–border);
-display: flex;
-align-items: center;
-gap: 12px;
+@keyframes popIn {
+from { opacity: 0; transform: scale(0.95) translateY(8px); }
+to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-.wk-num {
-font-family: ‘Syne’, sans-serif;
-font-size: 24px;
-font-weight: 800;
-color: var(–muted);
-min-width: 28px;
-line-height: 1;
+.topic-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+
+.topic-card.is-done { opacity: 0.55; }
+.topic-card.is-done::after {
+content: ‘’;
+position: absolute; inset: 0;
+background: repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(0,0,0,0.015) 8px, rgba(0,0,0,0.015) 9px);
+border-radius: 16px; pointer-events: none;
 }
 
-.wk-info { flex: 1; }
-.wk-title { font-size: 13px; font-weight: 600; color: #fff; }
-.wk-dates { font-size: 11px; color: var(–muted); margin-top: 1px; }
+.card-strip { height: 4px; border-radius: 4px; margin-bottom: 0.25rem; }
+.card-cat-badge {
+font-family: ‘DM Mono’, monospace; font-size: 0.55rem;
+letter-spacing: 0.12em; text-transform: uppercase;
+padding: 0.2rem 0.6rem; border-radius: 50px; font-weight: 500;
+display: inline-block;
+}
+.card-title {
+font-family: ‘Syne’, sans-serif; font-weight: 600;
+font-size: 1rem; line-height: 1.3; letter-spacing: -0.01em;
+}
+.topic-card.is-done .card-title { text-decoration: line-through; }
+.card-desc { font-size: 0.82rem; color: var(–muted); font-weight: 300; line-height: 1.5; flex: 1; }
 
-.wk-done-btn {
-background: transparent;
-border: 1.5px solid var(–border);
-border-radius: 6px;
-padding: 4px 10px;
-font-size: 11px;
-font-weight: 600;
-color: var(–muted);
-cursor: pointer;
-transition: all .15s;
-font-family: ‘Mulish’, sans-serif;
+.card-footer {
+display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+padding-top: 0.5rem; border-top: 1px solid var(–line);
 }
 
-.wk-done-btn:hover { border-color: var(–a3); color: var(–a3); }
-.wk-done-btn.done { background: rgba(82,217,160,.1); border-color: rgba(82,217,160,.3); color: var(–a3); }
-
-.wk-body { padding: 14px 18px; }
-
-.wk-task {
-display: flex;
-align-items: flex-start;
-gap: 8px;
-margin-bottom: 8px;
-font-size: 12px;
-color: var(–muted2);
+.btn-open {
+font-family: ‘DM Mono’, monospace; font-size: 0.6rem;
+letter-spacing: 0.08em; text-transform: uppercase;
+text-decoration: none; padding: 0.4rem 0.9rem;
+border-radius: 50px; transition: background 0.15s, color 0.15s;
+font-weight: 500; display: inline-flex; align-items: center; gap: 0.3rem;
 }
 
-.wk-task:last-child { margin-bottom: 0; }
+.card-right { display: flex; align-items: center; gap: 0.4rem; }
 
-.task-tag {
-font-size: 10px;
-font-weight: 700;
-letter-spacing: .5px;
-padding: 2px 7px;
-border-radius: 4px;
-white-space: nowrap;
-flex-shrink: 0;
-margin-top: 1px;
+.btn-done {
+width: 26px; height: 26px; border-radius: 50%;
+border: 1.5px solid var(–line); background: transparent;
+cursor: pointer; display: flex; align-items: center; justify-content: center;
+transition: all 0.2s; flex-shrink: 0;
 }
+.btn-done svg { width: 11px; height: 11px; fill: none; stroke: var(–muted); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.btn-done:hover { border-color: var(–c3); }
+.btn-done.done { background: var(–c3); border-color: var(–c3); }
+.btn-done.done svg { stroke: white; }
 
-/* ════════════════════ EXERCISES ════════════════════ */
-.ex-toolbar {
-display: flex;
-align-items: center;
-gap: 10px;
-margin-bottom: 20px;
-flex-wrap: wrap;
+.btn-del-card {
+background: transparent; border: none; color: var(–muted);
+font-size: 0.9rem; cursor: pointer; padding: 0.2rem; transition: color 0.15s;
 }
+.btn-del-card:hover { color: #e05a5a; }
 
-.filter-btn {
-background: var(–s1);
-border: 1px solid var(–border);
-border-radius: 100px;
-padding: 6px 14px;
-font-size: 12px;
-font-weight: 600;
-color: var(–muted2);
-cursor: pointer;
-transition: all .15s;
-font-family: ‘Mulish’, sans-serif;
+/* COLOR THEMES */
+.theme-uoe       { –col: var(–c2); –col-l: var(–c2l); }
+.theme-writing   { –col: var(–c1); –col-l: var(–c1l); }
+.theme-reading   { –col: var(–c3); –col-l: var(–c3l); }
+.theme-listening { –col: var(–c4); –col-l: var(–c4l); }
+.theme-speaking  { –col: var(–c6); –col-l: var(–c6l); }
+.theme-vocab     { –col: var(–c5); –col-l: var(–c5l); }
+
+.topic-card .card-strip { background: var(–col); }
+.card-cat-badge { background: var(–col-l); color: var(–col); }
+.btn-open { background: var(–col-l); color: var(–col); }
+.btn-open:hover { background: var(–col); color: white; }
+
+.empty-state {
+grid-column: 1/-1; text-align: center; padding: 4rem 1rem; color: var(–muted);
 }
+.empty-emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
+.empty-state p { font-family: ‘DM Mono’, monospace; font-size: 0.7rem; letter-spacing: 0.08em; line-height: 2; }
 
-.filter-btn:hover { border-color: var(–a1); color: var(–a1); }
-.filter-btn.active { background: rgba(108,142,255,.12); border-color: rgba(108,142,255,.35); color: var(–a1); }
-
-.add-ex-btn {
-margin-left: auto;
-background: var(–a1);
-color: #fff;
-border: none;
-border-radius: 8px;
-padding: 8px 18px;
-font-size: 13px;
-font-weight: 600;
-cursor: pointer;
-font-family: ‘Mulish’, sans-serif;
-transition: all .15s;
-display: flex;
-align-items: center;
-gap: 6px;
+/* MODAL */
+.overlay {
+position: fixed; inset: 0; z-index: 500;
+background: rgba(26,23,20,0.6);
+backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+display: flex; align-items: center; justify-content: center;
+padding: 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.2s;
 }
-
-.add-ex-btn:hover { background: #5577ee; }
-
-.ex-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 14px;
-}
-
-.ex-card {
-background: var(–s1);
-border: 1px solid var(–border);
-border-radius: var(–r);
-overflow: hidden;
-transition: border-color .2s;
-}
-
-.ex-card:hover { border-color: var(–border2); }
-
-.ex-card-top {
-padding: 14px 18px 12px;
-border-bottom: 1px solid var(–border);
-display: flex;
-align-items: flex-start;
-justify-content: space-between;
-gap: 10px;
-}
-
-.ex-type-tag {
-font-size: 10px;
-font-weight: 700;
-letter-spacing: 1px;
-text-transform: uppercase;
-padding: 3px 9px;
-border-radius: 4px;
-white-space: nowrap;
-}
-
-.ex-title {
-font-size: 13px;
-font-weight: 600;
-color: #fff;
-margin-top: 6px;
-line-height: 1.4;
-}
-
-.ex-card-body { padding: 14px 18px; }
-
-.ex-preview {
-font-size: 12px;
-color: var(–muted2);
-line-height: 1.6;
-margin-bottom: 12px;
-display: -webkit-box;
--webkit-line-clamp: 3;
--webkit-box-orient: vertical;
-overflow: hidden;
-}
-
-.ex-meta {
-display: flex;
-align-items: center;
-justify-content: space-between;
-}
-
-.ex-score {
-font-size: 11px;
-font-weight: 700;
-}
-
-.ex-open-btn {
-background: var(–s2);
-border: 1px solid var(–border);
-border-radius: 6px;
-padding: 5px 12px;
-font-size: 12px;
-font-weight: 600;
-color: var(–text);
-cursor: pointer;
-font-family: ‘Mulish’, sans-serif;
-transition: all .15s;
-}
-
-.ex-open-btn:hover { background: var(–s3); border-color: var(–a1); color: var(–a1); }
-
-/* Exercise modal */
-.modal-overlay {
-position: fixed;
-inset: 0;
-background: rgba(0,0,0,.7);
-backdrop-filter: blur(4px);
-z-index: 200;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 20px;
-opacity: 0;
-pointer-events: none;
-transition: opacity .2s;
-}
-
-.modal-overlay.open { opacity: 1; pointer-events: all; }
+.overlay.open { opacity: 1; pointer-events: all; }
 
 .modal {
-background: var(–s1);
-border: 1px solid var(–border2);
-border-radius: 16px;
-width: 100%;
-max-width: 640px;
-max-height: 85vh;
-overflow-y: auto;
-transform: translateY(20px);
-transition: transform .25s;
+background: var(–white); border-radius: 20px; padding: 2rem;
+width: 100%; max-width: 460px;
+transform: scale(0.95) translateY(16px);
+transition: transform 0.3s cubic-bezier(0.34,1.4,0.64,1);
+box-shadow: 0 30px 80px rgba(0,0,0,0.15);
 }
+.overlay.open .modal { transform: scale(1) translateY(0); }
 
-.modal-overlay.open .modal { transform: translateY(0); }
-
-.modal-head {
-padding: 22px 24px 18px;
-border-bottom: 1px solid var(–border);
-display: flex;
-align-items: flex-start;
-justify-content: space-between;
-gap: 14px;
-position: sticky;
-top: 0;
-background: var(–s1);
-z-index: 1;
-}
-
-.modal-head h2 {
-font-family: ‘Syne’, sans-serif;
-font-size: 17px;
-font-weight: 700;
-color: #fff;
-}
-
+.modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.modal-title { font-family: ‘Syne’, sans-serif; font-weight: 700; font-size: 1.3rem; letter-spacing: -0.02em; }
 .modal-close {
-background: var(–s2);
-border: 1px solid var(–border);
-border-radius: 6px;
-width: 28px; height: 28px;
-display: flex; align-items: center; justify-content: center;
-cursor: pointer;
-color: var(–muted2);
-font-size: 16px;
-flex-shrink: 0;
-transition: all .15s;
+background: var(–bg); border: none; border-radius: 50%;
+width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+cursor: pointer; font-size: 1rem; color: var(–muted); transition: background 0.15s;
+}
+.modal-close:hover { background: var(–line); }
+
+.field { margin-bottom: 1.1rem; }
+.field label {
+font-family: ‘DM Mono’, monospace; font-size: 0.6rem;
+letter-spacing: 0.15em; text-transform: uppercase; color: var(–muted);
+display: block; margin-bottom: 0.4rem;
+}
+.field input, .field select {
+width: 100%; background: var(–bg);
+border: 1.5px solid var(–line); border-radius: 10px;
+padding: 0.65rem 0.85rem; font-family: ‘DM Sans’, sans-serif;
+font-size: 0.95rem; color: var(–ink); outline: none;
+transition: border-color 0.2s; -webkit-appearance: none;
+}
+.field input:focus, .field select:focus { border-color: var(–c1); }
+.field input::placeholder { color: var(–muted); opacity: 0.7; }
+.field select {
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘8’%3E%3Cpath d=‘M1 1l5 5 5-5’ stroke=’%238a8178’ stroke-width=‘1.5’ fill=‘none’ stroke-linecap=‘round’/%3E%3C/svg%3E”);
+background-repeat: no-repeat; background-position: right 0.85rem center;
+padding-right: 2.5rem; cursor: pointer;
 }
 
-.modal-close:hover { background: var(–s3); color: var(–text); }
-
-.modal-body { padding: 22px 24px; }
-
-/* Add exercise form */
-.form-group { margin-bottom: 16px; }
-
-.form-label {
-display: block;
-font-size: 12px;
-font-weight: 600;
-color: var(–muted2);
-letter-spacing: .5px;
-margin-bottom: 6px;
-text-transform: uppercase;
+.submit-btn {
+width: 100%; background: var(–ink); color: white; border: none;
+border-radius: 50px; padding: 0.85rem;
+font-family: ‘Syne’, sans-serif; font-weight: 700; font-size: 0.9rem;
+cursor: pointer; transition: background 0.15s, transform 0.1s; margin-top: 0.5rem;
 }
+.submit-btn:hover { background: var(–c1); }
+.submit-btn:active { transform: scale(0.98); }
 
-.form-input, .form-select, .form-textarea {
-width: 100%;
-background: var(–s2);
-border: 1.5px solid var(–border);
-border-radius: 8px;
-padding: 10px 14px;
-font-family: ‘Mulish’, sans-serif;
-font-size: 14px;
-color: var(–text);
-outline: none;
-transition: border-color .2s;
+.toast {
+position: fixed; bottom: 1.5rem; left: 50%;
+transform: translateX(-50%) translateY(70px);
+background: var(–ink); color: white;
+font-family: ‘DM Mono’, monospace; font-size: 0.62rem; letter-spacing: 0.08em;
+padding: 0.65rem 1.4rem; border-radius: 50px;
+transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1);
+z-index: 9999; white-space: nowrap; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
+.toast.show { transform: translateX(-50%) translateY(0); }
 
-.form-input:focus, .form-select:focus, .form-textarea:focus {
-border-color: var(–a1);
+@media (max-width: 700px) {
+.hero { padding: 2rem 1.25rem 1.5rem; }
+.hero h1 { font-size: 2.4rem; }
+.tabs-wrap, .grid-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+.topbar { padding: 0 1rem; }
+.topics-grid { grid-template-columns: 1fr; }
 }
-
-.form-select { appearance: none; cursor: pointer; }
-.form-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
-
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-/* Exercise detail in modal */
-.ex-question {
-background: var(–s2);
-border: 1px solid var(–border);
-border-radius: 8px;
-padding: 16px;
-margin-bottom: 14px;
-font-size: 14px;
-line-height: 1.7;
-color: var(–text);
-}
-
-.ex-answer-input {
-width: 100%;
-background: var(–s2);
-border: 1.5px solid var(–border);
-border-radius: 8px;
-padding: 10px 14px;
-font-family: ‘Mulish’, sans-serif;
-font-size: 14px;
-color: var(–text);
-outline: none;
-transition: border-color .2s;
-margin-bottom: 10px;
-}
-
-.ex-answer-input:focus { border-color: var(–a1); }
-.ex-answer-input.correct { border-color: var(–a3); background: rgba(82,217,160,.06); }
-.ex-answer-input.wrong { border-color: var(–a5); background: rgba(255,107,107,.06); }
-
-.ex-feedback {
-display: none;
-padding: 10px 14px;
-border-radius: 8px;
-font-size: 13px;
-margin-bottom: 12px;
-}
-
-.ex-feedback.show { display: block; }
-.ex-feedback.correct { background: rgba(82,217,160,.1); border: 1px solid rgba(82,217,160,.25); color: var(–a3); }
-.ex-feedback.wrong { background: rgba(255,107,107,.08); border: 1px solid rgba(255,107,107,.2); color: var(–a5); }
-
-.mc-opt {
-display: flex;
-align-items: center;
-gap: 10px;
-padding: 10px 14px;
-border: 1px solid var(–border);
-border-radius: 8px;
-cursor: pointer;
-margin-bottom: 8px;
-transition: all .15s;
-user-select: none;
-}
-
-.mc-opt:hover { border-color: var(–a1); background: rgba(108,142,255,.05); }
-.mc-opt.selected { border-color: var(–a1); background: rgba(108,142,255,.1); }
-.mc-opt.correct { border-color: var(–a3); background: rgba(82,217,160,.08); }
-.mc-opt.wrong { border-color: var(–a5); background: rgba(255,107,107,.08); }
-
-.mc-letter {
-width: 24px; height: 24px;
-border-radius: 50%;
-border: 1.5px solid var(–border);
-display: flex; align-items: center; justify-content: center;
-font-size: 11px; font-weight: 700;
-color: var(–muted);
-flex-shrink: 0;
-transition: all .15s;
-}
-
-.mc-opt.selected .mc-letter { border-color: var(–a1); color: var(–a1); }
-.mc-opt.correct .mc-letter { border-color: var(–a3); color: var(–a3); background: rgba(82,217,160,.15); }
-.mc-opt.wrong .mc-letter { border-color: var(–a5); color: var(–a5); background: rgba(255,107,107,.1); }
-
-/* ════════════════════ RESULTS ════════════════════ */
-.results-summary {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 14px;
-margin-bottom: 24px;
-}
-
-.res-card {
-background: var(–s1);
-border: 1px solid var(–border);
-border-radius: var(–r);
-padding: 20px;
-text-align: center;
-}
-
-.res-big {
-font-family: ‘Syne’, sans-serif;
-font-size: 36px;
-font-weight: 800;
-line-height: 1;
-margin-bottom: 4px;
-}
-
-.res-label { font-size: 12px; color: var(–muted); }
-
-.results-table-wrap {
-background: var(–s1);
-border: 1px solid var(–border);
-border-radius: var(–r);
-overflow: hidden;
-margin-bottom: 24px;
-}
-
-.res-table {
-width: 100%;
-border-collapse: collapse;
-}
-
-.res-table th {
-padding: 11px 16px;
-text-align: left;
-font-size: 10px;
-font-weight: 700;
-letter-spacing: 1.2px;
-text-transform: uppercase;
-color: var(–muted);
-background: var(–s2);
-border-bottom: 1px solid var(–border);
-}
-
-.res-table td {
-padding: 12px 16px;
-border-top: 1px solid var(–border);
-font-size: 13px;
-vertical-align: middle;
-}
-
-.res-table tr:hover td { background: rgba(255,255,255,.02); }
-
-.tag {
-display: inline-block;
-font-size: 10px;
-font-weight: 700;
-padding: 2px 9px;
-border-radius: 100px;
-}
-
-.tag-g { background: rgba(82,217,160,.12); color: var(–a3); border: 1px solid rgba(82,217,160,.25); }
-.tag-o { background: rgba(255,197,90,.1); color: var(–a4); border: 1px solid rgba(255,197,90,.2); }
-.tag-r { background: rgba(255,107,107,.1); color: var(–a5); border: 1px solid rgba(255,107,107,.2); }
-
-/* ════════════════════ NOTES ════════════════════ */
-.notes-toolbar {
-display: flex;
-gap: 10px;
-margin-bottom: 20px;
-align-items: center;
-}
-
-.note-add-btn {
-background: var(–a1);
-color: #fff;
-border: none;
-border-radius: 8px;
-padding: 8px 18px;
-font-size: 13px;
-font-weight: 600;
-cursor: pointer;
-font-family: ‘Mulish’, sans-serif;
-transition: background .15s;
-display: flex;
-align-items: center;
-gap: 6px;
-}
-
-.note-add-btn:hover { background: #5577ee; }
-
-.notes-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-gap: 14px;
-}
-
-.note-card {
-background: var(–s1);
-border: 1px solid var(–border);
-border-radius: var(–r);
-padding: 16px 18px;
-cursor: pointer;
-transition: border-color .2s;
-position: relative;
-}
-
-.note-card:hover { border-color: var(–border2); }
-
-.note-card-title {
-font-size: 14px;
-font-weight: 600;
-color: #fff;
-margin-bottom: 6px;
-}
-
-.note-card-body {
-font-size: 12px;
-color: var(–muted2);
-line-height: 1.6;
-display: -webkit-box;
--webkit-line-clamp: 4;
--webkit-box-orient: vertical;
-overflow: hidden;
-white-space: pre-wrap;
-}
-
-.note-card-meta {
-font-size: 11px;
-color: var(–muted);
-margin-top: 10px;
-display: flex;
-justify-content: space-between;
-}
-
-.note-del-btn {
-background: none;
-border: none;
-color: var(–muted);
-cursor: pointer;
-font-size: 14px;
-padding: 0;
-transition: color .15s;
-}
-
-.note-del-btn:hover { color: var(–a5); }
-
-/* ════════════════════ BUTTONS ════════════════════ */
-.btn {
-font-family: ‘Mulish’, sans-serif;
-font-size: 13px;
-font-weight: 600;
-padding: 10px 22px;
-border-radius: 8px;
-cursor: pointer;
-border: none;
-transition: all .15s;
-}
-
-.btn-primary { background: var(–a1); color: #fff; }
-.btn-primary:hover { background: #5577ee; }
-.btn-secondary { background: var(–s2); color: var(–text); border: 1px solid var(–border); }
-.btn-secondary:hover { border-color: var(–a1); color: var(–a1); }
-.btn-success { background: rgba(82,217,160,.15); color: var(–a3); border: 1px solid rgba(82,217,160,.3); }
-.btn-success:hover { background: rgba(82,217,160,.25); }
-.btn-danger { background: rgba(255,107,107,.12); color: var(–a5); border: 1px solid rgba(255,107,107,.25); }
-.btn-danger:hover { background: rgba(255,107,107,.22); }
-
-.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
-
-/* ════════════════════ EMPTY STATE ════════════════════ */
-.empty-state {
-text-align: center;
-padding: 48px 24px;
-color: var(–muted);
-}
-
-.empty-state .empty-icon { font-size: 40px; margin-bottom: 14px; }
-.empty-state h3 { font-size: 16px; font-weight: 600; color: var(–muted2); margin-bottom: 6px; }
-.empty-state p { font-size: 13px; line-height: 1.6; }
-
-/* ════════════════════ MISC ════════════════════ */
-.section-title {
-font-family: ‘Syne’, sans-serif;
-font-size: 20px;
-font-weight: 800;
-color: #fff;
-margin-bottom: 20px;
-}
-
-@keyframes fadeUp {
-from { opacity:0; transform:translateY(12px); }
-to { opacity:1; transform:translateY(0); }
-}
-
-.fade-in { animation: fadeUp .35s ease both; }
-
-/* ════════════════════ RESPONSIVE ════════════════════ */
-@media(max-width: 900px) {
-.stats-row { grid-template-columns: 1fr 1fr; }
-.dash-grid { grid-template-columns: 1fr; }
-.plan-weeks { grid-template-columns: 1fr; }
-.ex-grid { grid-template-columns: 1fr; }
-.results-summary { grid-template-columns: 1fr 1fr; }
-}
-
-@media(max-width: 700px) {
-.sidebar {
-width: 60px;
-padding-bottom: 16px;
-}
-.logo { padding: 20px 0; text-align: center; }
-.logo-text, .logo-sub { display: none; }
-.nav-label { display: none; }
-.nav-item { justify-content: center; padding: 10px; }
-.nav-item span:not(.nav-icon) { display: none; }
-.sidebar-footer { display: none; }
-.main { margin-left: 60px; }
-.content { padding: 20px 16px; }
-.topbar { padding: 12px 16px; }
-.stats-row { grid-template-columns: 1fr 1fr; }
-}
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(–s1); }
-::-webkit-scrollbar-thumb { background: var(–border2); border-radius: 10px; }
 </style>
 
 </head>
 <body>
 
-<!-- ═══════════ SIDEBAR ═══════════ -->
-
-<aside class="sidebar">
-  <div class="logo">
-    <div class="logo-text">FCE<span>·</span>Hub</div>
-    <div class="logo-sub">B2 First Prep</div>
+<div class="topbar">
+  <div class="topbar-logo"><span class="dot"></span> FCE Hub</div>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search" placeholder="Search topics…" oninput="renderGrid()" autocomplete="off" />
   </div>
-
-  <div class="nav-group">
-    <div class="nav-label">Hlavní</div>
-    <div class="nav-item active" onclick="showSection('dashboard', this)">
-      <span class="nav-icon">⚡</span><span>Dashboard</span>
-    </div>
-    <div class="nav-item" onclick="showSection('plan', this)">
-      <span class="nav-icon">📅</span><span>Plán</span>
-    </div>
-    <div class="nav-item" onclick="showSection('exercises', this)">
-      <span class="nav-icon">📝</span><span>Cvičení</span>
-    </div>
-    <div class="nav-item" onclick="showSection('results', this)">
-      <span class="nav-icon">📊</span><span>Výsledky</span>
-    </div>
-    <div class="nav-item" onclick="showSection('notes', this)">
-      <span class="nav-icon">🗒️</span><span>Poznámky</span>
-    </div>
+  <div class="topbar-right">
+    <button class="pill-btn" onclick="openModal()">＋ Add topic</button>
   </div>
+</div>
 
-  <div class="sidebar-footer">
-    <div class="xp-label">Pokrok celkem</div>
-    <div class="xp-bar-track">
-      <div class="xp-bar-fill" id="globalXpBar" style="width:0%"></div>
-    </div>
-    <div class="xp-nums" id="globalXpNums">0 / 17 týdnů</div>
-  </div>
-</aside>
-
-<!-- ═══════════ MAIN ═══════════ -->
-
-<main class="main">
-
-  <!-- TOPBAR -->
-
-  <div class="topbar">
-    <div class="page-title" id="topbarTitle">Dashboard</div>
-    <div class="topbar-right">
-      <div class="streak-chip">🔥 <span id="streakCount">0</span> dní za sebou</div>
-    </div>
-  </div>
-
-  <div class="content">
-
-```
-<!-- ════════ DASHBOARD ════════ -->
-<div id="section-dashboard" class="section active fade-in">
-
-  <div class="dash-greeting">
-    <h1>Vítej zpět 👋</h1>
-    <p>Zkouška v červnu 2026 &nbsp;·&nbsp; <span id="daysLeft">—</span> dní do zkoušky</p>
-  </div>
-
+<div class="hero">
+  <div class="hero-tag">✦ Cambridge B2 First</div>
+  <h1>FCE <span>Study</span> Hub</h1>
+  <p class="hero-sub">All your exam preparation in one place. Track progress, open notes, stay focused.</p>
   <div class="stats-row">
-    <div class="stat-card c1">
-      <div class="stat-num" id="stat-ex">0</div>
-      <div class="stat-label">Cvičení celkem</div>
-    </div>
-    <div class="stat-card c2">
-      <div class="stat-num" id="stat-score">—</div>
-      <div class="stat-label">Průměrné skóre</div>
-    </div>
-    <div class="stat-card c3">
-      <div class="stat-num" id="stat-weeks">0</div>
-      <div class="stat-label">Týdnů splněno</div>
-    </div>
-    <div class="stat-card c4">
-      <div class="stat-num" id="stat-notes">0</div>
-      <div class="stat-label">Poznámek</div>
-    </div>
+    <div class="stat-chip accent"><div class="stat-chip-val" id="s-total">0</div><div class="stat-chip-label">Topics</div></div>
+    <div class="stat-chip"><div class="stat-chip-val" id="s-done" style="color:var(--c3)">0</div><div class="stat-chip-label">Done</div></div>
+    <div class="stat-chip"><div class="stat-chip-val" id="s-left" style="color:var(--c1)">0</div><div class="stat-chip-label">Left</div></div>
   </div>
-
-  <div class="dash-grid">
-
-    <div class="panel">
-      <div class="panel-head">
-        <h3>Silné &amp; slabé stránky</h3>
-      </div>
-      <div class="panel-body">
-        <div class="skill-line">
-          <span class="skill-nm">🔄 KWT</span>
-          <div class="sk-track"><div class="sk-fill" style="background:var(--a2)" data-w="45"></div></div>
-          <span class="skill-pct" style="color:var(--a2)">45%</span>
-        </div>
-        <div class="skill-line">
-          <span class="skill-nm">✍️ Writing</span>
-          <div class="sk-track"><div class="sk-fill" style="background:var(--a5)" data-w="55"></div></div>
-          <span class="skill-pct" style="color:var(--a5)">55%</span>
-        </div>
-        <div class="skill-line">
-          <span class="skill-nm">📝 Open Cloze</span>
-          <div class="sk-track"><div class="sk-fill" style="background:var(--a4)" data-w="60"></div></div>
-          <span class="skill-pct" style="color:var(--a4)">60%</span>
-        </div>
-        <div class="skill-line">
-          <span class="skill-nm">🔤 Word Formation</span>
-          <div class="sk-track"><div class="sk-fill" style="background:var(--a4)" data-w="58"></div></div>
-          <span class="skill-pct" style="color:var(--a4)">58%</span>
-        </div>
-        <div class="skill-line">
-          <span class="skill-nm">📖 Reading</span>
-          <div class="sk-track"><div class="sk-fill" style="background:var(--a3)" data-w="75"></div></div>
-          <span class="skill-pct" style="color:var(--a3)">75%</span>
-        </div>
-        <div class="skill-line">
-          <span class="skill-nm">🎧 Listening</span>
-          <div class="sk-track"><div class="sk-fill" style="background:var(--a3)" data-w="67"></div></div>
-          <span class="skill-pct" style="color:var(--a3)">67%</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-head">
-        <h3>Poslední aktivita</h3>
-      </div>
-      <div class="panel-body" id="activityFeed">
-        <div class="empty-state" style="padding:24px">
-          <div style="font-size:28px;margin-bottom:8px">💤</div>
-          <p>Zatím žádná aktivita.<br>Přidej první cvičení!</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Quick actions -->
-  <div class="panel">
-    <div class="panel-head"><h3>Rychlé akce</h3></div>
-    <div class="panel-body" style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn btn-primary" onclick="showSection('exercises', document.querySelector('[onclick*=exercises]'))">➕ Přidat cvičení</button>
-      <button class="btn btn-secondary" onclick="showSection('notes', document.querySelector('[onclick*=notes]'))">🗒️ Nová poznámka</button>
-      <button class="btn btn-secondary" onclick="showSection('plan', document.querySelector('[onclick*=plan]'))">📅 Zobrazit plán</button>
-    </div>
-  </div>
-
-</div>
-
-<!-- ════════ PLAN ════════ -->
-<div id="section-plan" class="section">
-  <div class="section-title">📅 Studijní plán do června</div>
-
-  <!-- FÁZE 1 -->
-  <div class="plan-phase">
-    <div class="phase-header">
-      <h2>Fáze 1 — Základ</h2>
-      <div class="phase-divider"></div>
-      <div class="phase-badge" style="background:rgba(108,142,255,.1);color:var(--a1);border:1px solid rgba(108,142,255,.2)">Duben · T1–4</div>
-    </div>
-    <div class="plan-weeks" id="phase1-weeks"></div>
-  </div>
-
-  <!-- FÁZE 2 -->
-  <div class="plan-phase">
-    <div class="phase-header">
-      <h2>Fáze 2 — Intenzita</h2>
-      <div class="phase-divider"></div>
-      <div class="phase-badge" style="background:rgba(255,126,179,.1);color:var(--a2);border:1px solid rgba(255,126,179,.2)">Květen · T5–8</div>
-    </div>
-    <div class="plan-weeks" id="phase2-weeks"></div>
-  </div>
-
-  <!-- FÁZE 3 -->
-  <div class="plan-phase">
-    <div class="phase-header">
-      <h2>Fáze 3 — Finální</h2>
-      <div class="phase-divider"></div>
-      <div class="phase-badge" style="background:rgba(82,217,160,.1);color:var(--a3);border:1px solid rgba(82,217,160,.2)">Červen · T9–10</div>
-    </div>
-    <div class="plan-weeks" id="phase3-weeks"></div>
-  </div>
-
-</div>
-
-<!-- ════════ EXERCISES ════════ -->
-<div id="section-exercises" class="section">
-  <div class="section-title">📝 Cvičení</div>
-
-  <div class="ex-toolbar">
-    <button class="filter-btn active" onclick="filterEx('all',this)">Všechna</button>
-    <button class="filter-btn" onclick="filterEx('kwt',this)">KWT</button>
-    <button class="filter-btn" onclick="filterEx('writing',this)">Writing</button>
-    <button class="filter-btn" onclick="filterEx('reading',this)">Reading</button>
-    <button class="filter-btn" onclick="filterEx('listening',this)">Listening</button>
-    <button class="filter-btn" onclick="filterEx('speaking',this)">Speaking</button>
-    <button class="filter-btn" onclick="filterEx('uoe',this)">Use of Eng.</button>
-    <button class="add-ex-btn" onclick="openAddExModal()">+ Přidat cvičení</button>
-  </div>
-
-  <div class="ex-grid" id="exGrid">
-    <!-- built by JS -->
+  <div class="progress-row">
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+    <div class="progress-pct" id="prog-pct">0%</div>
   </div>
 </div>
 
-<!-- ════════ RESULTS ════════ -->
-<div id="section-results" class="section">
-  <div class="section-title">📊 Výsledky</div>
-
-  <div class="results-summary">
-    <div class="res-card">
-      <div class="res-big" id="r-total" style="color:var(--a1)">0</div>
-      <div class="res-label">Cvičení celkem</div>
-    </div>
-    <div class="res-card">
-      <div class="res-big" id="r-avg" style="color:var(--a3)">—</div>
-      <div class="res-label">Průměrné skóre</div>
-    </div>
-    <div class="res-card">
-      <div class="res-big" id="r-best" style="color:var(--a4)">—</div>
-      <div class="res-label">Nejlepší kategorie</div>
-    </div>
-  </div>
-
-  <div class="results-table-wrap">
-    <table class="res-table">
-      <thead>
-        <tr>
-          <th>Cvičení</th>
-          <th>Typ</th>
-          <th>Skóre</th>
-          <th>Datum</th>
-          <th>Hodnocení</th>
-        </tr>
-      </thead>
-      <tbody id="resultsBody">
-        <tr>
-          <td colspan="5" style="text-align:center;padding:32px;color:var(--muted)">
-            Zatím žádné výsledky. Splň cvičení a uvidíš je zde.
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="tabs-wrap">
+  <button class="tab active" onclick="setTab('all',this)">All <span class="tab-badge" id="tb-all">0</span></button>
+  <button class="tab" onclick="setTab('uoe',this)">Use of English <span class="tab-badge" id="tb-uoe">0</span></button>
+  <button class="tab" onclick="setTab('writing',this)">Writing <span class="tab-badge" id="tb-writing">0</span></button>
+  <button class="tab" onclick="setTab('reading',this)">Reading <span class="tab-badge" id="tb-reading">0</span></button>
+  <button class="tab" onclick="setTab('listening',this)">Listening <span class="tab-badge" id="tb-listening">0</span></button>
+  <button class="tab" onclick="setTab('speaking',this)">Speaking <span class="tab-badge" id="tb-speaking">0</span></button>
+  <button class="tab" onclick="setTab('vocab',this)">Vocabulary <span class="tab-badge" id="tb-vocab">0</span></button>
 </div>
 
-<!-- ════════ NOTES ════════ -->
-<div id="section-notes" class="section">
-  <div class="section-title">🗒️ Poznámky</div>
-
-  <div class="notes-toolbar">
-    <button class="note-add-btn" onclick="openNoteModal()">+ Nová poznámka</button>
-  </div>
-
-  <div class="notes-grid" id="notesGrid">
-    <!-- built by JS -->
-  </div>
+<div class="grid-wrap">
+  <div class="topics-grid" id="grid"></div>
 </div>
-```
 
-  </div><!-- /content -->
-</main>
-
-<!-- ═══════════ MODAL: ADD EXERCISE ═══════════ -->
-
-<div class="modal-overlay" id="addExModal">
+<div class="overlay" id="overlay" onclick="closeOut(event)">
   <div class="modal">
     <div class="modal-head">
-      <h2>Přidat cvičení</h2>
-      <div class="modal-close" onclick="closeModal('addExModal')">✕</div>
+      <div class="modal-title">Add new topic ✦</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Název cvičení</label>
-        <input class="form-input" id="ex-name" placeholder="např. KWT — wish + past perfect">
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Typ</label>
-          <select class="form-select" id="ex-type">
-            <option value="kwt">Key Word Transformations</option>
-            <option value="uoe">Use of English</option>
-            <option value="writing">Writing</option>
-            <option value="reading">Reading</option>
-            <option value="listening">Listening</option>
-            <option value="speaking">Speaking</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Obtížnost</label>
-          <select class="form-select" id="ex-diff">
-            <option value="easy">Lehká (B1)</option>
-            <option value="medium" selected>Střední (B1+)</option>
-            <option value="hard">Těžká (B2)</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Zadání / otázky</label>
-        <textarea class="form-textarea" id="ex-questions" placeholder="Sem vlož zadání cvičení — např. otázky od tutora, text k přečtení, KWT věty..."></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Správné odpovědi (volitelné)</label>
-        <textarea class="form-textarea" id="ex-answers" placeholder="Správné odpovědi — odděluj čárkou nebo každou na nový řádek" style="min-height:70px"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Tvoje odpovědi / poznámky</label>
-        <textarea class="form-textarea" id="ex-my-answers" placeholder="Sem napiš svoji odpověď nebo poznámky k cvičení..." style="min-height:70px"></textarea>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Skóre (volitelné)</label>
-          <input class="form-input" id="ex-score-val" type="number" min="0" max="100" placeholder="0–100">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Max. skóre</label>
-          <input class="form-input" id="ex-score-max" type="number" min="1" max="100" placeholder="10">
-        </div>
-      </div>
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="saveExercise()">Uložit cvičení</button>
-        <button class="btn btn-secondary" onclick="closeModal('addExModal')">Zrušit</button>
-      </div>
+    <div class="field">
+      <label>Topic name *</label>
+      <input type="text" id="f-name" placeholder="e.g. Key Word Transformations" autocomplete="off" />
     </div>
+    <div class="field">
+      <label>Category</label>
+      <select id="f-cat">
+        <option value="uoe">Use of English</option>
+        <option value="writing">Writing</option>
+        <option value="reading">Reading</option>
+        <option value="listening">Listening</option>
+        <option value="speaking">Speaking</option>
+        <option value="vocab">Vocabulary</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Short description</label>
+      <input type="text" id="f-desc" placeholder="e.g. Part 4 — sentence transformations" autocomplete="off" />
+    </div>
+    <div class="field">
+      <label>URL link *</label>
+      <input type="url" id="f-url" placeholder="https://amelietoupal.github.io/…" autocomplete="off" autocorrect="off" autocapitalize="none" />
+    </div>
+    <button class="submit-btn" onclick="addTopic()">Add topic →</button>
   </div>
 </div>
 
-<!-- ═══════════ MODAL: VIEW EXERCISE ═══════════ -->
-
-<div class="modal-overlay" id="viewExModal">
-  <div class="modal">
-    <div class="modal-head">
-      <div>
-        <div id="viewExType" style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px"></div>
-        <h2 id="viewExTitle"></h2>
-      </div>
-      <div class="modal-close" onclick="closeModal('viewExModal')">✕</div>
-    </div>
-    <div class="modal-body" id="viewExBody">
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ MODAL: NOTE ═══════════ -->
-
-<div class="modal-overlay" id="noteModal">
-  <div class="modal">
-    <div class="modal-head">
-      <h2 id="noteModalTitle">Nová poznámka</h2>
-      <div class="modal-close" onclick="closeModal('noteModal')">✕</div>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Nadpis</label>
-        <input class="form-input" id="note-title" placeholder="např. KWT vzory — wish">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Obsah poznámky</label>
-        <textarea class="form-textarea" id="note-body" style="min-height:180px" placeholder="Sem piš — vzory, tipy, gramatiku, co si chceš zapamatovat..."></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Barva</label>
-        <div style="display:flex;gap:8px" id="noteColorPicker">
-          <div class="note-color-opt" data-color="default" onclick="selectNoteColor(this)" style="width:24px;height:24px;border-radius:50%;background:var(--s3);border:2px solid var(--a1);cursor:pointer"></div>
-          <div class="note-color-opt" data-color="blue" onclick="selectNoteColor(this)" style="width:24px;height:24px;border-radius:50%;background:rgba(108,142,255,.25);border:2px solid transparent;cursor:pointer"></div>
-          <div class="note-color-opt" data-color="green" onclick="selectNoteColor(this)" style="width:24px;height:24px;border-radius:50%;background:rgba(82,217,160,.25);border:2px solid transparent;cursor:pointer"></div>
-          <div class="note-color-opt" data-color="pink" onclick="selectNoteColor(this)" style="width:24px;height:24px;border-radius:50%;background:rgba(255,126,179,.25);border:2px solid transparent;cursor:pointer"></div>
-          <div class="note-color-opt" data-color="gold" onclick="selectNoteColor(this)" style="width:24px;height:24px;border-radius:50%;background:rgba(255,197,90,.25);border:2px solid transparent;cursor:pointer"></div>
-        </div>
-      </div>
-      <input type="hidden" id="note-color" value="default">
-      <input type="hidden" id="note-edit-id" value="">
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="saveNote()">Uložit</button>
-        <button class="btn btn-secondary" onclick="closeModal('noteModal')">Zrušit</button>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="toast" id="toast"></div>
 
 <script>
-// ══════════════════════════════════════════════════
-// DATA
-// ══════════════════════════════════════════════════
-let exercises = [];
-let notes = [];
-let weeksDone = [];
-let currentFilter = 'all';
-let editNoteId = null;
+const KEY = 'fce-hub-v1';
+let currentTab = 'all';
 
-const TYPE_LABELS = {
-  kwt: 'Key Word Transf.', uoe: 'Use of English',
-  writing: 'Writing', reading: 'Reading',
-  listening: 'Listening', speaking: 'Speaking'
+const CATS = {
+  uoe:       { label: 'Use of English', theme: 'theme-uoe' },
+  writing:   { label: 'Writing',        theme: 'theme-writing' },
+  reading:   { label: 'Reading',        theme: 'theme-reading' },
+  listening: { label: 'Listening',      theme: 'theme-listening' },
+  speaking:  { label: 'Speaking',       theme: 'theme-speaking' },
+  vocab:     { label: 'Vocabulary',     theme: 'theme-vocab' },
 };
 
-const TYPE_COLORS = {
-  kwt:       'rgba(255,126,179,.12)',
-  uoe:       'rgba(108,142,255,.12)',
-  writing:   'rgba(255,197,90,.12)',
-  reading:   'rgba(82,217,160,.12)',
-  listening: 'rgba(78,201,201,.12)',
-  speaking:  'rgba(255,107,107,.1)',
-};
-
-const TYPE_TEXT = {
-  kwt:'var(--a2)', uoe:'var(--a1)', writing:'var(--a4)',
-  reading:'var(--a3)', listening:'#4ec9c9', speaking:'var(--a5)'
-};
-
-const NOTE_COLORS = {
-  default: { bg: 'var(--s1)', border: 'var(--border)' },
-  blue:    { bg: 'rgba(108,142,255,.07)', border: 'rgba(108,142,255,.2)' },
-  green:   { bg: 'rgba(82,217,160,.07)', border: 'rgba(82,217,160,.2)' },
-  pink:    { bg: 'rgba(255,126,179,.07)', border: 'rgba(255,126,179,.2)' },
-  gold:    { bg: 'rgba(255,197,90,.07)', border: 'rgba(255,197,90,.2)' },
-};
-
-// Plan data
-const PLAN = [
-  { phase:1, week:1, title:'Gramatika + první KWT', dates:'7.–13. dubna',
-    tasks:[ {tag:'KWT',tc:'kwt',text:'Vzory: wish + past perfect, too…to, enough to (5 vět)'},
-            {tag:'Writing',tc:'writing',text:'FCE essay — brainstorming + napsání (45 min)'},
-            {tag:'Cloze',tc:'uoe',text:'Open Cloze: Cambridge Official Tests str. 1–20'} ] },
-  { phase:1, week:2, title:'Pasivum + Word Formation', dates:'14.–20. dubna',
-    tasks:[ {tag:'KWT',tc:'kwt',text:'Vzory: passive voice, have sth done (5 vět)'},
-            {tag:'WF',tc:'uoe',text:'Word Formation: přípony -tion, -ness, -ment + drill'},
-            {tag:'Writing',tc:'writing',text:'Formální email — celý task na čas'} ] },
-  { phase:1, week:3, title:'Reported speech + Reading', dates:'21.–27. dubna',
-    tasks:[ {tag:'KWT',tc:'kwt',text:'Vzory: reported speech, say→tell, ask (5 vět)'},
-            {tag:'Reading',tc:'reading',text:'Reading Part 5: 1 úryvek + 6 MC otázek'},
-            {tag:'Writing',tc:'writing',text:'Article — engaging opener + 3 odstavce'} ] },
-  { phase:1, week:4, title:'🗓 Mini Mock Test #1', dates:'28. dubna–4. května', isMock:true,
-    tasks:[ {tag:'KWT',tc:'kwt',text:'Opakování vzorů 1–3 smíchané (10 vět)'},
-            {tag:'Mock',tc:'uoe',text:'MOCK TEST #1: Use of English + Writing (pod časem)'},
-            {tag:'Oprava',tc:'uoe',text:'Oprava + analýza chyb — co opakovat ve fázi 2'} ] },
-  { phase:2, week:5, title:'Conditionals + Listening', dates:'5.–11. května',
-    tasks:[ {tag:'KWT',tc:'kwt',text:'Vzory: conditionals 2nd/3rd, mixed conditional'},
-            {tag:'Listening',tc:'listening',text:'Listening Part 3: přepis + 5 otázek, distraktory'},
-            {tag:'Writing',tc:'writing',text:'Report — formát, nadpisy, doporučení'} ] },
-  { phase:2, week:6, title:'Phrasal verbs + Reading Part 6', dates:'12.–18. května',
-    tasks:[ {tag:'KWT',tc:'kwt',text:'Vzory: phrasal verbs v transformacích'},
-            {tag:'Reading',tc:'reading',text:'Reading Part 6: gapped text — lexical cohesion'},
-            {tag:'Writing',tc:'writing',text:'Essay — důraz na linking words'} ] },
-  { phase:2, week:7, title:'Speaking + Spelling drill', dates:'19.–25. května',
-    tasks:[ {tag:'KWT',tc:'kwt',text:'Smíchané: všechny vzory dohromady (10 vět)'},
-            {tag:'Speaking',tc:'speaking',text:'Speaking Part 2: porovnej 2 fotky (napiš odpověď)'},
-            {tag:'Spelling',tc:'uoe',text:'20 těžkých B2 slov — drill + memory tricks'} ] },
-  { phase:2, week:8, title:'🗓 Mock Test #2 — celý FCE', dates:'26. května–1. června', isMock:true,
-    tasks:[ {tag:'KWT',tc:'kwt',text:'Opakování všechny vzory — rychlý drill'},
-            {tag:'Mock',tc:'uoe',text:'MOCK TEST #2: celý FCE pod reálným časem'},
-            {tag:'Oprava',tc:'uoe',text:'Oprava + plán co doladit ve fázi 3'} ] },
-  { phase:3, week:9, title:'Doladění slabých míst', dates:'2.–8. června',
-    tasks:[ {tag:'Slabiny',tc:'uoe',text:'Cílené procvičení na základě mock testu #2'},
-            {tag:'Writing',tc:'writing',text:'Portfolio: přečti všechny napsané eseje'},
-            {tag:'R+L',tc:'reading',text:'Reading + Listening: 1 celá část z Official Tests'} ] },
-  { phase:3, week:10, title:'🎓 Zkouška — poslední týden', dates:'9.–15. června', isFinal:true,
-    tasks:[ {tag:'KWT',tc:'kwt',text:'Finální drill: 10 vět — pouze opakování vzorů'},
-            {tag:'Strategie',tc:'uoe',text:'Strategické opakování: tipy na každou část'},
-            {tag:'Odpočinek',tc:'uoe',text:'Den před zkouškou: odpočinek, žádná nová látka!'} ] },
+const DEFAULT_TOPICS = [
+  {
+    name: 'Phrasal Verbs',
+    cat: 'vocab',
+    desc: 'Most common FCE phrasal verbs by topic',
+    url: 'https://amelietoupal.github.io/fce-studium/',
+    done: false
+  }
 ];
 
-// ══════════════════════════════════════════════════
-// LOAD / SAVE
-// ══════════════════════════════════════════════════
 function load() {
   try {
-    exercises = JSON.parse(localStorage.getItem('fce_exercises') || '[]');
-    notes = JSON.parse(localStorage.getItem('fce_notes') || '[]');
-    weeksDone = JSON.parse(localStorage.getItem('fce_weeks_done') || '[]');
-  } catch(e) { exercises=[]; notes=[]; weeksDone=[]; }
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (d && d.length) return d;
+  } catch {}
+  save(DEFAULT_TOPICS);
+  return DEFAULT_TOPICS.map(t => ({...t}));
 }
 
-function save() {
-  try {
-    localStorage.setItem('fce_exercises', JSON.stringify(exercises));
-    localStorage.setItem('fce_notes', JSON.stringify(notes));
-    localStorage.setItem('fce_weeks_done', JSON.stringify(weeksDone));
-  } catch(e) {}
-}
+function save(t) { localStorage.setItem(KEY, JSON.stringify(t)); }
 
-// ══════════════════════════════════════════════════
-// NAVIGATION
-// ══════════════════════════════════════════════════
-const sectionTitles = {
-  dashboard: 'Dashboard', plan: 'Studijní plán',
-  exercises: 'Cvičení', results: 'Výsledky', notes: 'Poznámky'
-};
+function renderGrid() {
+  const all = load();
+  const q = document.getElementById('search').value.trim().toLowerCase();
 
-function showSection(id, navEl) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const s = document.getElementById('section-'+id);
-  if(s) { s.classList.add('active'); s.classList.remove('fade-in'); void s.offsetWidth; s.classList.add('fade-in'); }
-  if(navEl) navEl.classList.add('active');
-  document.getElementById('topbarTitle').textContent = sectionTitles[id] || id;
-  if(id === 'exercises') renderExercises();
-  if(id === 'results') renderResults();
-  if(id === 'notes') renderNotes();
-  if(id === 'dashboard') renderDashboard();
-  if(id === 'plan') renderPlan();
-}
+  const done = all.filter(t => t.done).length;
+  document.getElementById('s-total').textContent = all.length;
+  document.getElementById('s-done').textContent = done;
+  document.getElementById('s-left').textContent = all.length - done;
+  const pct = all.length ? Math.round(done / all.length * 100) : 0;
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-fill').style.width = pct + '%';
 
-// ══════════════════════════════════════════════════
-// DASHBOARD
-// ══════════════════════════════════════════════════
-function renderDashboard() {
-  // stats
-  document.getElementById('stat-ex').textContent = exercises.length;
-  document.getElementById('stat-notes').textContent = notes.length;
-  document.getElementById('stat-weeks').textContent = weeksDone.length;
+  document.getElementById('tb-all').textContent = all.length;
+  Object.keys(CATS).forEach(c => {
+    const el = document.getElementById('tb-' + c);
+    if (el) el.textContent = all.filter(t => t.cat === c).length;
+  });
 
-  const scored = exercises.filter(e => e.score !== '' && e.scoreMax !== '' && +e.scoreMax > 0);
-  if(scored.length) {
-    const avg = Math.round(scored.reduce((s,e) => s + (+e.score / +e.scoreMax * 100), 0) / scored.length);
-    document.getElementById('stat-score').textContent = avg + '%';
-  } else {
-    document.getElementById('stat-score').textContent = '—';
+  let list = all.map((t,i) => ({...t, _i: i}));
+  if (currentTab !== 'all') list = list.filter(t => t.cat === currentTab);
+  if (q) list = list.filter(t =>
+    t.name.toLowerCase().includes(q) || (t.desc||'').toLowerCase().includes(q)
+  );
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+
+  if (list.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><span class="empty-emoji">🔍</span><p>No topics found.</p></div>`;
+    return;
   }
 
-  // days left — assume June 14 2026
-  const exam = new Date('2026-06-14');
-  const now = new Date();
-  const diff = Math.ceil((exam - now) / 86400000);
-  document.getElementById('daysLeft').textContent = diff > 0 ? diff : '🎓 Zkouška proběhla';
-
-  // streak (simplified — count today)
-  const today = new Date().toDateString();
-  const lastDay = localStorage.getItem('fce_last_day');
-  let streak = +(localStorage.getItem('fce_streak') || 0);
-  if(lastDay !== today) {
-    const yesterday = new Date(Date.now()-86400000).toDateString();
-    if(lastDay === yesterday) streak++;
-    else if(!lastDay) streak = 1;
-    else streak = 1;
-    localStorage.setItem('fce_streak', streak);
-    localStorage.setItem('fce_last_day', today);
-  }
-  document.getElementById('streakCount').textContent = streak;
-
-  // XP bar
-  const total = 10;
-  const pct = Math.round(weeksDone.length / total * 100);
-  document.getElementById('globalXpBar').style.width = pct + '%';
-  document.getElementById('globalXpNums').textContent = weeksDone.length + ' / ' + total + ' týdnů';
-
-  // activity feed
-  const feed = document.getElementById('activityFeed');
-  const recent = [...exercises].reverse().slice(0,5);
-  if(recent.length === 0) {
-    feed.innerHTML = '<div class="empty-state" style="padding:24px"><div style="font-size:28px;margin-bottom:8px">💤</div><p>Zatím žádná aktivita.<br>Přidej první cvičení!</p></div>';
-  } else {
-    feed.innerHTML = recent.map(e => `
-      <div class="activity-item">
-        <div class="act-dot" style="background:${TYPE_TEXT[e.type]||'var(--a1)'}"></div>
-        <div class="act-text">Splněno: <strong>${e.name}</strong></div>
-        <div class="act-time">${e.date}</div>
-      </div>`).join('');
-  }
-
-  // animate skill bars
-  setTimeout(() => {
-    document.querySelectorAll('.sk-fill[data-w]').forEach(el => {
-      el.style.width = el.dataset.w + '%';
-    });
-  }, 200);
-}
-
-// ══════════════════════════════════════════════════
-// PLAN
-// ══════════════════════════════════════════════════
-function renderPlan() {
-  [1,2,3].forEach(phase => {
-    const container = document.getElementById('phase'+phase+'-weeks');
-    const weeks = PLAN.filter(w => w.phase === phase);
-    container.innerHTML = weeks.map(w => {
-      const done = weeksDone.includes(w.week);
-      return `
-      <div class="week-card ${w.isMock?'mock':''} ${w.isFinal?'final':''}">
-        <div class="wk-top">
-          <div class="wk-num">${w.week}</div>
-          <div class="wk-info">
-            <div class="wk-title">${w.title}</div>
-            <div class="wk-dates">${w.dates}</div>
-          </div>
-          <button class="wk-done-btn ${done?'done':''}" onclick="toggleWeekDone(${w.week},this)">
-            ${done ? '✓ Splněno' : 'Označit'}
+  list.forEach((t, idx) => {
+    const cat = CATS[t.cat] || { label: t.cat, theme: 'theme-vocab' };
+    const card = document.createElement('div');
+    card.className = `topic-card ${cat.theme}${t.done ? ' is-done' : ''}`;
+    card.style.animationDelay = (idx * 0.04) + 's';
+    card.innerHTML = `
+      <div class="card-strip"></div>
+      <span class="card-cat-badge">${cat.label}</span>
+      <div class="card-title">${esc(t.name)}</div>
+      ${t.desc ? `<div class="card-desc">${esc(t.desc)}</div>` : ''}
+      <div class="card-footer">
+        <a class="btn-open" href="${esc(t.url)}" target="_blank" rel="noopener">↗ Open notes</a>
+        <div class="card-right">
+          <button class="btn-done ${t.done ? 'done' : ''}" onclick="toggleDone(${t._i})" title="Mark as done">
+            <svg viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1"/></svg>
           </button>
-        </div>
-        <div class="wk-body">
-          ${w.tasks.map(t => `
-            <div class="wk-task">
-              <span class="task-tag" style="background:${TYPE_COLORS[t.tc]||'var(--s3)'};color:${TYPE_TEXT[t.tc]||'var(--muted2)'}">${t.tag}</span>
-              <span>${t.text}</span>
-            </div>`).join('')}
+          <button class="btn-del-card" onclick="delTopic(${t._i})" title="Delete">×</button>
         </div>
       </div>`;
-    }).join('');
+    grid.appendChild(card);
   });
 }
 
-function toggleWeekDone(week, btn) {
-  if(weeksDone.includes(week)) {
-    weeksDone = weeksDone.filter(w => w !== week);
-    btn.textContent = 'Označit'; btn.classList.remove('done');
-  } else {
-    weeksDone.push(week);
-    btn.textContent = '✓ Splněno'; btn.classList.add('done');
-  }
-  save();
-  document.getElementById('stat-weeks').textContent = weeksDone.length;
-  const pct = Math.round(weeksDone.length / 10 * 100);
-  document.getElementById('globalXpBar').style.width = pct + '%';
-  document.getElementById('globalXpNums').textContent = weeksDone.length + ' / 10 týdnů';
+function toggleDone(i) {
+  const t = load(); t[i].done = !t[i].done; save(t);
+  renderGrid();
+  toast(t[i].done ? '✓ Marked as done!' : '○ Marked as to-do');
 }
 
-// ══════════════════════════════════════════════════
-// EXERCISES
-// ══════════════════════════════════════════════════
-function openAddExModal() {
-  document.getElementById('ex-name').value = '';
-  document.getElementById('ex-type').value = 'kwt';
-  document.getElementById('ex-diff').value = 'medium';
-  document.getElementById('ex-questions').value = '';
-  document.getElementById('ex-answers').value = '';
-  document.getElementById('ex-my-answers').value = '';
-  document.getElementById('ex-score-val').value = '';
-  document.getElementById('ex-score-max').value = '';
-  openModal('addExModal');
+function delTopic(i) {
+  const t = load(); const name = t[i].name;
+  t.splice(i,1); save(t); renderGrid();
+  toast('Deleted: ' + name);
 }
 
-function saveExercise() {
-  const name = document.getElementById('ex-name').value.trim();
-  if(!name) { alert('Zadej název cvičení!'); return; }
-
-  const ex = {
-    id: Date.now(),
-    name,
-    type: document.getElementById('ex-type').value,
-    diff: document.getElementById('ex-diff').value,
-    questions: document.getElementById('ex-questions').value.trim(),
-    answers: document.getElementById('ex-answers').value.trim(),
-    myAnswers: document.getElementById('ex-my-answers').value.trim(),
-    score: document.getElementById('ex-score-val').value,
-    scoreMax: document.getElementById('ex-score-max').value,
-    date: new Date().toLocaleDateString('cs-CZ'),
-  };
-
-  exercises.push(ex);
-  save();
-  closeModal('addExModal');
-  renderExercises();
-  renderDashboard();
+function addTopic() {
+  const name = document.getElementById('f-name').value.trim();
+  const url  = document.getElementById('f-url').value.trim();
+  const cat  = document.getElementById('f-cat').value;
+  const desc = document.getElementById('f-desc').value.trim();
+  if (!name) { toast('Enter a topic name.'); document.getElementById('f-name').focus(); return; }
+  if (!url)  { toast('Enter a URL.'); document.getElementById('f-url').focus(); return; }
+  if (!url.startsWith('http')) { toast('URL must start with https://'); return; }
+  const t = load();
+  t.push({ name, cat, desc, url, done: false });
+  save(t); closeModal(); renderGrid();
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-url').value = '';
+  document.getElementById('f-desc').value = '';
+  toast('✓ Added: ' + name);
 }
 
-function renderExercises() {
-  const grid = document.getElementById('exGrid');
-  let filtered = currentFilter === 'all' ? exercises : exercises.filter(e => e.type === currentFilter);
-
-  if(filtered.length === 0) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
-      <div class="empty-icon">📝</div>
-      <h3>Žádná cvičení</h3>
-      <p>Klikni na "+ Přidat cvičení" a vlož cvičení od tutora.</p>
-    </div>`;
-    return;
-  }
-
-  grid.innerHTML = filtered.map(ex => {
-    const pct = ex.score !== '' && ex.scoreMax > 0 ? Math.round(+ex.score / +ex.scoreMax * 100) : null;
-    const scoreColor = pct === null ? 'var(--muted)' : pct >= 70 ? 'var(--a3)' : pct >= 50 ? 'var(--a4)' : 'var(--a5)';
-    return `
-    <div class="ex-card" data-type="${ex.type}">
-      <div class="ex-card-top">
-        <div>
-          <span class="ex-type-tag" style="background:${TYPE_COLORS[ex.type]};color:${TYPE_TEXT[ex.type]}">${TYPE_LABELS[ex.type]}</span>
-          <div class="ex-title">${ex.name}</div>
-        </div>
-      </div>
-      <div class="ex-card-body">
-        <div class="ex-preview">${ex.questions || '(bez zadání)'}</div>
-        <div class="ex-meta">
-          <span class="ex-score" style="color:${scoreColor}">
-            ${pct !== null ? `${ex.score}/${ex.scoreMax} (${pct}%)` : 'bez skóre'}
-          </span>
-          <div style="display:flex;gap:8px;align-items:center">
-            <span style="font-size:11px;color:var(--muted)">${ex.date}</span>
-            <button class="ex-open-btn" onclick="viewExercise(${ex.id})">Otevřít</button>
-            <button class="ex-open-btn" style="color:var(--a5);border-color:rgba(255,107,107,.2)" onclick="deleteExercise(${ex.id})">✕</button>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function filterEx(type, btn) {
-  currentFilter = type;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+function setTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  renderExercises();
+  renderGrid();
 }
 
-function viewExercise(id) {
-  const ex = exercises.find(e => e.id === id);
-  if(!ex) return;
-  document.getElementById('viewExType').textContent = TYPE_LABELS[ex.type] + ' · ' + ex.date;
-  document.getElementById('viewExTitle').textContent = ex.name;
+function openModal() {
+  document.getElementById('overlay').classList.add('open');
+  setTimeout(() => document.getElementById('f-name').focus(), 280);
+}
+function closeModal() { document.getElementById('overlay').classList.remove('open'); }
+function closeOut(e) { if (e.target === document.getElementById('overlay')) closeModal(); }
 
-  const pct = ex.score !== '' && ex.scoreMax > 0 ? Math.round(+ex.score / +ex.scoreMax * 100) : null;
-
-  document.getElementById('viewExBody').innerHTML = `
-    ${ex.questions ? `<div style="margin-bottom:14px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Zadání</div>
-      <div class="ex-question" style="white-space:pre-wrap">${ex.questions}</div>
-    </div>` : ''}
-    ${ex.myAnswers ? `<div style="margin-bottom:14px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Tvoje odpovědi</div>
-      <div style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap">${ex.myAnswers}</div>
-    </div>` : ''}
-    ${ex.answers ? `<div style="margin-bottom:14px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Správné odpovědi</div>
-      <div style="background:rgba(82,217,160,.07);border:1px solid rgba(82,217,160,.2);border-radius:8px;padding:14px;font-size:13px;line-height:1.7;color:var(--a3);white-space:pre-wrap">${ex.answers}</div>
-    </div>` : ''}
-    ${pct !== null ? `<div style="margin-top:16px;padding:14px;background:var(--s2);border-radius:8px;display:flex;align-items:center;gap:12px">
-      <span style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:${pct>=70?'var(--a3)':pct>=50?'var(--a4)':'var(--a5)'}">${pct}%</span>
-      <span style="font-size:13px;color:var(--muted2)">Skóre: ${ex.score}/${ex.scoreMax}</span>
-    </div>` : ''}
-    <div style="margin-top:16px">
-      <button class="btn btn-danger" onclick="deleteExercise(${ex.id});closeModal('viewExModal')">Smazat cvičení</button>
-    </div>
-  `;
-  openModal('viewExModal');
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 2500);
 }
 
-function deleteExercise(id) {
-  if(!confirm('Smazat toto cvičení?')) return;
-  exercises = exercises.filter(e => e.id !== id);
-  save();
-  renderExercises();
-  renderDashboard();
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ══════════════════════════════════════════════════
-// RESULTS
-// ══════════════════════════════════════════════════
-function renderResults() {
-  document.getElementById('r-total').textContent = exercises.length;
-
-  const scored = exercises.filter(e => e.score !== '' && +e.scoreMax > 0);
-  if(scored.length) {
-    const avg = Math.round(scored.reduce((s,e) => s + (+e.score / +e.scoreMax * 100), 0) / scored.length);
-    document.getElementById('r-avg').textContent = avg + '%';
-  } else {
-    document.getElementById('r-avg').textContent = '—';
-  }
-
-  // best category
-  const byType = {};
-  scored.forEach(e => {
-    if(!byType[e.type]) byType[e.type] = [];
-    byType[e.type].push(+e.score / +e.scoreMax * 100);
-  });
-  let best = null, bestAvg = 0;
-  Object.entries(byType).forEach(([t,arr]) => {
-    const a = arr.reduce((s,v)=>s+v,0)/arr.length;
-    if(a > bestAvg) { bestAvg = a; best = t; }
-  });
-  document.getElementById('r-best').textContent = best ? TYPE_LABELS[best] : '—';
-
-  // table
-  const tbody = document.getElementById('resultsBody');
-  if(exercises.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--muted)">Zatím žádné výsledky.</td></tr>';
-    return;
-  }
-
-  tbody.innerHTML = [...exercises].reverse().map(ex => {
-    const pct = ex.score !== '' && +ex.scoreMax > 0 ? Math.round(+ex.score / +ex.scoreMax * 100) : null;
-    let tagHtml = '<span class="tag tag-o">bez skóre</span>';
-    if(pct !== null) {
-      tagHtml = pct >= 70
-        ? `<span class="tag tag-g">✓ ${pct}%</span>`
-        : pct >= 50
-        ? `<span class="tag tag-o">${pct}%</span>`
-        : `<span class="tag tag-r">✗ ${pct}%</span>`;
-    }
-    return `<tr>
-      <td style="font-weight:600;color:#fff">${ex.name}</td>
-      <td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;background:${TYPE_COLORS[ex.type]};color:${TYPE_TEXT[ex.type]}">${TYPE_LABELS[ex.type]}</span></td>
-      <td>${pct !== null ? `${ex.score}/${ex.scoreMax}` : '—'}</td>
-      <td style="color:var(--muted)">${ex.date}</td>
-      <td>${tagHtml}</td>
-    </tr>`;
-  }).join('');
-}
-
-// ══════════════════════════════════════════════════
-// NOTES
-// ══════════════════════════════════════════════════
-function openNoteModal(id) {
-  editNoteId = id || null;
-  document.getElementById('noteModalTitle').textContent = id ? 'Upravit poznámku' : 'Nová poznámka';
-  if(id) {
-    const n = notes.find(n => n.id === id);
-    document.getElementById('note-title').value = n.title;
-    document.getElementById('note-body').value = n.body;
-    document.getElementById('note-color').value = n.color || 'default';
-  } else {
-    document.getElementById('note-title').value = '';
-    document.getElementById('note-body').value = '';
-    document.getElementById('note-color').value = 'default';
-  }
-  // reset color picker
-  document.querySelectorAll('.note-color-opt').forEach(el => {
-    el.style.border = el.dataset.color === (id ? notes.find(n=>n.id===id)?.color||'default' : 'default')
-      ? '2px solid var(--a1)' : '2px solid transparent';
-  });
-  openModal('noteModal');
-}
-
-function selectNoteColor(el) {
-  document.querySelectorAll('.note-color-opt').forEach(o => o.style.border = '2px solid transparent');
-  el.style.border = '2px solid var(--a1)';
-  document.getElementById('note-color').value = el.dataset.color;
-}
-
-function saveNote() {
-  const title = document.getElementById('note-title').value.trim();
-  const body = document.getElementById('note-body').value.trim();
-  if(!title) { alert('Zadej nadpis!'); return; }
-
-  if(editNoteId) {
-    const n = notes.find(n => n.id === editNoteId);
-    if(n) { n.title=title; n.body=body; n.color=document.getElementById('note-color').value; n.date=new Date().toLocaleDateString('cs-CZ'); }
-  } else {
-    notes.push({ id:Date.now(), title, body, color:document.getElementById('note-color').value, date:new Date().toLocaleDateString('cs-CZ') });
-  }
-  save();
-  closeModal('noteModal');
-  renderNotes();
-  document.getElementById('stat-notes').textContent = notes.length;
-}
-
-function renderNotes() {
-  const grid = document.getElementById('notesGrid');
-  if(notes.length === 0) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
-      <div class="empty-icon">🗒️</div>
-      <h3>Žádné poznámky</h3>
-      <p>Klikni na "+ Nová poznámka" a ulož si vzory, tipy nebo gramatiku.</p>
-    </div>`;
-    return;
-  }
-  grid.innerHTML = notes.map(n => {
-    const c = NOTE_COLORS[n.color] || NOTE_COLORS.default;
-    return `
-    <div class="note-card" style="background:${c.bg};border-color:${c.border}" onclick="openNoteModal(${n.id})">
-      <div class="note-card-title">${n.title}</div>
-      <div class="note-card-body">${n.body}</div>
-      <div class="note-card-meta">
-        <span>${n.date}</span>
-        <button class="note-del-btn" onclick="event.stopPropagation();deleteNote(${n.id})">✕</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function deleteNote(id) {
-  if(!confirm('Smazat tuto poznámku?')) return;
-  notes = notes.filter(n => n.id !== id);
-  save();
-  renderNotes();
-  document.getElementById('stat-notes').textContent = notes.length;
-}
-
-// ══════════════════════════════════════════════════
-// MODAL
-// ══════════════════════════════════════════════════
-function openModal(id) {
-  document.getElementById(id).classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// Close on overlay click
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', e => {
-    if(e.target === overlay) closeModal(overlay.id);
-  });
-});
-
-// Close on Escape
 document.addEventListener('keydown', e => {
-  if(e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
+  if (e.key === 'Escape') closeModal();
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault(); document.getElementById('search').focus();
   }
 });
 
-// ══════════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════════
-load();
-renderDashboard();
-renderPlan();
+document.addEventListener('DOMContentLoaded', () => {
+  renderGrid();
+  document.getElementById('f-name').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('f-url').focus();
+  });
+  document.getElementById('f-url').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addTopic();
+  });
+});
 </script>
 
 </body>
