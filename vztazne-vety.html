@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relative Clauses – FCE Grammar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf7f2;
+    --ink: #1a1410;
+    --rust: #c4622d;
+    --sage: #7a9e7e;
+    --dusty: #d4a57a;
+    --light-rust: #f5ece4;
+    --mid: #8c7b6e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; padding: 2rem 1rem; }
+
+.module-header { text-align: center; margin-bottom: 3rem; }
+.module-header h1 { font-family: ‘Playfair Display’, serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(–rust); letter-spacing: -1px; }
+.module-header p { color: var(–mid); font-size: 0.95rem; margin-top: 0.4rem; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; }
+.tab-btn { font-family: ‘DM Sans’, sans-serif; font-size: 0.85rem; font-weight: 500; padding: 0.5rem 1.2rem; border: 2px solid var(–rust); border-radius: 999px; background: transparent; color: var(–rust); cursor: pointer; transition: all 0.2s; }
+.tab-btn.active, .tab-btn:hover { background: var(–rust); color: white; }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.card { background: white; border-radius: 16px; padding: 1.8rem; margin-bottom: 1.5rem; border-left: 5px solid var(–rust); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.card h2 { font-family: ‘Playfair Display’, serif; font-size: 1.3rem; color: var(–rust); margin-bottom: 0.8rem; }
+
+.pronoun-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; margin-top: 1rem; }
+.pronoun-chip { background: var(–light-rust); border-radius: 12px; padding: 0.8rem 1rem; text-align: center; }
+.pronoun-chip .word { font-family: ‘Playfair Display’, serif; font-size: 1.2rem; font-weight: 700; color: var(–rust); }
+.pronoun-chip .use { font-size: 0.78rem; color: var(–mid); margin-top: 0.2rem; }
+.pronoun-chip .example { font-size: 0.8rem; font-style: italic; margin-top: 0.4rem; color: var(–ink); }
+.pronoun-chip em { color: var(–rust); font-style: normal; font-weight: 500; }
+
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+@media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-card { border-radius: 12px; padding: 1rem; }
+.compare-card.defining { background: #e8f4ea; border-top: 4px solid var(–sage); }
+.compare-card.non-defining { background: #fff3e8; border-top: 4px solid var(–dusty); }
+.compare-card .label { font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+.compare-card.defining .label { color: var(–sage); }
+.compare-card.non-defining .label { color: var(–rust); }
+.compare-card p { font-size: 0.9rem; margin-bottom: 0.4rem; }
+.compare-card .ex { font-style: italic; font-size: 0.85rem; color: var(–mid); }
+.compare-card em { color: var(–rust); font-style: normal; font-weight: 500; }
+
+.rule-list { list-style: none; margin-top: 0.8rem; }
+.rule-list li { display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.6rem 0; border-bottom: 1px solid #f0ebe4; font-size: 0.9rem; }
+.rule-list li:last-child { border-bottom: none; }
+.rule-list .icon { font-size: 1.1rem; flex-shrink: 0; }
+
+.question-block { background: white; border-radius: 14px; padding: 1.4rem; margin-bottom: 1.2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.question-block .q-num { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(–mid); margin-bottom: 0.5rem; }
+.question-block .sentence { font-size: 1rem; margin-bottom: 1rem; line-height: 1.7; }
+
+.options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.option-btn { font-family: ‘DM Sans’, sans-serif; font-size: 0.88rem; padding: 0.45rem 1rem; border: 2px solid #e0d8d0; border-radius: 8px; background: var(–cream); cursor: pointer; transition: all 0.15s; color: var(–ink); }
+.option-btn:hover:not(:disabled) { border-color: var(–rust); color: var(–rust); }
+.option-btn.correct { background: #d4edda; border-color: var(–sage); color: #2d6a4f; font-weight: 500; }
+.option-btn.wrong { background: #fde8e8; border-color: #e07a7a; color: #8b2020; }
+.option-btn:disabled { cursor: default; opacity: 0.85; }
+
+.feedback { margin-top: 0.8rem; font-size: 0.85rem; padding: 0.6rem 0.9rem; border-radius: 8px; display: none; }
+.feedback.show { display: block; }
+.feedback.ok { background: #d4edda; color: #2d6a4f; }
+.feedback.bad { background: #fde8e8; color: #8b2020; }
+
+.fill-sentence { font-size: 1rem; line-height: 2.4; }
+.fill-input { font-family: ‘DM Sans’, sans-serif; font-size: 0.95rem; border: none; border-bottom: 2px solid var(–rust); background: transparent; padding: 0 0.3rem; width: 90px; text-align: center; color: var(–ink); outline: none; }
+.fill-input.correct { border-color: var(–sage); color: #2d6a4f; }
+.fill-input.wrong { border-color: #e07a7a; color: #8b2020; }
+
+.check-btn { font-family: ‘DM Sans’, sans-serif; margin-top: 1.2rem; padding: 0.6rem 1.6rem; background: var(–rust); color: white; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: background 0.2s; display: block; }
+.check-btn:hover { background: #a5511f; }
+
+.score-bar { text-align: center; padding: 1.2rem; background: white; border-radius: 14px; margin-top: 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.06); font-size: 0.95rem; color: var(–mid); display: none; }
+.score-bar.show { display: block; }
+.score-bar strong { font-size: 1.5rem; color: var(–rust); font-family: ‘Playfair Display’, serif; }
+
+.mistakes-options { display: flex; flex-direction: column; gap: 0.5rem; }
+.mistakes-options .option-btn { text-align: left; white-space: normal; height: auto; padding: 0.5rem 0.9rem; }
+</style>
+
+</head>
+<body>
+
+<div class="module-header">
+  <h1>Relative Clauses</h1>
+  <p>Vztažné věty · FCE Grammar B2 · Unit 6</p>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab-btn active" data-tab="theory">📖 Teorie</button>
+  <button class="tab-btn" data-tab="quiz">🎯 Quiz</button>
+  <button class="tab-btn" data-tab="fill">✏️ Doplňovačka</button>
+  <button class="tab-btn" data-tab="mistakes">🔍 Oprav chyby</button>
+</div>
+
+<!-- THEORY -->
+
+<div class="tab-panel active" id="theory">
+  <div class="card">
+    <h2>Vztažná zájmena</h2>
+    <p style="color:var(--mid); font-size:0.9rem;">Vybereš správné podle toho, o čem mluvíš.</p>
+    <div class="pronoun-grid">
+      <div class="pronoun-chip"><div class="word">who</div><div class="use">osoby</div><div class="example">a person <em>who</em> runs</div></div>
+      <div class="pronoun-chip"><div class="word">which</div><div class="use">věci / zvířata</div><div class="example">a book <em>which</em> inspired me</div></div>
+      <div class="pronoun-chip"><div class="word">that</div><div class="use">osoby i věci (jen defining!)</div><div class="example">the man <em>that</em> called</div></div>
+      <div class="pronoun-chip"><div class="word">whose</div><div class="use">přivlastnění</div><div class="example">a girl <em>whose</em> mum is a doctor</div></div>
+      <div class="pronoun-chip"><div class="word">whom</div><div class="use">formálnější „koho"</div><div class="example">a person <em>whom</em> I met</div></div>
+      <div class="pronoun-chip"><div class="word">where</div><div class="use">místo</div><div class="example">the hotel <em>where</em> we stayed</div></div>
+      <div class="pronoun-chip"><div class="word">when</div><div class="use">čas</div><div class="example">the day <em>when</em> I met you</div></div>
+      <div class="pronoun-chip"><div class="word">why</div><div class="use">důvod</div><div class="example">the reason <em>why</em> she left</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Defining vs Non-defining</h2>
+    <div class="compare-grid">
+      <div class="compare-card defining">
+        <div class="label">✅ Defining (vymezující)</div>
+        <p>Říká nám, <strong>o které</strong> osobě/věci mluvíme. Bez věty by věta ztratila smysl.</p>
+        <p class="ex">The match <em>which</em> I saw was close.</p>
+        <ul style="font-size:0.82rem; margin-top:0.5rem; padding-left:1.2rem;">
+          <li>❌ Žádná čárka</li>
+          <li>✅ Lze použít <strong>that</strong></li>
+          <li>✅ Lze vypustit zájmeno (pokud není podmět)</li>
+        </ul>
+      </div>
+      <div class="compare-card non-defining">
+        <div class="label">ℹ️ Non-defining (doplňující)</div>
+        <p>Přidává <strong>extra info</strong>, které není nutné. Věta bez ní stále dává smysl.</p>
+        <p class="ex">The match, <em>which</em> I saw, was close.</p>
+        <ul style="font-size:0.82rem; margin-top:0.5rem; padding-left:1.2rem;">
+          <li>✅ Čárky (před i za)</li>
+          <li>❌ Nelze použít <strong>that</strong></li>
+          <li>❌ Nelze vypustit zájmeno</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Klíčová pravidla</h2>
+    <ul class="rule-list">
+      <li><span class="icon">🔤</span><span><strong>which</strong> s čárkou před sebou = „což" — doplňuje celou předchozí větu.<br><em>She passed the exam, which surprised everyone.</em></span></li>
+      <li><span class="icon">🚫</span><span>Před <strong>that</strong> se čárka <strong>nepíše nikdy</strong>.</span></li>
+      <li><span class="icon">✂️</span><span>Zájmeno lze <strong>vypustit</strong> jen v defining clause, pokud <strong>není podmět</strong>.<br><em>The book (that) I read was great.</em> ✅</span></li>
+      <li><span class="icon">👤</span><span><strong>whom</strong> = formálnější předmět místo who.<br><em>The teacher whom I respect most retired.</em></span></li>
+      <li><span class="icon">📍</span><span>Po předložce VŽDY <strong>whom</strong>.<br><em>the person to <strong>whom</strong> I spoke</em></span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- QUIZ -->
+
+<div class="tab-panel" id="quiz">
+  <div id="quiz-container"></div>
+  <div class="score-bar" id="quiz-score"></div>
+</div>
+
+<!-- FILL IN -->
+
+<div class="tab-panel" id="fill">
+  <div class="card" style="border-left-color: var(--sage);">
+    <h2>Doplň správné zájmeno</h2>
+    <p style="color:var(--mid); font-size:0.88rem; margin-bottom:1rem;">who · which · whose · where · when · why · whom · that</p>
+    <div id="fill-container"></div>
+    <button class="check-btn" id="check-fill-btn">Zkontrolovat</button>
+    <div class="score-bar" id="fill-score"></div>
+  </div>
+</div>
+
+<!-- MISTAKES -->
+
+<div class="tab-panel" id="mistakes">
+  <div class="card" style="border-left-color: var(--dusty);">
+    <h2>Oprav chybu ve větě</h2>
+    <p style="color:var(--mid); font-size:0.88rem; margin-bottom:1.2rem;">Najdi chybu a vyber opravenou verzi.</p>
+    <div id="mistakes-container"></div>
+    <div class="score-bar" id="mistakes-score"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+
+  var quizData = [
+    { sentence: "She is the woman ___ saved my life.", options: ["who","which","whose","whom"], answer: "who", explanation: "who pro osoby jako podmět (subject)" },
+    { sentence: "This is the building ___ was designed by Gehry.", options: ["who","which","whose","where"], answer: "which", explanation: "which pro věci" },
+    { sentence: "The city ___ I was born has changed a lot.", options: ["when","where","which","who"], answer: "where", explanation: "where pro místa" },
+    { sentence: "I remember the summer ___ we first met.", options: ["where","why","when","which"], answer: "when", explanation: "when pro čas" },
+    { sentence: "He's the student ___ essay won first prize.", options: ["who","whom","whose","which"], answer: "whose", explanation: "whose vyjadřuje přivlastnění" },
+    { sentence: "That's the reason ___ she didn't come.", options: ["when","where","why","which"], answer: "why", explanation: "why se pojí s the reason" },
+    { sentence: "The man ___ I spoke to was very helpful.", options: ["who","whom","whose","which"], answer: "whom", explanation: "whom = předmět (I spoke to HIM)" },
+    { sentence: "She passed the exam, ___ surprised everyone.", options: ["that","who","which","whose"], answer: "which", explanation: "Čárka před zájmenem = non-defining = nelze that, jen which" },
+    { sentence: "The film ___ we watched last night was boring.", options: ["who","whose","where","that"], answer: "that", explanation: "Defining clause o věci = that nebo which" },
+    { sentence: "My sister, ___ lives in Prague, is a doctor.", options: ["that","which","who","whose"], answer: "who", explanation: "Non-defining o osobě = who; that nelze!" }
+  ];
+
+  var fillData = [
+    { before: "The hotel", blank: "where", after: "we stayed was amazing.", hint: "místo" },
+    { before: "He's the only person", blank: "who", after: "can fix this.", hint: "osoba = podmět" },
+    { before: "I've lost the keys", blank: "which", after: "you gave me.", hint: "věc" },
+    { before: "That's the day", blank: "when", after: "everything changed.", hint: "čas" },
+    { before: "She's the girl", blank: "whose", after: "brother is a famous singer.", hint: "přivlastnění" },
+    { before: "I don't know the reason", blank: "why", after: "he left so suddenly.", hint: "důvod" },
+    { before: "The man", blank: "whom", after: "I admire most is my grandfather.", hint: "předmět, formální" },
+    { before: "Emily's novel, ___", blank: "which", after: "was set in a school, was successful.", hint: "non-defining, věc" }
+  ];
+
+  var mistakesData = [
+    { wrong: "I've chosen to study two languages, whose are Portuguese and Italian.", options: ["...two languages, which are Portuguese and Italian.","...two languages, that are Portuguese and Italian.","...two languages, who are Portuguese and Italian."], answer: 0, explanation: "whose = přivlastnění. Non-defining o věcech = which" },
+    { wrong: "You should visit in June, where the weather is usually nice.", options: ["...in June, which the weather is usually nice.","...in June, when the weather is usually nice.","...in June, whose the weather is usually nice."], answer: 1, explanation: "where = místo. June je čas = when" },
+    { wrong: "I don't like people which are unkind to their friends.", options: ["...people who are unkind...","...people whose are unkind...","...people, which are unkind..."], answer: 0, explanation: "which je pro věci, ne osoby = who" },
+    { wrong: "There is a new gym which we can do spin classes.", options: ["...a new gym who we can do spin classes.","...a new gym where we can do spin classes.","...a new gym that we can do spin classes."], answer: 1, explanation: "Gym je místo, kde se něco děje = where" },
+    { wrong: "The wallet belonged to a man who name was Giacomo.", options: ["...a man which name was Giacomo.","...a man that name was Giacomo.","...a man whose name was Giacomo."], answer: 2, explanation: "Přivlastnění = whose (name patří muži)" },
+    { wrong: "Anna who is keen on painting saw some brilliant artwork in the gallery.", options: ["Anna, who is keen on painting, saw some brilliant artwork...","Anna that is keen on painting saw some brilliant artwork...","Anna which is keen on painting saw some brilliant artwork..."], answer: 0, explanation: "Vlastní jméno = non-defining = čárky kolem věty" }
+  ];
+
+  // TABS
+  document.getElementById('tabs').addEventListener('click', function(e) {
+    var btn = e.target;
+    if (!btn.classList.contains('tab-btn')) return;
+    var tabName = btn.getAttribute('data-tab');
+    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.getElementById(tabName).classList.add('active');
+    btn.classList.add('active');
+  });
+
+  // QUIZ
+  var quizAnswered = quizData.map(function() { return false; });
+  var quizCorrect = 0;
+
+  var qc = document.getElementById('quiz-container');
+  qc.innerHTML = quizData.map(function(q, i) {
+    var opts = q.options.map(function(o) {
+      return '<button class="option-btn" data-qi="' + i + '" data-ans="' + o + '">' + o + '</button>';
+    }).join('');
+    var sent = q.sentence.replace('___', '<span style="border-bottom:2px solid var(--rust);padding:0 0.4rem">___</span>');
+    return '<div class="question-block" id="qblock-' + i + '">'
+      + '<div class="q-num">Otázka ' + (i+1) + ' / ' + quizData.length + '</div>'
+      + '<div class="sentence">' + sent + '</div>'
+      + '<div class="options">' + opts + '</div>'
+      + '<div class="feedback" id="fb-' + i + '"></div>'
+      + '</div>';
+  }).join('');
+
+  qc.addEventListener('click', function(e) {
+    var btn = e.target;
+    if (!btn.hasAttribute('data-qi')) return;
+    var i = parseInt(btn.getAttribute('data-qi'));
+    var chosen = btn.getAttribute('data-ans');
+    if (quizAnswered[i]) return;
+    quizAnswered[i] = true;
+    var q = quizData[i];
+    var block = document.getElementById('qblock-' + i);
+    var fb = document.getElementById('fb-' + i);
+    block.querySelectorAll('[data-qi]').forEach(function(b) {
+      b.disabled = true;
+      if (b.getAttribute('data-ans') === q.answer) b.classList.add('correct');
+    });
+    if (chosen === q.answer) {
+      btn.classList.add('correct');
+      fb.textContent = '✅ Správně! ' + q.explanation;
+      fb.className = 'feedback ok show';
+      quizCorrect++;
+    } else {
+      btn.classList.add('wrong');
+      fb.textContent = '❌ Správná odpověď: ' + q.answer + ' – ' + q.explanation;
+      fb.className = 'feedback bad show';
+    }
+    if (quizAnswered.every(function(v) { return v; })) {
+      var sc = document.getElementById('quiz-score');
+      sc.innerHTML = 'Výsledek: <strong>' + quizCorrect + ' / ' + quizData.length + '</strong> správně';
+      sc.className = 'score-bar show';
+    }
+  });
+
+  // FILL IN
+  var fc = document.getElementById('fill-container');
+  fc.innerHTML = fillData.map(function(f, i) {
+    return '<div class="question-block" style="margin-bottom:0.8rem;">'
+      + '<div class="q-num">' + (i+1) + '. nápověda: ' + f.hint + '</div>'
+      + '<div class="fill-sentence">' + f.before
+      + ' <input class="fill-input" id="fi-' + i + '" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"> '
+      + f.after + '</div>'
+      + '</div>';
+  }).join('');
+
+  document.getElementById('check-fill-btn').addEventListener('click', function() {
+    var correct = 0;
+    fillData.forEach(function(f, i) {
+      var inp = document.getElementById('fi-' + i);
+      var val = inp.value.trim().toLowerCase();
+      inp.classList.remove('correct', 'wrong');
+      if (val === f.blank) {
+        inp.classList.add('correct');
+        correct++;
+      } else {
+        inp.classList.add('wrong');
+        inp.value = '';
+        inp.setAttribute('placeholder', f.blank);
+      }
+    });
+    var sc = document.getElementById('fill-score');
+    sc.innerHTML = 'Správně: <strong>' + correct + ' / ' + fillData.length + '</strong>';
+    sc.className = 'score-bar show';
+  });
+
+  // MISTAKES
+  var mistakesAnswered = mistakesData.map(function() { return false; });
+  var mistakesCorrect = 0;
+
+  var mc = document.getElementById('mistakes-container');
+  mc.innerHTML = mistakesData.map(function(m, i) {
+    var opts = m.options.map(function(o, j) {
+      return '<button class="option-btn" data-mi="' + i + '" data-mj="' + j + '" style="text-align:left;white-space:normal;height:auto;padding:0.5rem 0.9rem;">' + o + '</button>';
+    }).join('');
+    return '<div class="question-block" id="mblock-' + i + '">'
+      + '<div class="q-num">Věta ' + (i+1) + '</div>'
+      + '<div class="sentence" style="color:var(--rust);text-decoration:line-through;font-size:0.9rem;margin-bottom:0.6rem;">' + m.wrong + '</div>'
+      + '<div class="mistakes-options">' + opts + '</div>'
+      + '<div class="feedback" id="mfb-' + i + '"></div>'
+      + '</div>';
+  }).join('');
+
+  mc.addEventListener('click', function(e) {
+    var btn = e.target;
+    if (!btn.hasAttribute('data-mi')) return;
+    var i = parseInt(btn.getAttribute('data-mi'));
+    var j = parseInt(btn.getAttribute('data-mj'));
+    if (mistakesAnswered[i]) return;
+    mistakesAnswered[i] = true;
+    var m = mistakesData[i];
+    var block = document.getElementById('mblock-' + i);
+    var fb = document.getElementById('mfb-' + i);
+    block.querySelectorAll('[data-mi]').forEach(function(b) {
+      b.disabled = true;
+      if (parseInt(b.getAttribute('data-mj')) === m.answer) b.classList.add('correct');
+    });
+    if (j === m.answer) {
+      btn.classList.add('correct');
+      fb.textContent = '✅ Správně! ' + m.explanation;
+      fb.className = 'feedback ok show';
+      mistakesCorrect++;
+    } else {
+      btn.classList.add('wrong');
+      fb.textContent = '❌ ' + m.explanation;
+      fb.className = 'feedback bad show';
+    }
+    if (mistakesAnswered.every(function(v) { return v; })) {
+      var sc = document.getElementById('mistakes-score');
+      sc.innerHTML = 'Výsledek: <strong>' + mistakesCorrect + ' / ' + mistakesData.length + '</strong> správně';
+      sc.className = 'score-bar show';
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
