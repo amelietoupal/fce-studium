@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phrasal Verbs · Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+–cream: #F6F1E9;
+–ink: #1C1810;
+–rust: #C05C2A;
+–sage: #5A7A5D;
+–sand: #D8CCBA;
+–pale: #EDE7DA;
+–white: #FDFAF5;
+–green: #3D6B41;
+}
+
+body {
+font-family: ‘Fraunces’, Georgia, serif;
+background: var(–cream);
+color: var(–ink);
+min-height: 100vh;
+}
+
+/* HEADER */
+header {
+padding: 1.6rem 2rem 1rem;
+border-bottom: 1.5px solid var(–sand);
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 0.8rem;
+}
+.logo {
+display: flex;
+align-items: baseline;
+gap: 0.7rem;
+}
+header h1 {
+font-size: 1.5rem;
+font-weight: 700;
+letter-spacing: -0.03em;
+}
+header h1 em { color: var(–rust); font-style: italic; }
+.mono {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.62rem;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+background: var(–ink);
+color: var(–cream);
+padding: 0.2em 0.6em;
+border-radius: 2px;
+}
+
+/* MODE TOGGLE */
+.mode-toggle {
+display: flex;
+gap: 0.4rem;
+}
+.mode-btn {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.68rem;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+border: 1.5px solid var(–sand);
+background: none;
+color: var(–ink);
+padding: 0.4em 1em;
+border-radius: 3px;
+cursor: pointer;
+transition: all 0.15s;
+}
+.mode-btn.active {
+background: var(–ink);
+color: var(–cream);
+border-color: var(–ink);
+}
+.mode-btn:hover:not(.active) { border-color: var(–ink); }
+
+/* MAIN LAYOUT */
+main { display: flex; min-height: calc(100vh - 80px); }
+
+/* SIDEBAR */
+aside {
+width: 200px;
+flex-shrink: 0;
+border-right: 1.5px solid var(–sand);
+padding: 1.2rem 0;
+background: var(–white);
+}
+.group-btn {
+display: block;
+width: 100%;
+text-align: left;
+font-family: ‘DM Mono’, monospace;
+font-size: 0.72rem;
+letter-spacing: 0.06em;
+text-transform: uppercase;
+background: none;
+border: none;
+padding: 0.7rem 1.4rem;
+cursor: pointer;
+color: #666;
+transition: all 0.15s;
+border-left: 3px solid transparent;
+}
+.group-btn:hover { color: var(–ink); background: var(–pale); }
+.group-btn.active {
+color: var(–rust);
+border-left-color: var(–rust);
+background: var(–pale);
+font-weight: 500;
+}
+.sidebar-divider {
+height: 1px;
+background: var(–sand);
+margin: 0.6rem 1rem;
+}
+
+/* CONTENT AREA */
+.content { flex: 1; padding: 1.8rem 2rem; overflow-y: auto; }
+
+/* BROWSE MODE */
+.cards-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+gap: 1rem;
+}
+.card {
+background: var(–white);
+border: 1.5px solid var(–sand);
+border-radius: 6px;
+padding: 1.2rem 1.4rem;
+transition: box-shadow 0.2s, transform 0.2s;
+cursor: default;
+}
+.card:hover {
+box-shadow: 4px 4px 0 var(–sand);
+transform: translate(-1px, -1px);
+}
+.card-verb {
+font-size: 1.15rem;
+font-weight: 700;
+color: var(–rust);
+letter-spacing: -0.02em;
+margin-bottom: 0.3rem;
+}
+.card-verb em { font-style: italic; color: var(–ink); font-size: 0.85em; }
+.card-meaning-label {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.58rem;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(–sage);
+margin-bottom: 0.4rem;
+}
+.card-meaning { font-size: 0.88rem; color: #444; line-height: 1.5; margin-bottom: 0.6rem; }
+.card-example {
+font-size: 0.82rem;
+font-style: italic;
+color: #777;
+border-left: 2px solid var(–sand);
+padding-left: 0.7rem;
+line-height: 1.5;
+}
+
+/* GROUP HEADER */
+.group-header {
+display: flex;
+align-items: baseline;
+gap: 1rem;
+margin-bottom: 1.4rem;
+padding-bottom: 0.8rem;
+border-bottom: 1.5px solid var(–sand);
+}
+.group-title {
+font-size: 1.8rem;
+font-weight: 700;
+letter-spacing: -0.04em;
+}
+.group-title em { color: var(–rust); font-style: italic; }
+.group-count {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.7rem;
+color: #999;
+}
+.subgroup-label {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.65rem;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(–sage);
+margin: 1.4rem 0 0.7rem;
+padding-bottom: 0.3rem;
+border-bottom: 1px solid var(–sand);
+}
+
+/* LEARN MODE */
+.learn-wrap {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 2rem 1rem;
+}
+.progress-bar-wrap {
+width: 100%;
+max-width: 560px;
+margin-bottom: 1.8rem;
+}
+.progress-top {
+display: flex;
+justify-content: space-between;
+font-family: ‘DM Mono’, monospace;
+font-size: 0.68rem;
+color: #888;
+margin-bottom: 0.5rem;
+}
+.progress-bar {
+height: 4px;
+background: var(–sand);
+border-radius: 2px;
+overflow: hidden;
+}
+.progress-fill {
+height: 100%;
+background: var(–rust);
+border-radius: 2px;
+transition: width 0.4s ease;
+}
+
+/* FLIP CARD */
+.flip-scene {
+width: 100%;
+max-width: 560px;
+height: 300px;
+perspective: 1000px;
+margin-bottom: 1.6rem;
+cursor: pointer;
+}
+.flip-card {
+width: 100%;
+height: 100%;
+position: relative;
+transform-style: preserve-3d;
+transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+}
+.flip-card.flipped { transform: rotateY(180deg); }
+.flip-face {
+position: absolute;
+inset: 0;
+backface-visibility: hidden;
+border-radius: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 2rem;
+text-align: center;
+border: 2px solid var(–sand);
+}
+.flip-front { background: var(–white); }
+.flip-back {
+background: var(–ink);
+color: var(–cream);
+transform: rotateY(180deg);
+}
+.flip-hint {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.6rem;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: #aaa;
+margin-bottom: 1rem;
+}
+.flip-back .flip-hint { color: #888; }
+.flip-verb {
+font-size: 2.2rem;
+font-weight: 700;
+letter-spacing: -0.04em;
+color: var(–rust);
+margin-bottom: 0.4rem;
+}
+.flip-group-tag {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.62rem;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+color: #bbb;
+}
+.flip-meaning {
+font-size: 1.05rem;
+line-height: 1.55;
+margin-bottom: 1rem;
+color: var(–cream);
+}
+.flip-example-back {
+font-size: 0.85rem;
+font-style: italic;
+color: #aaa;
+line-height: 1.5;
+}
+
+/* ANSWER BTNS */
+.answer-btns {
+display: flex;
+gap: 1rem;
+margin-bottom: 1.2rem;
+}
+.ans-btn {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.72rem;
+letter-spacing: 0.06em;
+text-transform: uppercase;
+border: 2px solid;
+background: none;
+padding: 0.6em 2em;
+border-radius: 4px;
+cursor: pointer;
+transition: all 0.15s;
+}
+.ans-wrong {
+border-color: #C04040;
+color: #C04040;
+}
+.ans-wrong:hover { background: #C04040; color: white; }
+.ans-right {
+border-color: var(–green);
+color: var(–green);
+}
+.ans-right:hover { background: var(–green); color: white; }
+.ans-btn.locked { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+
+.skip-btn {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.62rem;
+letter-spacing: 0.06em;
+text-transform: uppercase;
+background: none;
+border: none;
+color: #aaa;
+cursor: pointer;
+text-decoration: underline;
+}
+.skip-btn:hover { color: var(–ink); }
+
+/* RESULT SCREEN */
+.result-screen {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 4rem 2rem;
+gap: 1rem;
+}
+.result-emoji { font-size: 3rem; margin-bottom: 0.5rem; }
+.result-title { font-size: 2rem; font-weight: 700; letter-spacing: -0.04em; }
+.result-sub { font-size: 0.95rem; color: #666; }
+.result-score {
+font-family: ‘DM Mono’, monospace;
+font-size: 1.4rem;
+color: var(–rust);
+margin: 0.5rem 0;
+}
+.restart-btn {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.72rem;
+letter-spacing: 0.07em;
+text-transform: uppercase;
+background: var(–ink);
+color: var(–cream);
+border: none;
+padding: 0.8em 2.4em;
+border-radius: 4px;
+cursor: pointer;
+margin-top: 0.5rem;
+}
+.restart-btn:hover { background: var(–rust); }
+
+/* hidden */
+.hidden { display: none !important; }
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <h1>Phrasal <em>Verbs</em></h1>
+    <span class="mono">FCE Prep</span>
+  </div>
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="btnBrowse">Browse</button>
+    <button class="mode-btn" id="btnLearn">Learn</button>
+  </div>
+</header>
+
+<main>
+  <aside>
+    <button class="group-btn active" id="tab-all">All verbs</button>
+    <div class="sidebar-divider"></div>
+    <button class="group-btn" id="tab-on">with ON</button>
+    <button class="group-btn" id="tab-off">with OFF</button>
+    <button class="group-btn" id="tab-up">with UP</button>
+    <button class="group-btn" id="tab-down">with DOWN</button>
+    <button class="group-btn" id="tab-out">with OUT</button>
+    <button class="group-btn" id="tab-in">with IN</button>
+    <button class="group-btn" id="tab-away">with AWAY</button>
+    <button class="group-btn" id="tab-about">with ABOUT</button>
+    <button class="group-btn" id="tab-back">with BACK</button>
+    <button class="group-btn" id="tab-over">with OVER</button>
+  </aside>
+
+  <div class="content" id="contentArea"></div>
+</main>
+
+<script>
+const DATA = {
+  on: {
+    label: "ON",
+    subgroups: [
+      {
+        name: "Meaning: To attach",
+        verbs: [
+          { verb: "put on",    meaning: "to attach clothes to your body",                        example: "She puts on a pair of socks in the morning." },
+          { verb: "try on",    meaning: "to attach clothes to try them",                          example: "Where can I try on this jacket?" },
+          { verb: "take on",   meaning: "to attach a new employee, or take on more work/responsibility", example: "He is taking on more clients at the moment." },
+          { verb: "catch on",  meaning: "a new idea or fashion attaches itself to society",       example: "The idea is catching on around the western world." },
+          { verb: "cheat on",  meaning: "to attach yourself romantically to someone while in a relationship", example: "He has been cheating on his wife for years." },
+          { verb: "get on with", meaning: "to like someone as a friend",                         example: "I get on well with my neighbour." },
+          { verb: "get on",    meaning: "to board a vehicle (bus, plane, boat)",                  example: "He got on the plane at 9am." },
+          { verb: "turn on / switch on", meaning: "to attach a device to power/electricity",      example: "How do I switch the computer on?" },
+        ]
+      },
+      {
+        name: "Meaning: To continue",
+        verbs: [
+          { verb: "go on",    meaning: "to continue speaking or moving",     example: "Please go on and finish what you were saying." },
+          { verb: "carry on", meaning: "to continue an activity",            example: "She carried on working until she was 70." },
+          { verb: "keep on",  meaning: "to continue with an action",         example: "They kept on swimming until they reached land." },
+        ]
+      }
+    ]
+  },
+  off: {
+    label: "OFF",
+    subgroups: [
+      {
+        name: "Meaning: To detach",
+        verbs: [
+          { verb: "take off",      meaning: "to detach clothes / when a plane leaves the ground", example: "Take off your shoes. / The pilot took off into the blue sky." },
+          { verb: "call off",      meaning: "to cancel a meeting or event",                       example: "They called off the wedding at the last moment." },
+          { verb: "put off",       meaning: "to postpone / to lose enthusiasm for something",     example: "I have put off taking that exam until next year." },
+          { verb: "go off",        meaning: "to explode / food goes bad",                         example: "The bomb went off. / This milk has gone off!" },
+          { verb: "drop off",      meaning: "to fall asleep unexpectedly / to leave someone somewhere", example: "My grandfather dropped off on the sofa." },
+          { verb: "turn off / switch off", meaning: "to detach a device from electricity",       example: "Turn off the computer when you are finished." },
+          { verb: "get off",       meaning: "to detach yourself from a vehicle",                  example: "It is difficult to get off a boat in waves." },
+        ]
+      },
+      {
+        name: "Meaning: To leave",
+        verbs: [
+          { verb: "set off",  meaning: "to start a journey",                           example: "They set off for the mountain early." },
+          { verb: "be off",   meaning: "to tell someone you are leaving",               example: "Are you off already? The party has only just started." },
+          { verb: "drive off", meaning: "to leave by driving",                          example: "The truck drove off into the night." },
+          { verb: "walk off", meaning: "to leave by walking / to abandon",              example: "The man walked off and left his kids in the park." },
+          { verb: "run off",  meaning: "to leave by running",                           example: "Don't run off and leave me here with all these bags." },
+          { verb: "head off", meaning: "to leave, going towards a new place",           example: "I saw him heading off into town." },
+        ]
+      }
+    ]
+  },
+  up: {
+    label: "UP",
+    subgroups: [
+      {
+        name: "Meaning: Emphasis (completeness)",
+        verbs: [
+          { verb: "look up",     meaning: "to search in a dictionary or online",         example: "I will look up the word in the dictionary." },
+          { verb: "clean up",    meaning: "to clean when something is very messy",        example: "Clean up this mess!" },
+          { verb: "save up",     meaning: "to save money for something particular",       example: "He's saving up for a new bike." },
+          { verb: "cut up",      meaning: "to completely destroy something through cutting", example: "He cut up his t-shirt." },
+          { verb: "beat up",     meaning: "to physically beat someone",                  example: "The man got beaten up outside a pub." },
+          { verb: "dress up",    meaning: "to dress in a costume or best clothes",        example: "I am going to dress up for the party." },
+          { verb: "listen up",   meaning: "to listen with attention",                    example: "Listen up people; we need to rebuild the library." },
+          { verb: "follow up",   meaning: "to continue a meeting with another action",   example: "I will follow this up with an email next week." },
+          { verb: "read up on",  meaning: "to do a lot of reading about a subject",      example: "I did a lot of reading up on ancient Egyptians before we left." },
+          { verb: "cheer up",    meaning: "to make someone feel happier",                example: "We are taking him out to cheer him up." },
+          { verb: "use up",      meaning: "to use something completely",                 example: "We have to use up all the milk before it goes off." },
+          { verb: "free up",     meaning: "to liberate time or space",                   example: "Computers free up a lot of time." },
+        ]
+      },
+      {
+        name: "Meaning: To increase",
+        verbs: [
+          { verb: "turn up",  meaning: "to increase the volume",      example: "They turned up the music to maximum." },
+          { verb: "speak up", meaning: "to speak louder",             example: "Speak up please; my grandmother is a little deaf." },
+        ]
+      },
+      {
+        name: "Meaning: Distinction / other",
+        verbs: [
+          { verb: "break up", meaning: "to end a relationship",                         example: "My brother and his girlfriend broke up last spring." },
+          { verb: "do up",    meaning: "to fasten a piece of clothing or a seat belt",  example: "Don't forget to do up your shoes." },
+          { verb: "mess up",  meaning: "to make a mistake",                             example: "I just messed up the project. Sorry!" },
+          { verb: "end up",   meaning: "to finish in an unexpected way",                example: "I made the cake but ended up eating it myself." },
+          { verb: "make up",  meaning: "to invent / to reconcile / to compensate",      example: "Beatrix Potter made up a story about rabbits. / They made up after the argument." },
+        ]
+      }
+    ]
+  },
+  down: {
+    label: "DOWN",
+    subgroups: [
+      {
+        name: "Meaning: To reduce",
+        verbs: [
+          { verb: "settle down",  meaning: "to reduce your movement / become calmer",       example: "Settle down children and relax." },
+          { verb: "calm down",    meaning: "to reduce your stress",                         example: "Have a cup of tea to calm down." },
+          { verb: "cut down on",  meaning: "to reduce something you eat, drink or smoke",   example: "I'm cutting down on sugar." },
+          { verb: "come down to", meaning: "to reduce an argument to its basic point",      example: "It all comes down to whether they can afford it." },
+          { verb: "cool down",    meaning: "to reduce your heat / recover from exercise",   example: "Take a moment to cool down after the gym." },
+          { verb: "turn down",    meaning: "to reduce volume / to reject something",        example: "He turned down the job offer." },
+          { verb: "let down",     meaning: "to disappoint someone",                         example: "She felt let down when her parents didn't come." },
+          { verb: "slow down",    meaning: "to reduce your speed",                          example: "Slow down, we are coming to a traffic light." },
+        ]
+      },
+      {
+        name: "Meaning: To remove / cut something taller",
+        verbs: [
+          { verb: "cut down", meaning: "to cut something taller than you, like a tree", example: "We need to cut down the tree." },
+        ]
+      },
+      {
+        name: "Meaning: Temporary breakdown",
+        verbs: [
+          { verb: "break down", meaning: "a large machine temporarily stops working", example: "My car broke down on the motorway." },
+        ]
+      }
+    ]
+  },
+  out: {
+    label: "OUT",
+    subgroups: [
+      {
+        name: "Meaning: To exit",
+        verbs: [
+          { verb: "fall out",  meaning: "to exit by falling",                                    example: "Don't stand so close to the window, you may fall out." },
+          { verb: "get out",   meaning: "to exit / a rude way to tell someone to leave",         example: "Please get out of the car; we have arrived." },
+          { verb: "break out", meaning: "to exit by breaking (e.g. prison)",                     example: "It took 25 years to break out of prison." },
+          { verb: "take out",  meaning: "to take something outside / withdraw money",            example: "Can you take out the rubbish please?" },
+          { verb: "sell out",  meaning: "all products exit the shop by being sold",              example: "The shop has sold out of bread." },
+          { verb: "move out",  meaning: "to leave a house or apartment",                         example: "My flatmate is moving out next month." },
+          { verb: "pop out",   meaning: "to exit somewhere quickly and then return",             example: "I am just popping out to buy some bread." },
+        ]
+      },
+      {
+        name: "Meaning: To complete / solve",
+        verbs: [
+          { verb: "fill out",   meaning: "to complete a form",                                   example: "How many forms do I have to fill out for my VISA?" },
+          { verb: "sort out",   meaning: "to organise, arrange or fix something",                example: "We have to sort out a new router for the WIFI." },
+          { verb: "work out",   meaning: "to solve a problem",                                   example: "We'll work out how to fix the program later." },
+          { verb: "figure out", meaning: "to understand and solve something",                    example: "Sherlock Holmes is good at figuring out who did it." },
+        ]
+      },
+      {
+        name: "Meaning: To find / discover",
+        verbs: [
+          { verb: "find out",  meaning: "to look for information outside your immediate knowledge", example: "I don't know what time the train leaves but I will find out." },
+          { verb: "make out",  meaning: "to capture sound or sight that is out of range",          example: "I can't make out what she was saying, she was too far away." },
+          { verb: "set out",   meaning: "to try to achieve something new",                          example: "NASA set out to land on the moon by the end of the 60s." },
+        ]
+      },
+      {
+        name: "Meaning: To hide / keep away",
+        verbs: [
+          { verb: "cross out", meaning: "to hide writing by drawing a line through it",  example: "Cross that out, it was a mistake." },
+          { verb: "keep out",  meaning: "to maintain something outside a perimeter",     example: "The sign says 'keep out' so we shouldn't enter." },
+          { verb: "block out", meaning: "to keep an idea out of your mind",              example: "She has blocked out the car accident." },
+        ]
+      },
+      {
+        name: "Meaning: To extinguish / lose enthusiasm",
+        verbs: [
+          { verb: "put out",       meaning: "to extinguish a fire",                                  example: "It took a week to put out the forest fire." },
+          { verb: "fizzle out",    meaning: "something starts with energy but slowly dies",          example: "The party was great until 11pm, and then it fizzled out." },
+          { verb: "die out",       meaning: "to become extinct",                                     example: "How did the dinosaurs die out?" },
+          { verb: "fall out of love", meaning: "to lose romantic feelings over time",               example: "She fell out of love with her husband." },
+          { verb: "run out of",    meaning: "to temporarily finish a supply of something",           example: "We have run out of milk." },
+        ]
+      }
+    ]
+  },
+  in: {
+    label: "IN",
+    subgroups: [
+      {
+        name: "Meaning: To enter",
+        verbs: [
+          { verb: "break in",   meaning: "to enter by breaking something",                       example: "The thief broke into the museum." },
+          { verb: "move in",    meaning: "to enter a house or apartment by moving",              example: "They moved into a beautiful apartment by the river." },
+          { verb: "pop in",     meaning: "to quickly enter a shop or house",                     example: "I'm just popping into this shop to buy some milk." },
+          { verb: "get in",     meaning: "to enter a small space like a car or elevator",        example: "Get in the car please, it is about to rain." },
+          { verb: "get into",   meaning: "to start a passion or hobby",                          example: "He got into jazz music in his 20s." },
+        ]
+      }
+    ]
+  },
+  away: {
+    label: "AWAY",
+    subgroups: [
+      {
+        name: "Meaning: The method of leaving",
+        verbs: [
+          { verb: "walk away",  meaning: "to leave by walking (also figurative)",     example: "He walked away from the marriage." },
+          { verb: "drive away", meaning: "to leave by driving",                       example: "The taxi drove away into the night." },
+          { verb: "scare away", meaning: "something leaves because it is scared",     example: "The dog scared the birds away." },
+          { verb: "run away",   meaning: "to flee",                                   example: "The people ran away from the earthquake." },
+          { verb: "sneak away", meaning: "to leave by stealth",                       example: "She sneaked away from the meeting." },
+          { verb: "back away",  meaning: "to leave backwards, facing the person",     example: "They backed away from the thief." },
+          { verb: "move away",  meaning: "to leave by moving (e.g. to another city)", example: "My best friend moved away to another province." },
+        ]
+      },
+      {
+        name: "True phrasal verbs (two meanings)",
+        verbs: [
+          { verb: "break away",    meaning: "to separate from a bigger entity",                  example: "The politicians broke away and formed a new party." },
+          { verb: "throw away",    meaning: "to throw rubbish into the bin",                     example: "Don't throw away that receipt!" },
+          { verb: "get away with", meaning: "to leave with impunity / to do something without punishment", example: "My sister always gets away with not doing her homework." },
+          { verb: "get away",      meaning: "to go on holiday / to escape normal life",          example: "I'm so stressed, I need to get away." },
+          { verb: "give away",     meaning: "to donate something for free",                      example: "They are giving away free tomatoes at the market." },
+        ]
+      }
+    ]
+  },
+  about: {
+    label: "ABOUT / AROUND",
+    subgroups: [
+      {
+        name: "Meaning: To do something with no particular purpose",
+        verbs: [
+          { verb: "hang about/around", meaning: "to pass time with friends doing nothing",   example: "There are those teenagers again, hanging about in the park." },
+          { verb: "run about/around",  meaning: "to run from place to place",                example: "I've been running about all day!" },
+          { verb: "walk about/around", meaning: "to walk in a place with no purpose",        example: "We walked around Paris all day. It was great!" },
+          { verb: "mess about/around", meaning: "to do silly things with no purpose",        example: "Stop messing about and do some work!" },
+          { verb: "go around",         meaning: "to travel without a direction",             example: "I've been going around the mall all morning." },
+          { verb: "wander about/around", meaning: "to walk with no direction, looking at sights", example: "They spent all week wandering about London." },
+          { verb: "get round to",      meaning: "to find enough time to do something",       example: "I will get around to calling my mother later." },
+        ]
+      }
+    ]
+  },
+  back: {
+    label: "BACK",
+    subgroups: [
+      {
+        name: "Meaning: To return",
+        verbs: [
+          { verb: "give back",        meaning: "to return something that was given",                 example: "She gave back the ring when they ended their engagement." },
+          { verb: "take back",        meaning: "to return something that was bought",                example: "Peter took back the jacket to the shop." },
+          { verb: "put back",         meaning: "to return something to its position",               example: "After washing up, we put the dishes back on the shelves." },
+          { verb: "come back",        meaning: "to return (from perspective of those waiting)",     example: "Simon called and said he was coming back home at 5 pm." },
+          { verb: "go back",          meaning: "to return (from perspective of those leaving)",     example: "Simon told his boss he was going back home." },
+          { verb: "move back",        meaning: "to return to your place of origin",                 example: "After university, my sister moved back home." },
+          { verb: "get back on track", meaning: "to return to the path of success",                example: "Now it's the new year, I am getting back on track." },
+        ]
+      }
+    ]
+  },
+  over: {
+    label: "OVER",
+    subgroups: [
+      {
+        name: "Meaning: To pass above / through",
+        verbs: [
+          { verb: "run over",   meaning: "to pass over something in a car, causing harm",         example: "The car ran over the cat and killed it." },
+          { verb: "get over",   meaning: "to recover from an illness or bad situation",            example: "It took me a long time to get over this cold." },
+          { verb: "stop over",  meaning: "when a plane stops in a city before continuing",         example: "We had a 3-hour stopover in Dubai." },
+          { verb: "take over",  meaning: "an outside force takes control of something",            example: "The big company took over the small startup." },
+        ]
+      },
+      {
+        name: "Meaning: To repeat",
+        verbs: [
+          { verb: "go over", meaning: "to rehearse or review information again", example: "Let's go over this one more time to make it perfect." },
+        ]
+      }
+    ]
+  }
+};
+
+// Flatten all verbs
+function getAllVerbs() {
+  const all = [];
+  for (const [group, data] of Object.entries(DATA)) {
+    for (const sg of data.subgroups) {
+      for (const v of sg.verbs) {
+        all.push({ ...v, group, groupLabel: data.label, subgroup: sg.name });
+      }
+    }
+  }
+  return all;
+}
+
+function getGroupVerbs(group) {
+  if (group === 'all') return getAllVerbs();
+  const data = DATA[group];
+  const verbs = [];
+  for (const sg of data.subgroups) {
+    for (const v of sg.verbs) {
+      verbs.push({ ...v, group, groupLabel: data.label, subgroup: sg.name });
+    }
+  }
+  return verbs;
+}
+
+let currentGroup = 'all';
+let currentMode = 'browse';
+
+// LEARN STATE
+let learnQueue = [];
+let learnIndex = 0;
+let learnCorrect = 0;
+let learnWrong = 0;
+let isFlipped = false;
+let answered = false;
+
+function selectGroup(g) {
+  currentGroup = g;
+  document.querySelectorAll('.group-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + g).classList.add('active');
+  render();
+}
+
+function setMode(m) {
+  currentMode = m;
+  document.getElementById('btnBrowse').classList.toggle('active', m === 'browse');
+  document.getElementById('btnLearn').classList.toggle('active', m === 'learn');
+  if (m === 'learn') startLearn();
+  else render();
+}
+
+let wrongQueue = [];
+let isRepeatRound = false;
+
+function startLearn() {
+  const verbs = getGroupVerbs(currentGroup);
+  learnQueue = shuffle([...verbs]);
+  wrongQueue = [];
+  learnIndex = 0;
+  learnCorrect = 0;
+  learnWrong = 0;
+  isFlipped = false;
+  answered = false;
+  isRepeatRound = false;
+  renderLearn();
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function render() {
+  if (currentMode === 'learn') { renderLearn(); return; }
+  const content = document.getElementById('contentArea');
+  const verbs = getGroupVerbs(currentGroup);
+
+  if (currentGroup === 'all') {
+    let html = `<div class="group-header"><div class="group-title">All <em>phrasal verbs</em></div><span class="group-count">${verbs.length} verbs</span></div>`;
+    for (const [group, data] of Object.entries(DATA)) {
+      html += `<div class="subgroup-label">with ${data.label}</div><div class="cards-grid">`;
+      const gverbs = getGroupVerbs(group);
+      for (const v of gverbs) {
+        html += cardHTML(v);
+      }
+      html += `</div>`;
+    }
+    content.innerHTML = html;
+  } else {
+    const data = DATA[currentGroup];
+    let html = `<div class="group-header"><div class="group-title">with <em>${data.label}</em></div><span class="group-count">${verbs.length} verbs</span></div>`;
+    for (const sg of data.subgroups) {
+      html += `<div class="subgroup-label">${sg.name}</div><div class="cards-grid">`;
+      for (const v of sg.verbs) {
+        html += cardHTML(v);
+      }
+      html += `</div>`;
+    }
+    content.innerHTML = html;
+  }
+}
+
+function cardHTML(v) {
+  return `<div class="card">
+    <div class="card-verb">${v.verb}</div>
+    <div class="card-meaning-label">meaning</div>
+    <div class="card-meaning">${v.meaning}</div>
+    <div class="card-example">"${v.example}"</div>
+  </div>`;
+}
+
+function renderLearn() {
+  const content = document.getElementById('contentArea');
+
+  if (learnIndex >= learnQueue.length) {
+    if (wrongQueue.length > 0) {
+      const repeatCount = wrongQueue.length;
+      content.innerHTML = `<div class="result-screen">
+        <div class="result-emoji">🔁</div>
+        <div class="result-title">Almost there!</div>
+        <div class="result-score">${learnCorrect} correct · <span style="color:#C04040">${repeatCount} to repeat</span></div>
+        <div class="result-sub">Let's go through the ones you didn't know again.</div>
+        <button class="restart-btn" id="btnRepeat">Repeat ${repeatCount} card${repeatCount > 1 ? 's' : ''} →</button>
+      </div>`;
+      document.getElementById('btnRepeat').addEventListener('click', () => {
+        learnQueue = shuffle([...wrongQueue]);
+        wrongQueue = [];
+        learnIndex = 0;
+        isRepeatRound = true;
+        isFlipped = false;
+        answered = false;
+        renderLearn();
+      });
+      return;
+    }
+    const doneTotal = learnCorrect + learnWrong;
+    const pct = doneTotal > 0 ? Math.round((learnCorrect / doneTotal) * 100) : 100;
+    const emoji = pct >= 80 ? '🎉' : pct >= 50 ? '👍' : '💪';
+    content.innerHTML = `<div class="result-screen">
+      <div class="result-emoji">${emoji}</div>
+      <div class="result-title">Round complete!</div>
+      <div class="result-score">${learnCorrect} / ${doneTotal} correct (${pct}%)</div>
+      <div class="result-sub">Keep practising to master all phrasal verbs.</div>
+      <button class="restart-btn" id="btnRestart">Try again ↺</button>
+    </div>`;
+    document.getElementById('btnRestart').addEventListener('click', startLearn);
+    return;
+  }
+
+  const card = learnQueue[learnIndex];
+  const total = learnQueue.length;
+  const progress = (learnIndex / total) * 100;
+  const roundLabel = isRepeatRound ? ' · repeat round' : '';
+
+  content.innerHTML = `
+    <div class="learn-wrap">
+      <div class="progress-bar-wrap">
+        <div class="progress-top">
+          <span>${learnIndex + 1} of ${total}${roundLabel}</span>
+          <span>✓ ${learnCorrect} &nbsp; ✗ ${learnWrong}</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
+      </div>
+
+      <div class="flip-scene" id="flipScene">
+        <div class="flip-card" id="flipCard">
+          <div class="flip-face flip-front">
+            <div class="flip-hint">tap to reveal</div>
+            <div class="flip-verb">${card.verb}</div>
+            <div class="flip-group-tag">with ${card.groupLabel}</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-hint">meaning</div>
+            <div class="flip-meaning">${card.meaning}</div>
+            <div class="flip-example-back">"${card.example}"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="answer-btns">
+        <button class="ans-btn ans-wrong locked" id="btnWrong">✗ &nbsp;Didn't know</button>
+        <button class="ans-btn ans-right locked" id="btnRight">✓ &nbsp;Got it!</button>
+      </div>
+      <button class="skip-btn" id="btnSkip">skip →</button>
+    </div>`;
+
+  isFlipped = false;
+  answered = false;
+
+  // Attach listeners after DOM update
+  document.getElementById('flipScene').addEventListener('click', flipCard);
+  document.getElementById('btnWrong').addEventListener('click', function() { answer(false); });
+  document.getElementById('btnRight').addEventListener('click', function() { answer(true); });
+  document.getElementById('btnSkip').addEventListener('click', skipCard);
+}
+
+function flipCard() {
+  if (answered) return;
+  isFlipped = !isFlipped;
+  document.getElementById('flipCard').classList.toggle('flipped', isFlipped);
+  if (isFlipped) {
+    document.getElementById('btnWrong').classList.remove('locked');
+    document.getElementById('btnRight').classList.remove('locked');
+  }
+}
+
+function answer(correct) {
+  if (!isFlipped || answered) return;
+  answered = true;
+  if (correct) {
+    learnCorrect++;
+  } else {
+    learnWrong++;
+    wrongQueue.push(learnQueue[learnIndex]);
+  }
+  document.getElementById('btnWrong').classList.add('locked');
+  document.getElementById('btnRight').classList.add('locked');
+  learnIndex++;
+  setTimeout(renderLearn, 300);
+}
+
+function skipCard() {
+  learnIndex++;
+  renderLearn();
+}
+
+// Wire up static buttons
+document.getElementById('btnBrowse').addEventListener('click', () => setMode('browse'));
+document.getElementById('btnLearn').addEventListener('click', () => setMode('learn'));
+
+const groupKeys = ['all','on','off','up','down','out','in','away','about','back','over'];
+groupKeys.forEach(g => {
+  document.getElementById('tab-' + g).addEventListener('click', () => selectGroup(g));
+});
+
+// Initial render
+render();
+</script>
+
+</body>
+</html>
