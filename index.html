@@ -5,397 +5,481 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>FCE Study Hub ✦</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:       #f7f4ef;
-  --white:    #ffffff;
-  --ink:      #1a1714;
-  --muted:    #8a8178;
-  --line:     #e2ddd6;
-  --c1:       #e8956a;
-  --c1l:      #fdf0e8;
-  --c2:       #5b8dd9;
-  --c2l:      #eaf1fb;
-  --c3:       #6abf8a;
-  --c3l:      #e8f7ee;
-  --c4:       #b97fd4;
-  --c4l:      #f3eafa;
-  --c5:       #c9a84c;
-  --c5l:      #fdf8e0;
-  --c6:       #e06b8b;
-  --c6l:      #fdedf2;
+  --bg:    #f7f4ef;
+  --white: #ffffff;
+  --ink:   #1a1714;
+  --muted: #8a8178;
+  --line:  #e2ddd6;
+  --c1:  #e8956a; --c1l: #fdf0e8;
+  --c2:  #5b8dd9; --c2l: #eaf1fb;
+  --c3:  #6abf8a; --c3l: #e8f7ee;
+  --c4:  #b97fd4; --c4l: #f3eafa;
+  --c5:  #c9a84c; --c5l: #fdf8e0;
+  --c6:  #e06b8b; --c6l: #fdedf2;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; }
 
 body {
 background: var(–bg);
 color: var(–ink);
-font-family: ‘DM Sans’, sans-serif;
+font-family: -apple-system, BlinkMacSystemFont, ‘Segoe UI’, sans-serif;
 font-size: 16px;
 line-height: 1.6;
 min-height: 100vh;
 }
 
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(–bg); }
-::-webkit-scrollbar-thumb { background: var(–line); border-radius: 2px; }
-
+/* ── TOPBAR ── */
 .topbar {
 position: sticky; top: 0; z-index: 100;
-background: rgba(247,244,239,0.92);
+background: rgba(247,244,239,0.95);
 backdrop-filter: blur(16px);
 -webkit-backdrop-filter: blur(16px);
-border-bottom: 1.5px solid var(–line);
-height: 54px;
+border-bottom: 2px solid var(–ink);
+height: 58px;
 display: flex; align-items: center;
-padding: 0 2rem; gap: 1rem;
+padding: 0 1.5rem; gap: 1rem;
 }
 
-.topbar-logo {
-font-family: ‘Syne’, sans-serif;
-font-weight: 800; font-size: 1.05rem;
-letter-spacing: -0.02em;
-display: flex; align-items: center; gap: 0.4rem;
+.logo {
+font-weight: 800; font-size: 1.1rem;
+letter-spacing: -0.03em;
+display: flex; align-items: center; gap: 0.5rem;
+white-space: nowrap;
 }
 
-.dot {
-width: 8px; height: 8px;
+.logo-dot {
+width: 10px; height: 10px;
 background: var(–c1); border-radius: 50%;
 animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
-0%,100% { transform: scale(1); opacity: 1; }
-50% { transform: scale(1.4); opacity: 0.7; }
+0%,100% { transform: scale(1); }
+50% { transform: scale(1.5); opacity: 0.6; }
 }
 
-.search-wrap { flex: 1; max-width: 320px; position: relative; }
-.search-wrap svg {
-position: absolute; left: 0.65rem; top: 50%; transform: translateY(-50%);
-width: 13px; height: 13px; opacity: 0.35; pointer-events: none;
-fill: none; stroke: var(–ink); stroke-width: 2; stroke-linecap: round;
+.search-box {
+flex: 1; max-width: 300px; position: relative;
 }
 
-#search {
-width: 100%; background: var(–white);
-border: 1.5px solid var(–line); border-radius: 50px;
-padding: 0.38rem 0.85rem 0.38rem 2rem;
-font-family: ‘DM Mono’, monospace; font-size: 0.68rem;
-letter-spacing: 0.03em; color: var(–ink); outline: none;
+.search-box input {
+width: 100%;
+background: var(–white);
+border: 2px solid var(–line);
+border-radius: 100px;
+padding: 0.4rem 1rem 0.4rem 2.2rem;
+font-size: 0.8rem;
+color: var(–ink);
+outline: none;
 transition: border-color 0.2s;
+font-family: inherit;
 }
-#search:focus { border-color: var(–c1); }
-#search::placeholder { color: var(–muted); }
+.search-box input:focus { border-color: var(–c1); }
+.search-box input::placeholder { color: var(–muted); }
 
-.topbar-right { margin-left: auto; }
-
-.pill-btn {
-font-family: ‘DM Mono’, monospace; font-size: 0.62rem;
-letter-spacing: 0.1em; text-transform: uppercase;
-background: var(–ink); color: var(–white);
-border: none; padding: 0.45rem 1.1rem;
-border-radius: 50px; cursor: pointer;
-transition: background 0.15s, transform 0.1s; white-space: nowrap;
+.search-icon {
+position: absolute; left: 0.7rem; top: 50%;
+transform: translateY(-50%);
+font-size: 0.8rem; opacity: 0.4; pointer-events: none;
 }
-.pill-btn:hover { background: var(–c1); }
-.pill-btn:active { transform: scale(0.97); }
 
+.add-btn {
+margin-left: auto;
+background: var(–ink); color: white;
+border: none; border-radius: 100px;
+padding: 0.5rem 1.2rem;
+font-size: 0.8rem; font-weight: 700;
+letter-spacing: 0.02em;
+cursor: pointer;
+transition: background 0.15s, transform 0.1s;
+white-space: nowrap;
+font-family: inherit;
+}
+.add-btn:hover { background: var(–c1); }
+.add-btn:active { transform: scale(0.96); }
+
+/* ── HERO ── */
 .hero {
-padding: 3rem 2.5rem 2rem;
-max-width: 1200px; margin: 0 auto;
+padding: 2.5rem 1.5rem 1.5rem;
+max-width: 1100px; margin: 0 auto;
 }
 
 .hero-tag {
-display: inline-flex; align-items: center; gap: 0.5rem;
-background: var(–c1l); border: 1px solid var(–c1);
-color: var(–c1); font-family: ‘DM Mono’, monospace;
-font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-padding: 0.3rem 0.8rem; border-radius: 50px; margin-bottom: 1rem;
+display: inline-block;
+background: var(–c1); color: white;
+font-size: 0.65rem; font-weight: 700;
+letter-spacing: 0.15em; text-transform: uppercase;
+padding: 0.25rem 0.8rem; border-radius: 100px;
+margin-bottom: 1rem;
 }
 
 .hero h1 {
-font-family: ‘Syne’, sans-serif; font-weight: 800;
-font-size: clamp(2.5rem, 6vw, 4.5rem);
-line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 0.75rem;
+font-size: clamp(2.2rem, 7vw, 4rem);
+font-weight: 800; letter-spacing: -0.03em;
+line-height: 1.0; margin-bottom: 0.5rem;
 }
+
 .hero h1 span { color: var(–c1); }
 
 .hero-sub {
-font-size: 1rem; color: var(–muted); font-weight: 300;
-margin-bottom: 2rem; max-width: 500px;
+font-size: 1rem; color: var(–muted);
+margin-bottom: 2rem; max-width: 440px;
 }
 
-.stats-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-
-.stat-chip {
-background: var(–white); border: 1.5px solid var(–line);
-border-radius: 12px; padding: 0.85rem 1.25rem;
-display: flex; flex-direction: column; gap: 0.1rem; min-width: 100px;
+/* STATS */
+.stats {
+display: flex; gap: 0.75rem; flex-wrap: wrap;
+margin-bottom: 1.5rem;
 }
-.stat-chip-val { font-family: ‘Syne’, sans-serif; font-weight: 700; font-size: 1.7rem; line-height: 1; }
-.stat-chip-label { font-family: ‘DM Mono’, monospace; font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(–muted); }
-.stat-chip.accent { background: var(–c1); border-color: var(–c1); }
-.stat-chip.accent .stat-chip-val { color: white; }
-.stat-chip.accent .stat-chip-label { color: rgba(255,255,255,0.7); }
 
-.progress-row { display: flex; align-items: center; gap: 1rem; max-width: 500px; }
-.progress-bar { flex: 1; height: 6px; background: var(–line); border-radius: 6px; overflow: hidden; }
-.progress-fill {
-height: 100%; background: linear-gradient(90deg, var(–c1), var(–c6));
-border-radius: 6px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); width: 0%;
+.stat-box {
+background: var(–white);
+border: 2px solid var(–line);
+border-radius: 14px;
+padding: 0.85rem 1.2rem;
+min-width: 90px;
 }
-.progress-pct { font-family: ‘Syne’, sans-serif; font-weight: 700; font-size: 0.9rem; color: var(–c1); min-width: 3rem; }
 
-.tabs-wrap {
-border-bottom: 1.5px solid var(–line);
-padding: 0 2.5rem; max-width: 1200px; margin: 0 auto;
-display: flex; gap: 0; overflow-x: auto;
+.stat-box.hi { background: var(–c1); border-color: var(–c1); }
+.stat-box.hi .stat-n { color: white; }
+.stat-box.hi .stat-l { color: rgba(255,255,255,0.75); }
+
+.stat-n {
+font-size: 1.8rem; font-weight: 800;
+letter-spacing: -0.03em; line-height: 1;
+display: block;
+}
+
+.stat-l {
+font-size: 0.6rem; font-weight: 600;
+letter-spacing: 0.12em; text-transform: uppercase;
+color: var(–muted); display: block; margin-top: 0.15rem;
+}
+
+/* PROGRESS */
+.prog-row {
+display: flex; align-items: center; gap: 1rem;
+max-width: 460px;
+}
+.prog-track {
+flex: 1; height: 8px;
+background: var(–line); border-radius: 8px; overflow: hidden;
+}
+.prog-fill {
+height: 100%;
+background: linear-gradient(90deg, var(–c1), var(–c6));
+border-radius: 8px;
+transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+width: 0%;
+}
+.prog-pct {
+font-size: 1rem; font-weight: 800;
+color: var(–c1); min-width: 3rem;
+}
+
+/* ── TABS ── */
+.tabs {
+border-bottom: 2px solid var(–line);
+padding: 0 1.5rem;
+max-width: 1100px; margin: 0 auto;
+display: flex; overflow-x: auto; gap: 0;
+-webkit-overflow-scrolling: touch;
 }
 
 .tab {
-font-family: ‘DM Mono’, monospace; font-size: 0.65rem;
-letter-spacing: 0.1em; text-transform: uppercase;
-background: transparent; border: none; color: var(–muted);
-padding: 0.85rem 1.25rem; cursor: pointer;
-border-bottom: 2px solid transparent; margin-bottom: -1.5px;
-transition: color 0.15s, border-color 0.15s; white-space: nowrap;
-display: flex; align-items: center; gap: 0.5rem;
+background: transparent; border: none;
+color: var(–muted); font-size: 0.72rem;
+font-weight: 600; letter-spacing: 0.08em;
+text-transform: uppercase;
+padding: 0.9rem 1rem;
+cursor: pointer;
+border-bottom: 3px solid transparent;
+margin-bottom: -2px;
+transition: color 0.15s, border-color 0.15s;
+white-space: nowrap;
+display: flex; align-items: center; gap: 0.4rem;
+font-family: inherit;
 }
 .tab:hover { color: var(–ink); }
-.tab.active { color: var(–ink); border-bottom-color: var(–ink); font-weight: 500; }
+.tab.on { color: var(–ink); border-bottom-color: var(–c1); }
 
-.tab-badge {
-font-size: 0.5rem; padding: 0.1rem 0.4rem;
-border-radius: 50px; background: var(–line); color: var(–muted);
+.badge {
+background: var(–line); color: var(–muted);
+font-size: 0.6rem; font-weight: 700;
+padding: 0.05rem 0.4rem; border-radius: 100px;
+min-width: 18px; text-align: center;
 }
-.tab.active .tab-badge { background: var(–ink); color: white; }
+.tab.on .badge { background: var(–c1); color: white; }
 
-.grid-wrap { max-width: 1200px; margin: 0 auto; padding: 2rem 2.5rem; }
+/* ── GRID ── */
+.grid-area {
+max-width: 1100px; margin: 0 auto; padding: 1.5rem;
+}
 
-.topics-grid {
+.grid {
 display: grid;
-grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 gap: 1rem;
 }
 
-.topic-card {
-background: var(–white); border: 1.5px solid var(–line);
-border-radius: 16px; padding: 1.25rem 1.25rem 1rem;
-display: flex; flex-direction: column; gap: 0.75rem;
+/* ── CARD ── */
+.card {
+background: var(–white);
+border-radius: 18px;
+border: 2px solid var(–line);
+padding: 1.25rem;
+display: flex; flex-direction: column; gap: 0.6rem;
 transition: transform 0.2s, box-shadow 0.2s;
-animation: popIn 0.3s cubic-bezier(0.34,1.4,0.64,1) forwards;
-opacity: 0; position: relative; overflow: hidden;
+animation: pop 0.3s cubic-bezier(0.34,1.4,0.64,1) forwards;
+opacity: 0;
+position: relative;
 }
 
-@keyframes popIn {
-from { opacity: 0; transform: scale(0.95) translateY(8px); }
+@keyframes pop {
+from { opacity: 0; transform: scale(0.94) translateY(10px); }
 to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-.topic-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.09); }
+.card.done-card { opacity: 0.5; }
+.card.done-card .card-title { text-decoration: line-through; }
 
-.topic-card.is-done { opacity: 0.55; }
-.topic-card.is-done::after {
-content: ‘’;
-position: absolute; inset: 0;
-background: repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(0,0,0,0.015) 8px, rgba(0,0,0,0.015) 9px);
-border-radius: 16px; pointer-events: none;
-}
+.card-bar { height: 5px; border-radius: 5px; background: var(–col, var(–c1)); margin-bottom: 0.2rem; }
 
-.card-strip { height: 4px; border-radius: 4px; margin-bottom: 0.25rem; }
-.card-cat-badge {
-font-family: ‘DM Mono’, monospace; font-size: 0.55rem;
-letter-spacing: 0.12em; text-transform: uppercase;
-padding: 0.2rem 0.6rem; border-radius: 50px; font-weight: 500;
+.cat-tag {
 display: inline-block;
+font-size: 0.6rem; font-weight: 700;
+letter-spacing: 0.12em; text-transform: uppercase;
+padding: 0.2rem 0.65rem; border-radius: 100px;
+background: var(–col-l, var(–c1l));
+color: var(–col, var(–c1));
 }
+
 .card-title {
-font-family: ‘Syne’, sans-serif; font-weight: 600;
-font-size: 1rem; line-height: 1.3; letter-spacing: -0.01em;
-}
-.topic-card.is-done .card-title { text-decoration: line-through; }
-.card-desc { font-size: 0.82rem; color: var(–muted); font-weight: 300; line-height: 1.5; flex: 1; }
-
-.card-footer {
-display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
-padding-top: 0.5rem; border-top: 1px solid var(–line);
+font-size: 1.05rem; font-weight: 700;
+letter-spacing: -0.01em; line-height: 1.3;
 }
 
-.btn-open {
-font-family: ‘DM Mono’, monospace; font-size: 0.6rem;
-letter-spacing: 0.08em; text-transform: uppercase;
-text-decoration: none; padding: 0.4rem 0.9rem;
-border-radius: 50px; transition: background 0.15s, color 0.15s;
-font-weight: 500; display: inline-flex; align-items: center; gap: 0.3rem;
+.card-desc {
+font-size: 0.85rem; color: var(–muted);
+line-height: 1.5; flex: 1;
 }
 
-.card-right { display: flex; align-items: center; gap: 0.4rem; }
+.card-foot {
+display: flex; align-items: center;
+justify-content: space-between; gap: 0.5rem;
+padding-top: 0.6rem;
+border-top: 1.5px solid var(–line);
+}
 
-.btn-done {
-width: 26px; height: 26px; border-radius: 50%;
-border: 1.5px solid var(–line); background: transparent;
+.open-btn {
+font-size: 0.68rem; font-weight: 700;
+letter-spacing: 0.06em; text-transform: uppercase;
+text-decoration: none;
+background: var(–col-l, var(–c1l));
+color: var(–col, var(–c1));
+padding: 0.42rem 1rem; border-radius: 100px;
+transition: background 0.15s, color 0.15s;
+display: inline-flex; align-items: center; gap: 0.3rem;
+}
+.open-btn:hover { background: var(–col, var(–c1)); color: white; }
+
+.card-right { display: flex; gap: 0.4rem; align-items: center; }
+
+.done-btn {
+width: 28px; height: 28px; border-radius: 50%;
+border: 2px solid var(–line); background: transparent;
 cursor: pointer; display: flex; align-items: center; justify-content: center;
-transition: all 0.2s; flex-shrink: 0;
+font-size: 0.7rem; transition: all 0.2s;
 }
-.btn-done svg { width: 11px; height: 11px; fill: none; stroke: var(–muted); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-.btn-done:hover { border-color: var(–c3); }
-.btn-done.done { background: var(–c3); border-color: var(–c3); }
-.btn-done.done svg { stroke: white; }
+.done-btn:hover { border-color: var(–c3); background: var(–c3l); }
+.done-btn.ticked { background: var(–c3); border-color: var(–c3); color: white; }
 
-.btn-del-card {
-background: transparent; border: none; color: var(–muted);
-font-size: 0.9rem; cursor: pointer; padding: 0.2rem; transition: color 0.15s;
+.del-btn {
+background: transparent; border: none;
+color: var(–muted); font-size: 1rem;
+cursor: pointer; padding: 0.15rem 0.3rem;
+border-radius: 6px; transition: color 0.15s, background 0.15s;
+line-height: 1;
 }
-.btn-del-card:hover { color: #e05a5a; }
+.del-btn:hover { color: #e05a5a; background: #fdedf2; }
 
-/* COLOR THEMES */
-.theme-uoe       { –col: var(–c2); –col-l: var(–c2l); }
-.theme-writing   { –col: var(–c1); –col-l: var(–c1l); }
-.theme-reading   { –col: var(–c3); –col-l: var(–c3l); }
-.theme-listening { –col: var(–c4); –col-l: var(–c4l); }
-.theme-speaking  { –col: var(–c6); –col-l: var(–c6l); }
-.theme-vocab     { –col: var(–c5); –col-l: var(–c5l); }
+/* THEMES */
+.t-uoe  { –col: var(–c2); –col-l: var(–c2l); }
+.t-writing   { –col: var(–c1); –col-l: var(–c1l); }
+.t-reading   { –col: var(–c3); –col-l: var(–c3l); }
+.t-listening { –col: var(–c4); –col-l: var(–c4l); }
+.t-speaking  { –col: var(–c6); –col-l: var(–c6l); }
+.t-vocab     { –col: var(–c5); –col-l: var(–c5l); }
 
-.topic-card .card-strip { background: var(–col); }
-.card-cat-badge { background: var(–col-l); color: var(–col); }
-.btn-open { background: var(–col-l); color: var(–col); }
-.btn-open:hover { background: var(–col); color: white; }
-
-.empty-state {
-grid-column: 1/-1; text-align: center; padding: 4rem 1rem; color: var(–muted);
+/* EMPTY */
+.empty {
+grid-column: 1/-1; text-align: center;
+padding: 4rem 1rem; color: var(–muted);
 }
-.empty-emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
-.empty-state p { font-family: ‘DM Mono’, monospace; font-size: 0.7rem; letter-spacing: 0.08em; line-height: 2; }
+.empty-ico { font-size: 3rem; display: block; margin-bottom: 1rem; }
+.empty p { font-size: 0.85rem; line-height: 2; }
 
-/* MODAL */
+/* ── MODAL ── */
 .overlay {
 position: fixed; inset: 0; z-index: 500;
-background: rgba(26,23,20,0.6);
-backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+background: rgba(26,23,20,0.65);
+backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 display: flex; align-items: center; justify-content: center;
-padding: 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.2s;
+padding: 1.5rem;
+opacity: 0; pointer-events: none; transition: opacity 0.2s;
 }
 .overlay.open { opacity: 1; pointer-events: all; }
 
 .modal {
-background: var(–white); border-radius: 20px; padding: 2rem;
-width: 100%; max-width: 460px;
-transform: scale(0.95) translateY(16px);
+background: var(–white); border-radius: 22px;
+padding: 2rem; width: 100%; max-width: 440px;
+transform: scale(0.94) translateY(20px);
 transition: transform 0.3s cubic-bezier(0.34,1.4,0.64,1);
-box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+box-shadow: 0 30px 80px rgba(0,0,0,0.18);
 }
 .overlay.open .modal { transform: scale(1) translateY(0); }
 
-.modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-.modal-title { font-family: ‘Syne’, sans-serif; font-weight: 700; font-size: 1.3rem; letter-spacing: -0.02em; }
-.modal-close {
-background: var(–bg); border: none; border-radius: 50%;
-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-cursor: pointer; font-size: 1rem; color: var(–muted); transition: background 0.15s;
+.modal-head {
+display: flex; justify-content: space-between; align-items: center;
+margin-bottom: 1.5rem;
 }
-.modal-close:hover { background: var(–line); }
+.modal-title { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; }
+
+.close-btn {
+background: var(–bg); border: none; border-radius: 50%;
+width: 34px; height: 34px;
+display: flex; align-items: center; justify-content: center;
+cursor: pointer; font-size: 1rem; color: var(–muted);
+transition: background 0.15s; font-family: inherit;
+}
+.close-btn:hover { background: var(–line); }
 
 .field { margin-bottom: 1.1rem; }
 .field label {
-font-family: ‘DM Mono’, monospace; font-size: 0.6rem;
-letter-spacing: 0.15em; text-transform: uppercase; color: var(–muted);
-display: block; margin-bottom: 0.4rem;
+display: block; font-size: 0.65rem; font-weight: 700;
+letter-spacing: 0.12em; text-transform: uppercase;
+color: var(–muted); margin-bottom: 0.4rem;
 }
 .field input, .field select {
-width: 100%; background: var(–bg);
-border: 1.5px solid var(–line); border-radius: 10px;
-padding: 0.65rem 0.85rem; font-family: ‘DM Sans’, sans-serif;
+width: 100%;
+background: var(–bg); border: 2px solid var(–line);
+border-radius: 12px; padding: 0.65rem 0.85rem;
 font-size: 0.95rem; color: var(–ink); outline: none;
 transition: border-color 0.2s; -webkit-appearance: none;
+font-family: inherit;
 }
 .field input:focus, .field select:focus { border-color: var(–c1); }
 .field input::placeholder { color: var(–muted); opacity: 0.7; }
 .field select {
-background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘8’%3E%3Cpath d=‘M1 1l5 5 5-5’ stroke=’%238a8178’ stroke-width=‘1.5’ fill=‘none’ stroke-linecap=‘round’/%3E%3C/svg%3E”);
-background-repeat: no-repeat; background-position: right 0.85rem center;
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘8’%3E%3Cpath d=‘M1 1l5 5 5-5’ stroke=’%238a8178’ stroke-width=‘1.8’ fill=‘none’ stroke-linecap=‘round’/%3E%3C/svg%3E”);
+background-repeat: no-repeat; background-position: right 0.9rem center;
 padding-right: 2.5rem; cursor: pointer;
 }
 
-.submit-btn {
-width: 100%; background: var(–ink); color: white; border: none;
-border-radius: 50px; padding: 0.85rem;
-font-family: ‘Syne’, sans-serif; font-weight: 700; font-size: 0.9rem;
-cursor: pointer; transition: background 0.15s, transform 0.1s; margin-top: 0.5rem;
+.sub-btn {
+width: 100%; background: var(–ink); color: white;
+border: none; border-radius: 100px; padding: 0.9rem;
+font-size: 0.95rem; font-weight: 800;
+cursor: pointer; transition: background 0.15s, transform 0.1s;
+margin-top: 0.5rem; font-family: inherit;
 }
-.submit-btn:hover { background: var(–c1); }
-.submit-btn:active { transform: scale(0.98); }
+.sub-btn:hover { background: var(–c1); }
+.sub-btn:active { transform: scale(0.98); }
 
+/* ── TOAST ── */
 .toast {
 position: fixed; bottom: 1.5rem; left: 50%;
 transform: translateX(-50%) translateY(70px);
 background: var(–ink); color: white;
-font-family: ‘DM Mono’, monospace; font-size: 0.62rem; letter-spacing: 0.08em;
-padding: 0.65rem 1.4rem; border-radius: 50px;
+font-size: 0.75rem; font-weight: 600;
+padding: 0.65rem 1.5rem; border-radius: 100px;
 transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1);
-z-index: 9999; white-space: nowrap; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+z-index: 9999; white-space: nowrap;
+box-shadow: 0 8px 24px rgba(0,0,0,0.18);
 }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
-@media (max-width: 700px) {
-.hero { padding: 2rem 1.25rem 1.5rem; }
-.hero h1 { font-size: 2.4rem; }
-.tabs-wrap, .grid-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+@media (max-width: 640px) {
+.hero { padding: 1.75rem 1rem 1.25rem; }
+.grid-area { padding: 1rem; }
+.tabs { padding: 0 1rem; }
 .topbar { padding: 0 1rem; }
-.topics-grid { grid-template-columns: 1fr; }
+.grid { grid-template-columns: 1fr; }
 }
 </style>
 
 </head>
 <body>
 
+<!-- TOPBAR -->
+
 <div class="topbar">
-  <div class="topbar-logo"><span class="dot"></span> FCE Hub</div>
-  <div class="search-wrap">
-    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="search" placeholder="Search topics…" oninput="renderGrid()" autocomplete="off" />
+  <div class="logo"><span class="logo-dot"></span> FCE Hub</div>
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search" placeholder="Search topics…" oninput="render()" autocomplete="off" />
   </div>
-  <div class="topbar-right">
-    <button class="pill-btn" onclick="openModal()">＋ Add topic</button>
-  </div>
+  <button class="add-btn" onclick="openModal()">＋ Add topic</button>
 </div>
+
+<!-- HERO -->
 
 <div class="hero">
   <div class="hero-tag">✦ Cambridge B2 First</div>
   <h1>FCE <span>Study</span> Hub</h1>
-  <p class="hero-sub">All your exam preparation in one place. Track progress, open notes, stay focused.</p>
-  <div class="stats-row">
-    <div class="stat-chip accent"><div class="stat-chip-val" id="s-total">0</div><div class="stat-chip-label">Topics</div></div>
-    <div class="stat-chip"><div class="stat-chip-val" id="s-done" style="color:var(--c3)">0</div><div class="stat-chip-label">Done</div></div>
-    <div class="stat-chip"><div class="stat-chip-val" id="s-left" style="color:var(--c1)">0</div><div class="stat-chip-label">Left</div></div>
+  <p class="hero-sub">All your exam prep in one place. Track progress, open notes, stay focused.</p>
+
+  <div class="stats">
+    <div class="stat-box hi">
+      <span class="stat-n" id="s-total">0</span>
+      <span class="stat-l">Topics</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-n" id="s-done" style="color:var(--c3)">0</span>
+      <span class="stat-l">Done ✓</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-n" id="s-left" style="color:var(--c1)">0</span>
+      <span class="stat-l">Left</span>
+    </div>
   </div>
-  <div class="progress-row">
-    <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
-    <div class="progress-pct" id="prog-pct">0%</div>
+
+  <div class="prog-row">
+    <div class="prog-track"><div class="prog-fill" id="prog"></div></div>
+    <div class="prog-pct" id="pct">0%</div>
   </div>
 </div>
 
-<div class="tabs-wrap">
-  <button class="tab active" onclick="setTab('all',this)">All <span class="tab-badge" id="tb-all">0</span></button>
-  <button class="tab" onclick="setTab('uoe',this)">Use of English <span class="tab-badge" id="tb-uoe">0</span></button>
-  <button class="tab" onclick="setTab('writing',this)">Writing <span class="tab-badge" id="tb-writing">0</span></button>
-  <button class="tab" onclick="setTab('reading',this)">Reading <span class="tab-badge" id="tb-reading">0</span></button>
-  <button class="tab" onclick="setTab('listening',this)">Listening <span class="tab-badge" id="tb-listening">0</span></button>
-  <button class="tab" onclick="setTab('speaking',this)">Speaking <span class="tab-badge" id="tb-speaking">0</span></button>
-  <button class="tab" onclick="setTab('vocab',this)">Vocabulary <span class="tab-badge" id="tb-vocab">0</span></button>
+<!-- TABS -->
+
+<div class="tabs">
+  <button class="tab on" onclick="setTab('all',this)">All <span class="badge" id="b-all">0</span></button>
+  <button class="tab" onclick="setTab('uoe',this)">Use of English <span class="badge" id="b-uoe">0</span></button>
+  <button class="tab" onclick="setTab('writing',this)">Writing <span class="badge" id="b-writing">0</span></button>
+  <button class="tab" onclick="setTab('reading',this)">Reading <span class="badge" id="b-reading">0</span></button>
+  <button class="tab" onclick="setTab('listening',this)">Listening <span class="badge" id="b-listening">0</span></button>
+  <button class="tab" onclick="setTab('speaking',this)">Speaking <span class="badge" id="b-speaking">0</span></button>
+  <button class="tab" onclick="setTab('vocab',this)">Vocabulary <span class="badge" id="b-vocab">0</span></button>
 </div>
 
-<div class="grid-wrap">
-  <div class="topics-grid" id="grid"></div>
+<!-- GRID -->
+
+<div class="grid-area">
+  <div class="grid" id="grid"></div>
 </div>
+
+<!-- MODAL -->
 
 <div class="overlay" id="overlay" onclick="closeOut(event)">
   <div class="modal">
     <div class="modal-head">
-      <div class="modal-title">Add new topic ✦</div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-title">Add topic ✦</div>
+      <button class="close-btn" onclick="closeModal()">✕</button>
     </div>
     <div class="field">
       <label>Topic name *</label>
@@ -413,40 +497,34 @@ z-index: 9999; white-space: nowrap; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
       </select>
     </div>
     <div class="field">
-      <label>Short description</label>
+      <label>Description (optional)</label>
       <input type="text" id="f-desc" placeholder="e.g. Part 4 — sentence transformations" autocomplete="off" />
     </div>
     <div class="field">
       <label>URL link *</label>
       <input type="url" id="f-url" placeholder="https://amelietoupal.github.io/…" autocomplete="off" autocorrect="off" autocapitalize="none" />
     </div>
-    <button class="submit-btn" onclick="addTopic()">Add topic →</button>
+    <button class="sub-btn" onclick="addTopic()">Add topic →</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const KEY = 'fce-hub-v1';
-let currentTab = 'all';
+const KEY = 'fce-v2';
+let tab = 'all';
 
 const CATS = {
-  uoe:       { label: 'Use of English', theme: 'theme-uoe' },
-  writing:   { label: 'Writing',        theme: 'theme-writing' },
-  reading:   { label: 'Reading',        theme: 'theme-reading' },
-  listening: { label: 'Listening',      theme: 'theme-listening' },
-  speaking:  { label: 'Speaking',       theme: 'theme-speaking' },
-  vocab:     { label: 'Vocabulary',     theme: 'theme-vocab' },
+  uoe:       { label: 'Use of English', cls: 't-uoe' },
+  writing:   { label: 'Writing',        cls: 't-writing' },
+  reading:   { label: 'Reading',        cls: 't-reading' },
+  listening: { label: 'Listening',      cls: 't-listening' },
+  speaking:  { label: 'Speaking',       cls: 't-speaking' },
+  vocab:     { label: 'Vocabulary',     cls: 't-vocab' },
 };
 
-const DEFAULT_TOPICS = [
-  {
-    name: 'Phrasal Verbs',
-    cat: 'vocab',
-    desc: 'Most common FCE phrasal verbs by topic',
-    url: 'https://amelietoupal.github.io/fce-studium/',
-    done: false
-  }
+const SEED = [
+  { name: 'Phrasal Verbs', cat: 'vocab', desc: 'Most common FCE phrasal verbs by topic', url: 'https://amelietoupal.github.io/fce-studium/', done: false }
 ];
 
 function load() {
@@ -454,13 +532,13 @@ function load() {
     const d = JSON.parse(localStorage.getItem(KEY));
     if (d && d.length) return d;
   } catch {}
-  save(DEFAULT_TOPICS);
-  return DEFAULT_TOPICS.map(t => ({...t}));
+  save(SEED);
+  return SEED.map(t => ({...t}));
 }
 
-function save(t) { localStorage.setItem(KEY, JSON.stringify(t)); }
+function save(d) { localStorage.setItem(KEY, JSON.stringify(d)); }
 
-function renderGrid() {
+function render() {
   const all = load();
   const q = document.getElementById('search').value.trim().toLowerCase();
 
@@ -469,17 +547,17 @@ function renderGrid() {
   document.getElementById('s-done').textContent = done;
   document.getElementById('s-left').textContent = all.length - done;
   const pct = all.length ? Math.round(done / all.length * 100) : 0;
-  document.getElementById('prog-pct').textContent = pct + '%';
-  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('pct').textContent = pct + '%';
+  document.getElementById('prog').style.width = pct + '%';
 
-  document.getElementById('tb-all').textContent = all.length;
+  document.getElementById('b-all').textContent = all.length;
   Object.keys(CATS).forEach(c => {
-    const el = document.getElementById('tb-' + c);
+    const el = document.getElementById('b-' + c);
     if (el) el.textContent = all.filter(t => t.cat === c).length;
   });
 
-  let list = all.map((t,i) => ({...t, _i: i}));
-  if (currentTab !== 'all') list = list.filter(t => t.cat === currentTab);
+  let list = all.map((t, i) => ({...t, _i: i}));
+  if (tab !== 'all') list = list.filter(t => t.cat === tab);
   if (q) list = list.filter(t =>
     t.name.toLowerCase().includes(q) || (t.desc||'').toLowerCase().includes(q)
   );
@@ -487,44 +565,41 @@ function renderGrid() {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
 
-  if (list.length === 0) {
-    grid.innerHTML = `<div class="empty-state"><span class="empty-emoji">🔍</span><p>No topics found.</p></div>`;
+  if (!list.length) {
+    grid.innerHTML = `<div class="empty"><span class="empty-ico">🔍</span><p>No topics found.</p></div>`;
     return;
   }
 
-  list.forEach((t, idx) => {
-    const cat = CATS[t.cat] || { label: t.cat, theme: 'theme-vocab' };
-    const card = document.createElement('div');
-    card.className = `topic-card ${cat.theme}${t.done ? ' is-done' : ''}`;
-    card.style.animationDelay = (idx * 0.04) + 's';
-    card.innerHTML = `
-      <div class="card-strip"></div>
-      <span class="card-cat-badge">${cat.label}</span>
+  list.forEach((t, i) => {
+    const cat = CATS[t.cat] || { label: t.cat, cls: 't-vocab' };
+    const el = document.createElement('div');
+    el.className = `card ${cat.cls}${t.done ? ' done-card' : ''}`;
+    el.style.animationDelay = (i * 0.05) + 's';
+    el.innerHTML = `
+      <div class="card-bar"></div>
+      <span class="cat-tag">${cat.label}</span>
       <div class="card-title">${esc(t.name)}</div>
       ${t.desc ? `<div class="card-desc">${esc(t.desc)}</div>` : ''}
-      <div class="card-footer">
-        <a class="btn-open" href="${esc(t.url)}" target="_blank" rel="noopener">↗ Open notes</a>
+      <div class="card-foot">
+        <a class="open-btn" href="${esc(t.url)}" target="_blank" rel="noopener">↗ Open notes</a>
         <div class="card-right">
-          <button class="btn-done ${t.done ? 'done' : ''}" onclick="toggleDone(${t._i})" title="Mark as done">
-            <svg viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1"/></svg>
-          </button>
-          <button class="btn-del-card" onclick="delTopic(${t._i})" title="Delete">×</button>
+          <button class="done-btn${t.done ? ' ticked' : ''}" onclick="toggleDone(${t._i})" title="Mark done">✓</button>
+          <button class="del-btn" onclick="del(${t._i})" title="Delete">×</button>
         </div>
       </div>`;
-    grid.appendChild(card);
+    grid.appendChild(el);
   });
 }
 
 function toggleDone(i) {
-  const t = load(); t[i].done = !t[i].done; save(t);
-  renderGrid();
-  toast(t[i].done ? '✓ Marked as done!' : '○ Marked as to-do');
+  const d = load(); d[i].done = !d[i].done; save(d);
+  render(); toast(d[i].done ? '✓ Done!' : '○ Back to to-do');
 }
 
-function delTopic(i) {
-  const t = load(); const name = t[i].name;
-  t.splice(i,1); save(t); renderGrid();
-  toast('Deleted: ' + name);
+function del(i) {
+  const d = load(); const n = d[i].name;
+  d.splice(i, 1); save(d); render();
+  toast('Deleted: ' + n);
 }
 
 function addTopic() {
@@ -532,23 +607,22 @@ function addTopic() {
   const url  = document.getElementById('f-url').value.trim();
   const cat  = document.getElementById('f-cat').value;
   const desc = document.getElementById('f-desc').value.trim();
-  if (!name) { toast('Enter a topic name.'); document.getElementById('f-name').focus(); return; }
-  if (!url)  { toast('Enter a URL.'); document.getElementById('f-url').focus(); return; }
-  if (!url.startsWith('http')) { toast('URL must start with https://'); return; }
-  const t = load();
-  t.push({ name, cat, desc, url, done: false });
-  save(t); closeModal(); renderGrid();
+  if (!name) { toast('Enter a topic name!'); return; }
+  if (!url || !url.startsWith('http')) { toast('Enter a valid URL!'); return; }
+  const d = load();
+  d.push({ name, cat, desc, url, done: false });
+  save(d); closeModal(); render();
   document.getElementById('f-name').value = '';
   document.getElementById('f-url').value = '';
   document.getElementById('f-desc').value = '';
   toast('✓ Added: ' + name);
 }
 
-function setTab(tab, btn) {
-  currentTab = tab;
-  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderGrid();
+function setTab(t, btn) {
+  tab = t;
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  render();
 }
 
 function openModal() {
@@ -571,20 +645,9 @@ function esc(s) {
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
-  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-    e.preventDefault(); document.getElementById('search').focus();
-  }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderGrid();
-  document.getElementById('f-name').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('f-url').focus();
-  });
-  document.getElementById('f-url').addEventListener('keydown', e => {
-    if (e.key === 'Enter') addTopic();
-  });
-});
+document.addEventListener('DOMContentLoaded', render);
 </script>
 
 </body>
