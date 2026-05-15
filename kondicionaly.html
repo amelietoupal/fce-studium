@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conditionals – FCE Grammar</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+#cond-root, #cond-root * {
+  box-sizing: border-box !important;
+  font-family: 'Sora', sans-serif !important;
+}
+#cond-root {
+  all: initial;
+  display: block;
+  background-color: #f3f0ff !important;
+  color: #1a0a2e !important;
+  padding: 20px 16px 60px !important;
+  max-width: 860px !important;
+  margin: 0 auto !important;
+  font-size: 15px !important;
+  line-height: 1.65 !important;
+}
+
+/* ── HEADER ── */
+#cond-root .hdr {
+background-color: #1a0a2e !important;
+border-radius: 20px !important;
+padding: 38px 26px 30px !important;
+margin-bottom: 22px !important;
+text-align: center !important;
+position: relative !important;
+overflow: hidden !important;
+}
+#cond-root .hdr-blob-a {
+position: absolute !important;
+width: 260px !important; height: 260px !important;
+background-color: #7c3aed !important;
+border-radius: 50% !important;
+top: -90px !important; right: -70px !important;
+opacity: 0.28 !important;
+}
+#cond-root .hdr-blob-b {
+position: absolute !important;
+width: 190px !important; height: 190px !important;
+background-color: #f59e0b !important;
+border-radius: 50% !important;
+bottom: -65px !important; left: -50px !important;
+opacity: 0.22 !important;
+}
+#cond-root .hdr h1 {
+font-size: clamp(1.8rem, 5vw, 2.9rem) !important;
+font-weight: 800 !important;
+color: #ffffff !important;
+letter-spacing: -1px !important;
+margin: 0 0 7px !important;
+position: relative !important;
+z-index: 2 !important;
+line-height: 1.15 !important;
+}
+#cond-root .hdr h1 span { color: #a78bfa !important; }
+#cond-root .hdr .hsub {
+color: #a99bc4 !important;
+font-size: 0.74rem !important;
+letter-spacing: 0.13em !important;
+text-transform: uppercase !important;
+margin: 0 0 18px !important;
+position: relative !important;
+z-index: 2 !important;
+display: block !important;
+}
+#cond-root .hdr-pills {
+display: flex !important;
+justify-content: center !important;
+gap: 8px !important;
+flex-wrap: wrap !important;
+position: relative !important;
+z-index: 2 !important;
+}
+#cond-root .hdr-pill {
+background-color: rgba(255,255,255,0.1) !important;
+border: 1px solid rgba(255,255,255,0.2) !important;
+color: #d4c8f5 !important;
+border-radius: 999px !important;
+padding: 4px 13px !important;
+font-size: 0.72rem !important;
+font-weight: 600 !important;
+display: inline-block !important;
+}
+
+/* ── TABS ── */
+#cond-root .tabs {
+display: flex !important;
+gap: 4px !important;
+background-color: #ffffff !important;
+border-radius: 14px !important;
+padding: 5px !important;
+margin-bottom: 24px !important;
+box-shadow: 0 2px 16px rgba(26,10,46,0.1) !important;
+flex-wrap: wrap !important;
+}
+#cond-root .tab-btn {
+font-family: ‘Sora’, sans-serif !important;
+font-size: 0.79rem !important;
+font-weight: 600 !important;
+padding: 9px 13px !important;
+border: none !important;
+border-radius: 10px !important;
+background-color: transparent !important;
+color: #6b5b95 !important;
+cursor: pointer !important;
+flex: 1 !important;
+white-space: nowrap !important;
+transition: background-color 0.15s, color 0.15s !important;
+}
+#cond-root .tab-btn:hover { background-color: #ede9fe !important; color: #7c3aed !important; }
+#cond-root .tab-btn.active {
+background-color: #7c3aed !important;
+color: #ffffff !important;
+box-shadow: 0 3px 12px rgba(124,58,237,0.35) !important;
+}
+#cond-root .tab-panel { display: none !important; }
+#cond-root .tab-panel.active { display: block !important; }
+
+/* ── SECTION ── */
+#cond-root .sec {
+display: flex !important;
+align-items: center !important;
+gap: 11px !important;
+margin: 30px 0 10px !important;
+}
+#cond-root .sec:first-child { margin-top: 0 !important; }
+#cond-root .sec-num {
+width: 30px !important; height: 30px !important;
+border-radius: 8px !important;
+background-color: #7c3aed !important;
+color: #ffffff !important;
+font-family: ‘JetBrains Mono’, monospace !important;
+font-weight: 600 !important;
+font-size: 0.77rem !important;
+display: flex !important;
+align-items: center !important;
+justify-content: center !important;
+flex-shrink: 0 !important;
+}
+#cond-root .sec-title { font-size: 1rem !important; font-weight: 700 !important; color: #1a0a2e !important; }
+#cond-root .sec-tag {
+margin-left: auto !important;
+font-size: 0.69rem !important;
+font-weight: 600 !important;
+color: #6b5b95 !important;
+background-color: #ede9fe !important;
+padding: 3px 9px !important;
+border-radius: 999px !important;
+white-space: nowrap !important;
+}
+#cond-root .divider {
+height: 1px !important;
+background-color: #e0d9f7 !important;
+margin-bottom: 14px !important;
+border: none !important;
+}
+
+/* ── INTRO BOX ── */
+#cond-root .intro-box {
+background-color: #1a0a2e !important;
+border-radius: 16px !important;
+padding: 22px 24px !important;
+margin-bottom: 14px !important;
+}
+#cond-root .intro-box p {
+color: #d4c8f5 !important;
+font-size: 0.88rem !important;
+line-height: 1.75 !important;
+margin: 0 0 8px !important;
+}
+#cond-root .intro-box strong { color: #a78bfa !important; font-weight: 700 !important; }
+#cond-root .intro-pills { display: flex !important; flex-wrap: wrap !important; gap: 7px !important; margin-top: 14px !important; }
+#cond-root .intro-pill {
+background-color: rgba(167,139,250,0.15) !important;
+border: 1px solid rgba(167,139,250,0.3) !important;
+color: #c4b5fd !important;
+border-radius: 999px !important;
+padding: 4px 12px !important;
+font-size: 0.72rem !important;
+font-weight: 600 !important;
+display: inline-block !important;
+}
+
+/* ── TYPE CARDS (the big ones) ── */
+#cond-root .type-card {
+border-radius: 16px !important;
+padding: 20px !important;
+margin-bottom: 14px !important;
+border-left: 5px solid transparent !important;
+}
+#cond-root .type-card.t0 { background-color: #f0fdf4 !important; border-color: #22c55e !important; }
+#cond-root .type-card.t1 { background-color: #eff6ff !important; border-color: #3b82f6 !important; }
+#cond-root .type-card.t2 { background-color: #fdf4ff !important; border-color: #a855f7 !important; }
+#cond-root .type-card.t3 { background-color: #fff7ed !important; border-color: #f97316 !important; }
+#cond-root .type-card.tm { background-color: #fef2f2 !important; border-color: #ef4444 !important; }
+
+#cond-root .tc-head {
+display: flex !important;
+align-items: center !important;
+gap: 10px !important;
+margin-bottom: 12px !important;
+}
+#cond-root .tc-badge {
+font-family: ‘JetBrains Mono’, monospace !important;
+font-size: 0.75rem !important;
+font-weight: 600 !important;
+padding: 4px 10px !important;
+border-radius: 8px !important;
+display: inline-block !important;
+}
+#cond-root .t0 .tc-badge { background-color: #dcfce7 !important; color: #16a34a !important; }
+#cond-root .t1 .tc-badge { background-color: #dbeafe !important; color: #1d4ed8 !important; }
+#cond-root .t2 .tc-badge { background-color: #f3e8ff !important; color: #7e22ce !important; }
+#cond-root .t3 .tc-badge { background-color: #ffedd5 !important; color: #c2410c !important; }
+#cond-root .tm .tc-badge { background-color: #fee2e2 !important; color: #b91c1c !important; }
+
+#cond-root .tc-name { font-size: 1rem !important; font-weight: 700 !important; color: #1a0a2e !important; }
+#cond-root .tc-use  { font-size: 0.82rem !important; color: #6b5b95 !important; margin-bottom: 12px !important; display: block !important; }
+
+/* formula */
+#cond-root .formula {
+background-color: #1a0a2e !important;
+border-radius: 10px !important;
+padding: 12px 15px !important;
+margin-bottom: 12px !important;
+display: flex !important;
+align-items: center !important;
+gap: 8px !important;
+flex-wrap: wrap !important;
+}
+#cond-root .formula-label {
+font-size: 0.67rem !important;
+font-weight: 700 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.08em !important;
+color: #6b5b95 !important;
+flex-shrink: 0 !important;
+font-family: ‘JetBrains Mono’, monospace !important;
+}
+#cond-root .formula-text {
+font-family: ‘JetBrains Mono’, monospace !important;
+font-size: 0.84rem !important;
+color: #e2d9ff !important;
+font-weight: 600 !important;
+}
+#cond-root .formula-text .hl { color: #a78bfa !important; }
+#cond-root .formula-text .hl2 { color: #f59e0b !important; }
+
+/* examples */
+#cond-root .ex-list { list-style: none !important; margin: 0 !important; padding: 0 !important; }
+#cond-root .ex-list li {
+font-style: italic !important;
+font-size: 0.86rem !important;
+padding: 5px 0 !important;
+border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+color: #1a0a2e !important;
+display: flex !important;
+gap: 6px !important;
+align-items: flex-start !important;
+}
+#cond-root .ex-list li:last-child { border-bottom: none !important; }
+#cond-root .ex-list em { font-style: normal !important; font-weight: 700 !important; color: #7c3aed !important; }
+#cond-root .ex-list .cz { font-style: normal !important; color: #9b89c4 !important; font-size: 0.77rem !important; display: block !important; }
+#cond-root .ex-bullet { color: #a78bfa !important; font-size: 0.7rem !important; flex-shrink: 0 !important; margin-top: 5px !important; }
+
+/* mini note */
+#cond-root .tc-note {
+background-color: rgba(255,255,255,0.7) !important;
+border-radius: 8px !important;
+padding: 8px 12px !important;
+font-size: 0.8rem !important;
+margin-top: 10px !important;
+color: #3a2560 !important;
+border-left: 3px solid #7c3aed !important;
+}
+#cond-root .tc-note strong { color: #7c3aed !important; }
+
+/* ── OVERVIEW TABLE ── */
+#cond-root .ov-table {
+width: 100% !important;
+border-collapse: collapse !important;
+font-size: 0.82rem !important;
+background-color: #ffffff !important;
+border-radius: 14px !important;
+overflow: hidden !important;
+box-shadow: 0 2px 14px rgba(26,10,46,0.09) !important;
+}
+#cond-root .ov-table thead th {
+background-color: #1a0a2e !important;
+color: #a99bc4 !important;
+font-size: 0.68rem !important;
+font-weight: 700 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.08em !important;
+padding: 10px 12px !important;
+text-align: left !important;
+}
+#cond-root .ov-table tbody tr { border-bottom: 1px solid #e0d9f7 !important; }
+#cond-root .ov-table tbody tr:last-child { border-bottom: none !important; }
+#cond-root .ov-table tbody tr:hover { background-color: #faf7ff !important; }
+#cond-root .ov-table td { padding: 9px 12px !important; vertical-align: middle !important; color: #1a0a2e !important; }
+#cond-root .ov-table .type-cell {
+font-family: ‘JetBrains Mono’, monospace !important;
+font-weight: 600 !important;
+font-size: 0.88rem !important;
+white-space: nowrap !important;
+}
+#cond-root .dot { display: inline-block !important; width: 10px !important; height: 10px !important; border-radius: 50% !important; margin-right: 6px !important; }
+#cond-root .d0  { background-color: #22c55e !important; }
+#cond-root .d1  { background-color: #3b82f6 !important; }
+#cond-root .d2  { background-color: #a855f7 !important; }
+#cond-root .d3  { background-color: #f97316 !important; }
+#cond-root .dm  { background-color: #ef4444 !important; }
+#cond-root .ov-table .mono-cell {
+font-family: ‘JetBrains Mono’, monospace !important;
+font-size: 0.77rem !important;
+color: #4c3080 !important;
+}
+
+/* ── WISH / UNLESS / ALTERNATIVES ── */
+#cond-root .alt-grid {
+display: grid !important;
+grid-template-columns: 1fr 1fr !important;
+gap: 12px !important;
+}
+@media (max-width: 540px) { #cond-root .alt-grid { grid-template-columns: 1fr !important; } }
+#cond-root .alt-card {
+background-color: #ffffff !important;
+border-radius: 14px !important;
+padding: 16px !important;
+box-shadow: 0 2px 10px rgba(26,10,46,0.07) !important;
+border-top: 3px solid #7c3aed !important;
+}
+#cond-root .alt-card.green  { border-top-color: #22c55e !important; }
+#cond-root .alt-card.amber  { border-top-color: #f59e0b !important; }
+#cond-root .alt-card.blue   { border-top-color: #3b82f6 !important; }
+#cond-root .alt-card .ac-head {
+font-size: 0.72rem !important;
+font-weight: 800 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.07em !important;
+color: #7c3aed !important;
+margin-bottom: 8px !important;
+display: block !important;
+}
+#cond-root .alt-card.green  .ac-head { color: #16a34a !important; }
+#cond-root .alt-card.amber  .ac-head { color: #b45309 !important; }
+#cond-root .alt-card.blue   .ac-head { color: #1d4ed8 !important; }
+#cond-root .alt-card p { font-size: 0.84rem !important; color: #1a0a2e !important; margin-bottom: 6px !important; }
+#cond-root .alt-card .ac-ex {
+font-style: italic !important;
+font-size: 0.82rem !important;
+background-color: #f8f5ff !important;
+border-radius: 7px !important;
+padding: 6px 10px !important;
+color: #1a0a2e !important;
+margin-top: 5px !important;
+border-left: 3px solid #7c3aed !important;
+display: block !important;
+}
+#cond-root .alt-card.green  .ac-ex { border-left-color: #22c55e !important; background-color: #f0fdf4 !important; }
+#cond-root .alt-card.amber  .ac-ex { border-left-color: #f59e0b !important; background-color: #fffbeb !important; }
+#cond-root .alt-card.blue   .ac-ex { border-left-color: #3b82f6 !important; background-color: #eff6ff !important; }
+#cond-root .alt-card .ac-ex em { font-style: normal !important; font-weight: 700 !important; color: #7c3aed !important; }
+#cond-root .alt-card.green .ac-ex em  { color: #16a34a !important; }
+#cond-root .alt-card.amber .ac-ex em  { color: #b45309 !important; }
+#cond-root .alt-card.blue  .ac-ex em  { color: #1d4ed8 !important; }
+
+/* ── WISH TABLE ── */
+#cond-root .wish-table {
+width: 100% !important;
+border-collapse: collapse !important;
+font-size: 0.83rem !important;
+background-color: #ffffff !important;
+border-radius: 14px !important;
+overflow: hidden !important;
+box-shadow: 0 2px 12px rgba(26,10,46,0.08) !important;
+}
+#cond-root .wish-table thead th {
+background-color: #1a0a2e !important;
+color: #a99bc4 !important;
+font-size: 0.68rem !important;
+font-weight: 700 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.07em !important;
+padding: 10px 13px !important;
+text-align: left !important;
+}
+#cond-root .wish-table tbody tr { border-bottom: 1px solid #e0d9f7 !important; }
+#cond-root .wish-table tbody tr:last-child { border-bottom: none !important; }
+#cond-root .wish-table td { padding: 9px 13px !important; vertical-align: middle !important; color: #1a0a2e !important; }
+#cond-root .wish-table .wt-tense { font-family: ‘JetBrains Mono’, monospace !important; font-size: 0.8rem !important; color: #7c3aed !important; font-weight: 600 !important; }
+#cond-root .wish-table .wt-ex { font-style: italic !important; font-size: 0.82rem !important; }
+#cond-root .wish-table .wt-ex em { font-style: normal !important; font-weight: 700 !important; color: #7c3aed !important; }
+
+/* ── TRAPS ── */
+#cond-root .trap-grid {
+display: grid !important;
+grid-template-columns: 1fr 1fr !important;
+gap: 10px !important;
+}
+@media (max-width: 500px) { #cond-root .trap-grid { grid-template-columns: 1fr !important; } }
+#cond-root .trap {
+background-color: #ffffff !important;
+border-radius: 12px !important;
+padding: 14px 15px !important;
+border-top: 3px solid #ef4444 !important;
+box-shadow: 0 2px 8px rgba(26,10,46,0.06) !important;
+font-size: 0.82rem !important;
+}
+#cond-root .trap .tn { font-size: 0.67rem !important; font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; color: #ef4444 !important; margin-bottom: 7px !important; display: block !important; }
+#cond-root .trap .bad  { color: #c0303b !important; text-decoration: line-through !important; font-style: italic !important; display: block !important; }
+#cond-root .trap .good { color: #16a34a !important; font-style: italic !important; display: block !important; margin-top: 5px !important; font-weight: 600 !important; }
+#cond-root .trap .note { color: #6b5b95 !important; font-size: 0.72rem !important; margin-top: 5px !important; display: block !important; }
+
+/* ── INSIGHT ── */
+#cond-root .insight {
+background-color: #ffffff !important;
+border-left: 4px solid #7c3aed !important;
+border-radius: 0 10px 10px 0 !important;
+padding: 12px 15px !important;
+margin-top: 12px !important;
+font-size: 0.84rem !important;
+box-shadow: 0 2px 8px rgba(26,10,46,0.06) !important;
+color: #1a0a2e !important;
+}
+#cond-root .insight strong { color: #7c3aed !important; }
+#cond-root .insight code {
+background-color: #ede9fe !important;
+color: #5b21b6 !important;
+padding: 2px 6px !important;
+border-radius: 5px !important;
+font-family: ‘JetBrains Mono’, monospace !important;
+font-size: 0.79rem !important;
+}
+#cond-root .ins-row { margin-top: 6px !important; line-height: 1.7 !important; }
+
+/* ── CHEAT SHEET ── */
+#cond-root .cheat {
+background-color: #ffffff !important;
+border-radius: 14px !important;
+overflow: hidden !important;
+box-shadow: 0 2px 12px rgba(26,10,46,0.07) !important;
+}
+#cond-root .cs-row {
+display: flex !important;
+align-items: flex-start !important;
+gap: 12px !important;
+padding: 13px 16px !important;
+border-bottom: 1px solid #e0d9f7 !important;
+font-size: 0.85rem !important;
+color: #1a0a2e !important;
+}
+#cond-root .cs-row:last-child { border-bottom: none !important; }
+#cond-root .cs-icon { font-size: 1rem !important; flex-shrink: 0 !important; margin-top: 2px !important; }
+#cond-root .cs-body strong { color: #7c3aed !important; }
+#cond-root .cs-ex    { font-style: italic !important; color: #6b5b95 !important; font-size: 0.79rem !important; display: block !important; margin-top: 3px !important; }
+#cond-root .cs-wrong { color: #c0303b !important; text-decoration: line-through !important; font-size: 0.79rem !important; display: block !important; font-style: italic !important; margin-top: 2px !important; }
+#cond-root .cs-right { color: #16a34a !important; font-size: 0.79rem !important; display: block !important; font-weight: 600 !important; font-style: italic !important; }
+
+/* ── WARN BOX ── */
+#cond-root .warn-box {
+background-color: #fffbeb !important;
+border-left: 4px solid #f59e0b !important;
+border-radius: 0 10px 10px 0 !important;
+padding: 10px 14px !important;
+font-size: 0.82rem !important;
+margin-top: 12px !important;
+color: #78350f !important;
+}
+
+/* ── QUIZ / EXERCISES ── */
+#cond-root .ex-wrap {
+background-color: #ffffff !important;
+border-radius: 16px !important;
+padding: 22px !important;
+box-shadow: 0 2px 14px rgba(26,10,46,0.08) !important;
+border-top: 4px solid #7c3aed !important;
+}
+#cond-root .ex-wrap.fill-wrap { border-top-color: #22c55e !important; }
+#cond-root .ex-wrap.mis-wrap  { border-top-color: #f59e0b !important; }
+#cond-root .ex-wrap h2 { font-size: 1.05rem !important; font-weight: 700 !important; margin: 0 0 5px !important; color: #1a0a2e !important; }
+#cond-root .ex-hint { font-size: 0.77rem !important; color: #6b5b95 !important; margin-bottom: 18px !important; font-family: ‘JetBrains Mono’, monospace !important; display: block !important; }
+
+#cond-root .qblock {
+background-color: #faf7ff !important;
+border-radius: 12px !important;
+padding: 16px !important;
+margin-bottom: 12px !important;
+border: 1px solid #e0d9f7 !important;
+}
+#cond-root .qnum {
+font-size: 0.67rem !important;
+font-weight: 700 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.09em !important;
+color: #6b5b95 !important;
+margin-bottom: 8px !important;
+font-family: ‘JetBrains Mono’, monospace !important;
+display: block !important;
+}
+#cond-root .qsentence { font-size: 0.93rem !important; margin-bottom: 12px !important; line-height: 1.7 !important; color: #1a0a2e !important; display: block !important; }
+
+#cond-root .opts { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; }
+#cond-root .obtn {
+font-family: ‘Sora’, sans-serif !important;
+font-size: 0.82rem !important;
+font-weight: 600 !important;
+padding: 7px 15px !important;
+border: 2px solid #e0d9f7 !important;
+border-radius: 8px !important;
+background-color: #ffffff !important;
+cursor: pointer !important;
+color: #1a0a2e !important;
+transition: background-color 0.12s, border-color 0.12s, color 0.12s !important;
+}
+#cond-root .obtn:hover:not(:disabled) { border-color: #7c3aed !important; color: #7c3aed !important; background-color: #ede9fe !important; }
+#cond-root .obtn.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #16a34a !important; }
+#cond-root .obtn.wrong   { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+#cond-root .obtn:disabled { cursor: default !important; opacity: 0.85 !important; }
+
+#cond-root .feedback {
+margin-top: 10px !important;
+font-size: 0.82rem !important;
+padding: 9px 13px !important;
+border-radius: 8px !important;
+display: none !important;
+line-height: 1.5 !important;
+font-weight: 500 !important;
+}
+#cond-root .feedback.show { display: block !important; }
+#cond-root .feedback.ok  { background-color: #dcfce7 !important; color: #16a34a !important; border-left: 3px solid #22c55e !important; }
+#cond-root .feedback.bad { background-color: #fee2e2 !important; color: #b91c1c !important; border-left: 3px solid #ef4444 !important; }
+
+#cond-root .fill-sentence { font-size: 0.93rem !important; line-height: 2.8 !important; color: #1a0a2e !important; display: block !important; }
+#cond-root .fill-input {
+font-family: ‘JetBrains Mono’, monospace !important;
+font-size: 0.84rem !important;
+border: none !important;
+border-bottom: 2px solid #7c3aed !important;
+background-color: transparent !important;
+padding: 0 5px !important;
+width: 140px !important;
+text-align: center !important;
+color: #1a0a2e !important;
+outline: none !important;
+}
+#cond-root .fill-input.correct { border-bottom-color: #22c55e !important; color: #16a34a !important; }
+#cond-root .fill-input.wrong   { border-bottom-color: #ef4444 !important; color: #b91c1c !important; }
+
+#cond-root .check-btn {
+font-family: ‘Sora’, sans-serif !important;
+margin-top: 18px !important;
+padding: 10px 28px !important;
+background-color: #7c3aed !important;
+color: #ffffff !important;
+border: none !important;
+border-radius: 10px !important;
+font-size: 0.88rem !important;
+font-weight: 700 !important;
+cursor: pointer !important;
+display: block !important;
+box-shadow: 0 4px 14px rgba(124,58,237,0.3) !important;
+transition: background-color 0.15s !important;
+}
+#cond-root .check-btn:hover { background-color: #6d28d9 !important; }
+
+#cond-root .score-bar {
+text-align: center !important;
+padding: 20px !important;
+background-color: #1a0a2e !important;
+border-radius: 12px !important;
+margin-top: 18px !important;
+display: none !important;
+}
+#cond-root .score-bar.show { display: block !important; }
+#cond-root .score-bar .sc-label { color: #a99bc4 !important; font-size: 0.84rem !important; display: block !important; margin-bottom: 4px !important; }
+#cond-root .score-bar strong { font-size: 1.9rem !important; color: #a78bfa !important; font-family: ‘JetBrains Mono’, monospace !important; display: block !important; font-weight: 600 !important; }
+
+#cond-root .mis-opts { display: flex !important; flex-direction: column !important; gap: 6px !important; }
+#cond-root .mis-opts .obtn { text-align: left !important; white-space: normal !important; height: auto !important; padding: 8px 14px !important; }
+
+#cond-root em  { font-style: italic !important; }
+#cond-root strong { font-weight: 700 !important; }
+#cond-root u   { text-decoration: underline !important; }
+</style>
+
+</head>
+<body>
+<div id="cond-root">
+
+<!-- ═══ HEADER ═══ -->
+
+<div class="hdr">
+  <div class="hdr-blob-a"></div>
+  <div class="hdr-blob-b"></div>
+  <h1>Con<span>ditionals</span></h1>
+  <span class="hsub">FCE Grammar · B2 · Podmínkové věty</span>
+  <div class="hdr-pills">
+    <span class="hdr-pill">0️⃣ Zero</span>
+    <span class="hdr-pill">1️⃣ First</span>
+    <span class="hdr-pill">2️⃣ Second</span>
+    <span class="hdr-pill">3️⃣ Third</span>
+    <span class="hdr-pill">🔀 Mixed</span>
+    <span class="hdr-pill">🌠 Wish &amp; Inversion</span>
+  </div>
+</div>
+
+<!-- ═══ TABS ═══ -->
+
+<div class="tabs" id="tabs">
+  <button class="tab-btn active" data-tab="theory">📖 Teorie</button>
+  <button class="tab-btn" data-tab="quiz">🎯 Quiz</button>
+  <button class="tab-btn" data-tab="fill">✏️ Doplňovačka</button>
+  <button class="tab-btn" data-tab="mistakes">🔍 Oprav chyby</button>
+</div>
+
+<!-- ══════════════════════ THEORY ══════════════════════ -->
+
+<div class="tab-panel active" id="theory">
+
+  <!-- 01 ÚVOD -->
+
+  <div class="sec"><span class="sec-num">01</span><span class="sec-title">Co jsou kondicionály?</span></div>
+  <div class="divider"></div>
+  <div class="intro-box">
+    <p>Podmínkové věty vyjadřují vztah <strong>podmínky a výsledku</strong> – co se stane (nebo stalo, nebo by se stalo), pokud je splněna určitá podmínka. Skládají se vždy ze dvou částí: <strong>if-clause</strong> (podmínka) a <strong>main clause</strong> (výsledek).</p>
+    <p>Pořadí vět je libovolné. Pokud začíná <em>if-clause</em>, píše se za ní <strong>čárka</strong>. Pokud začíná main clause, čárka se nepíše.</p>
+    <p>Na FCE se kondicionály testují v <strong>Part 4 (key word transformations)</strong>, <strong>Part 2 (open cloze)</strong> i ve <strong>Writing</strong>. Jsou to jedny z nejčastěji zkoušených struktur vůbec.</p>
+    <div class="intro-pills">
+      <span class="intro-pill">5 typů (0–3 + mixed)</span>
+      <span class="intro-pill">if-clause + main clause</span>
+      <span class="intro-pill">wish / if only / unless</span>
+      <span class="intro-pill">inversion (formální)</span>
+      <span class="intro-pill">would NIKDY po if</span>
+    </div>
+  </div>
+
+  <!-- 02 PŘEHLEDOVÁ TABULKA -->
+
+  <div class="sec"><span class="sec-num">02</span><span class="sec-title">Přehled všech typů – rychlý přehled</span><span class="sec-tag">Sken za 30s</span></div>
+  <div class="divider"></div>
+  <table class="ov-table">
+    <thead><tr><th>Typ</th><th>Použití</th><th>If-clause</th><th>Main clause</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="type-cell"><span class="dot d0"></span>Zero</td>
+        <td>Obecné pravdy, fakta, vědecké zákony</td>
+        <td class="mono-cell">If + present simple</td>
+        <td class="mono-cell">present simple</td>
+      </tr>
+      <tr>
+        <td class="type-cell"><span class="dot d1"></span>First</td>
+        <td>Reálná situace v přítomnosti/budoucnosti</td>
+        <td class="mono-cell">If + present simple</td>
+        <td class="mono-cell">will / can / may + inf.</td>
+      </tr>
+      <tr>
+        <td class="type-cell"><span class="dot d2"></span>Second</td>
+        <td>Hypotetická / nepravděpodobná situace (přítomnost/budoucnost)</td>
+        <td class="mono-cell">If + past simple</td>
+        <td class="mono-cell">would / could / might + inf.</td>
+      </tr>
+      <tr>
+        <td class="type-cell"><span class="dot d3"></span>Third</td>
+        <td>Hypotetická situace v minulosti (co se nestalo)</td>
+        <td class="mono-cell">If + past perfect</td>
+        <td class="mono-cell">would / could / might + have + pp.</td>
+      </tr>
+      <tr>
+        <td class="type-cell"><span class="dot dm"></span>Mixed</td>
+        <td>Mix minulosti a přítomnosti (nebo obráceně)</td>
+        <td class="mono-cell">If + past perfect / past simple</td>
+        <td class="mono-cell">would + inf. / would + have + pp.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 03 ZERO -->
+
+  <div class="sec"><span class="sec-num">03</span><span class="sec-title">Zero Conditional</span><span class="sec-tag">Obecné pravdy</span></div>
+  <div class="divider"></div>
+  <div class="type-card t0">
+    <div class="tc-head">
+      <span class="tc-badge">TYPE 0</span>
+      <span class="tc-name">Obecné pravdy &amp; fakta</span>
+    </div>
+    <span class="tc-use">Používáme pro věci, které jsou vždy pravdivé – přírodní zákony, obecné zvyky, vědecké fakty. <em>if</em> lze nahradit <em>when</em> bez změny významu.</span>
+    <div class="formula">
+      <span class="formula-label">Vzorec:</span>
+      <span class="formula-text">If + <span class="hl">present simple</span>, &nbsp; <span class="hl2">present simple</span></span>
+    </div>
+    <ul class="ex-list">
+      <li><span class="ex-bullet">▸</span><div>If you <em>heat</em> water to 100°C, it <em>boils</em>.<span class="cz">→ Když zahřeješ vodu na 100°C, vaří se. (vždy pravda)</span></div></li>
+      <li><span class="ex-bullet">▸</span><div>If it <em>rains</em>, the ground <em>gets</em> wet.<span class="cz">→ Když prší, zem se namočí.</span></div></li>
+      <li><span class="ex-bullet">▸</span><div>Plants <em>die</em> if they <em>don't get</em> water.<span class="cz">→ Rostliny umírají, pokud nedostávají vodu.</span></div></li>
+    </ul>
+    <div class="tc-note"><strong>💡 Tip:</strong> Lze nahradit <em>if → when/whenever</em> bez změny významu. Zero conditional nemá nic společného s hypotézou.</div>
+  </div>
+
+  <!-- 04 FIRST -->
+
+  <div class="sec"><span class="sec-num">04</span><span class="sec-title">First Conditional</span><span class="sec-tag">Reálná budoucnost</span></div>
+  <div class="divider"></div>
+  <div class="type-card t1">
+    <div class="tc-head">
+      <span class="tc-badge">TYPE 1</span>
+      <span class="tc-name">Reálná &amp; pravděpodobná situace</span>
+    </div>
+    <span class="tc-use">Situace, která se může skutečně stát – podmínka je reálná. Časté pro plány, hrozby, sliby, varování.</span>
+    <div class="formula">
+      <span class="formula-label">Vzorec:</span>
+      <span class="formula-text">If + <span class="hl">present simple</span>, &nbsp; <span class="hl2">will / can / may + infinitive</span></span>
+    </div>
+    <ul class="ex-list">
+      <li><span class="ex-bullet">▸</span><div>If it <em>rains</em> tomorrow, I <em>won't go</em> to the beach.<span class="cz">→ Pokud bude zítra pršet, nepůjdu na pláž.</span></div></li>
+      <li><span class="ex-bullet">▸</span><div>If you <em>study</em> hard, you <em>will pass</em> the FCE.<span class="cz">→ Pokud budeš pilně studovat, zvládneš FCE.</span></div></li>
+      <li><span class="ex-bullet">▸</span><div>If she <em>is</em> late, we <em>may leave</em> without her.<span class="cz">→ Pokud přijde pozdě, možná odejdeme bez ní.</span></div></li>
+    </ul>
+    <div class="tc-note"><strong>⚠️ Pozor:</strong> V <em>if-clause</em> NIKDY <strong>will</strong>! Používáme present simple i když mluvíme o budoucnosti. ❌ <em>If it will rain...</em></div>
+  </div>
+
+  <!-- 05 SECOND -->
+
+  <div class="sec"><span class="sec-num">05</span><span class="sec-title">Second Conditional</span><span class="sec-tag">Hypotetická přítomnost</span></div>
+  <div class="divider"></div>
+  <div class="type-card t2">
+    <div class="tc-head">
+      <span class="tc-badge">TYPE 2</span>
+      <span class="tc-name">Hypotetická / nepravděpodobná situace</span>
+    </div>
+    <span class="tc-use">Situace, která se pravděpodobně nestane – hypotéza v přítomnosti nebo budoucnosti. Typické pro rady (If I were you...) a sny.</span>
+    <div class="formula">
+      <span class="formula-label">Vzorec:</span>
+      <span class="formula-text">If + <span class="hl">past simple</span>, &nbsp; <span class="hl2">would / could / might + infinitive</span></span>
+    </div>
+    <ul class="ex-list">
+      <li><span class="ex-bullet">▸</span><div>If I <em>had</em> a million euros, I <em>would buy</em> a house.<span class="cz">→ Kdybych měla milion eur, koupila bych dům. (nemám)</span></div></li>
+      <li><span class="ex-bullet">▸</span><div>If I <em>were</em> you, I <em>wouldn't do</em> that.<span class="cz">→ Na tvém místě bych to nedělala.</span></div></li>
+      <li><span class="ex-bullet">▸</span><div>If she <em>spoke</em> French, she <em>could work</em> in Paris.<span class="cz">→ Kdyby mluvila francouzsky, mohla by pracovat v Paříži.</span></div></li>
+    </ul>
+    <div class="tc-note"><strong>💡 Tip:</strong> Po <em>if</em> vždy <strong>were</strong> (ne <em>was</em>) pro všechny osoby – zejm. <em>If I were you</em>. Cambridge toto testuje!</div>
+  </div>
+
+  <!-- 06 THIRD -->
+
+  <div class="sec"><span class="sec-num">06</span><span class="sec-title">Third Conditional</span><span class="sec-tag">Minulá hypotéza</span></div>
+  <div class="divider"></div>
+  <div class="type-card t3">
+    <div class="tc-head">
+      <span class="tc-badge">TYPE 3</span>
+      <span class="tc-name">Co se nestalo – lítost &amp; spekulace</span>
+    </div>
+    <span class="tc-use">Situace, která se v minulosti nestala. Vyjadřujeme lítost, výčitky nebo spekulace o minulosti. Nejsložitější typ.</span>
+    <div class="formula">
+      <span class="formula-label">Vzorec:</span>
+      <span class="formula-text">If + <span class="hl">past perfect</span>, &nbsp; <span class="hl2">would/could/might + have + past participle</span></span>
+    </div>
+    <ul class="ex-list">
+      <li><span class="ex-bullet">▸</span><div>If I <em>had studied</em> more, I <em>would have passed</em> the exam.<span class="cz">→ Kdybych se více učila, u zkoušky bych uspěla. (ale nestudovala jsem)</span></div></li>
+      <li><span class="ex-bullet">▸</span><div>If she <em>had left</em> earlier, she <em>wouldn't have missed</em> the train.<span class="cz">→ Kdyby odešla dřív, nestihla by vlak. (ale neodešla)</span></div></li>
+      <li><span class="ex-bullet">▸</span><div>If they <em>had saved</em> money, they <em>could have bought</em> the car.<span class="cz">→ Kdyby šetřili, mohli si auto koupit.</span></div></li>
+    </ul>
+    <div class="tc-note"><strong>⚠️ Nejčastější chyba:</strong> ❌ <em>If I would have gone...</em> &nbsp; ✅ <em>If I had gone...</em> — would NIKDY v if-clause!</div>
+  </div>
+
+  <!-- 07 MIXED -->
+
+  <div class="sec"><span class="sec-num">07</span><span class="sec-title">Mixed Conditionals</span><span class="sec-tag">B2 specialita</span></div>
+  <div class="divider"></div>
+  <div class="type-card tm">
+    <div class="tc-head">
+      <span class="tc-badge">MIXED</span>
+      <span class="tc-name">Kombinace minulosti a přítomnosti</span>
+    </div>
+    <span class="tc-use">Kombinujeme 2nd a 3rd conditional. Dva směry: minulá podmínka → přítomný výsledek, nebo přítomná podmínka → minulý výsledek.</span>
+
+```
+<div style="background-color:#fff0f0 !important; border-radius:10px !important; padding:12px 15px !important; margin-bottom:10px !important;">
+  <div style="font-size:0.72rem !important; font-weight:800 !important; text-transform:uppercase !important; letter-spacing:0.07em !important; color:#b91c1c !important; margin-bottom:8px !important;">Typ A: Minulá podmínka → přítomný výsledek</div>
+  <div class="formula" style="margin-bottom:8px !important;">
+    <span class="formula-label">Vzorec:</span>
+    <span class="formula-text">If + <span class="hl">past perfect</span>, &nbsp; <span class="hl2">would + infinitive</span></span>
+  </div>
+  <ul class="ex-list">
+    <li><span class="ex-bullet">▸</span><div>If I <em>had studied</em> medicine, I <em>would be</em> a doctor now.<span class="cz">→ Kdybych studovala medicínu (v minulosti), byla bych teď doktor.</span></div></li>
+    <li><span class="ex-bullet">▸</span><div>If she <em>hadn't missed</em> the interview, she <em>would have</em> the job now.</div></li>
+  </ul>
+</div>
+
+<div style="background-color:#fff0f0 !important; border-radius:10px !important; padding:12px 15px !important;">
+  <div style="font-size:0.72rem !important; font-weight:800 !important; text-transform:uppercase !important; letter-spacing:0.07em !important; color:#b91c1c !important; margin-bottom:8px !important;">Typ B: Přítomná podmínka → minulý výsledek</div>
+  <div class="formula" style="margin-bottom:8px !important;">
+    <span class="formula-label">Vzorec:</span>
+    <span class="formula-text">If + <span class="hl">past simple</span>, &nbsp; <span class="hl2">would have + past participle</span></span>
+  </div>
+  <ul class="ex-list">
+    <li><span class="ex-bullet">▸</span><div>If I <em>spoke</em> German, I <em>would have understood</em> them.<span class="cz">→ Kdybych mluvila německy (teď), byla bych jim rozuměla (tehdy).</span></div></li>
+    <li><span class="ex-bullet">▸</span><div>If she <em>were</em> more careful, she <em>wouldn't have made</em> that mistake.</div></li>
+  </ul>
+</div>
+```
+
+  </div>
+
+  <!-- 08 WISH / IF ONLY -->
+
+  <div class="sec"><span class="sec-num">08</span><span class="sec-title">Wish, If Only &amp; Would Rather</span><span class="sec-tag">FCE Writing ❤️</span></div>
+  <div class="divider"></div>
+  <table class="wish-table">
+    <thead><tr><th>Struktura</th><th>Čas po wish</th><th>Použití</th><th>Příklad</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>wish / if only</strong></td>
+        <td class="wt-tense">past simple</td>
+        <td>Lítost nad přítomností</td>
+        <td class="wt-ex">I wish I <em>spoke</em> French. (ale nemluvím)</td>
+      </tr>
+      <tr>
+        <td><strong>wish / if only</strong></td>
+        <td class="wt-tense">past perfect</td>
+        <td>Lítost nad minulostí</td>
+        <td class="wt-ex">I wish I <em>had studied</em> harder. (ale nestudovala jsem)</td>
+      </tr>
+      <tr>
+        <td><strong>wish / if only</strong></td>
+        <td class="wt-tense">would + inf.</td>
+        <td>Přání změny chování (jiné osoby)</td>
+        <td class="wt-ex">I wish he <em>would stop</em> talking. (dráždí mě)</td>
+      </tr>
+      <tr>
+        <td><strong>would rather</strong></td>
+        <td class="wt-tense">past simple</td>
+        <td>Preference (jiná osoba)</td>
+        <td class="wt-ex">I'd rather you <em>didn't</em> come. (raději bych, kdybys nepřišel)</td>
+      </tr>
+      <tr>
+        <td><strong>it's time</strong></td>
+        <td class="wt-tense">past simple</td>
+        <td>Načase udělat něco</td>
+        <td class="wt-ex">It's time you <em>went</em> to bed. (už by sis měl lehnout)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="warn-box" style="margin-top:12px;">⚠️ Po <strong>wish</strong> pro přítomnost = <strong>past simple</strong> (ne present). ❌ <em>I wish I speak French.</em> ✅ <em>I wish I spoke French.</em></div>
+
+  <!-- 09 UNLESS / ALTERNATIVES -->
+
+  <div class="sec"><span class="sec-num">09</span><span class="sec-title">Unless, Provided &amp; alternativy k „if"</span><span class="sec-tag">B2 vocabulary</span></div>
+  <div class="divider"></div>
+  <div class="alt-grid">
+    <div class="alt-card green">
+      <span class="ac-head">unless = if not</span>
+      <p>Negativní verze <em>if</em>. Podmínka, která zabrání výsledku.</p>
+      <span class="ac-ex">I'll go <em>unless</em> it rains.<br><small style="font-style:normal;color:#4a7a4e;">(= I'll go if it doesn't rain.)</small></span>
+      <span class="ac-ex">She won't pass <em>unless</em> she studies.</span>
+    </div>
+    <div class="alt-card amber">
+      <span class="ac-head">provided / as long as</span>
+      <p>Podmínka musí být splněna. Formálnější alternativa k <em>if</em>.</p>
+      <span class="ac-ex">You can borrow it <em>as long as</em> you return it.<br><em>Provided that</em> you're quiet, you can stay.</span>
+    </div>
+    <div class="alt-card blue">
+      <span class="ac-head">in case</span>
+      <p>Preventivní opatření – připravujeme se na možnost.</p>
+      <span class="ac-ex">Take an umbrella <em>in case</em> it rains.<br><small style="font-style:normal;color:#1d4ed8;">(= protože by mohlo pršet, ne nutně)</small></span>
+    </div>
+    <div class="alt-card">
+      <span class="ac-head">even if / whether...or</span>
+      <p>I za podmínky, že. Výsledek zůstává stejný bez ohledu na podmínku.</p>
+      <span class="ac-ex"><em>Even if</em> I were rich, I wouldn't buy that.<br><em>Whether</em> you come or not, I'll be fine.</span>
+    </div>
+  </div>
+
+  <!-- 10 INVERSION -->
+
+  <div class="sec"><span class="sec-num">10</span><span class="sec-title">Inversion – formální kondicionály</span><span class="sec-tag">Pokročilé B2+</span></div>
+  <div class="divider"></div>
+  <div class="cheat">
+    <div class="cs-row">
+      <span class="cs-icon">📝</span>
+      <div><strong>Should + subject + infinitive</strong> (= 1st conditional, formální)<span class="cs-ex">Should you need help, please call us. (= If you need help...)</span><span class="cs-ex">Should anyone ask, I'm not here.</span></div>
+    </div>
+    <div class="cs-row">
+      <span class="cs-icon">📝</span>
+      <div><strong>Were + subject + to + infinitive</strong> (= 2nd conditional, formální)<span class="cs-ex">Were I to win the lottery, I would travel the world. (= If I won...)</span></div>
+    </div>
+    <div class="cs-row">
+      <span class="cs-icon">📝</span>
+      <div><strong>Had + subject + past participle</strong> (= 3rd conditional, formální)<span class="cs-ex">Had she known, she would have told me. (= If she had known...)</span><span class="cs-ex">Had they arrived earlier, they wouldn't have missed the show.</span></div>
+    </div>
+    <div class="cs-row">
+      <span class="cs-icon">⚠️</span>
+      <div><strong>Negace v inversion:</strong> Nikdy stažený tvar!<span class="cs-wrong">Hadn't she known... ❌</span><span class="cs-right">Had she not known... ✅</span></div>
+    </div>
+  </div>
+  <div class="insight" style="margin-top:12px;">
+    <strong>💡 Jak to poznat:</strong> Inversion = v <em>if-clause</em> přehodíš pomocné sloveso před podmět a odstraníš <em>if</em>. Typické v akademickém psaní a FCE Part 4.
+  </div>
+
+  <!-- 11 NEJČASTĚJŠÍ CHYBY -->
+
+  <div class="sec"><span class="sec-num">11</span><span class="sec-title">Nejčastější chyby ve FCE</span><span class="sec-tag">6 pastí</span></div>
+  <div class="divider"></div>
+  <div class="trap-grid">
+    <div class="trap">
+      <span class="tn">Past 1 · would v if-clause</span>
+      <span class="bad">If I would have the money, I'd go.</span>
+      <span class="good">If I had the money, I'd go. ✅</span>
+      <span class="note">Would NIKDY přímo po if!</span>
+    </div>
+    <div class="trap">
+      <span class="tn">Past 2 · will v if-clause</span>
+      <span class="bad">If it will rain, I'll stay home.</span>
+      <span class="good">If it rains, I'll stay home. ✅</span>
+      <span class="note">V if-clause používáme present simple.</span>
+    </div>
+    <div class="trap">
+      <span class="tn">Past 3 · was místo were</span>
+      <span class="bad">If I was you, I wouldn't do that.</span>
+      <span class="good">If I were you, I wouldn't do that. ✅</span>
+      <span class="note">Po if ve 2nd conditional vždy were.</span>
+    </div>
+    <div class="trap">
+      <span class="tn">Past 4 · wish + present</span>
+      <span class="bad">I wish I speak better English.</span>
+      <span class="good">I wish I spoke better English. ✅</span>
+      <span class="note">Po wish pro přítomnost = past simple.</span>
+    </div>
+    <div class="trap">
+      <span class="tn">Past 5 · 3rd conditional tvar</span>
+      <span class="bad">If I had gone, I would seen him.</span>
+      <span class="good">If I had gone, I would have seen him. ✅</span>
+      <span class="note">would + have + past participle!</span>
+    </div>
+    <div class="trap">
+      <span class="tn">Past 6 · unless = if not</span>
+      <span class="bad">Unless you don't hurry, we'll be late.</span>
+      <span class="good">Unless you hurry, we'll be late. ✅</span>
+      <span class="note">Unless je samo o sobě negativní – nepřidávej not.</span>
+    </div>
+  </div>
+
+  <!-- 12 CHEAT SHEET -->
+
+  <div class="sec"><span class="sec-num">12</span><span class="sec-title">Cheat sheet – celý přehled</span><span class="sec-tag">Ulož si!</span></div>
+  <div class="divider"></div>
+  <div class="cheat">
+    <div class="cs-row"><span class="cs-icon">🚫</span><div><strong>would NIKDY přímo po if</strong> (v žádném typu!)<span class="cs-wrong">If I would know, I would tell you.</span><span class="cs-right">If I knew, I would tell you. ✅</span></div></div>
+    <div class="cs-row"><span class="cs-icon">👤</span><div><strong>If I were you</strong> (ne was) – 2nd conditional rady.<span class="cs-ex">Were I to know → formální inversion = If I knew</span></div></div>
+    <div class="cs-row"><span class="cs-icon">🕰️</span><div><strong>Wish + past simple</strong> = lítost přítomnost; <strong>wish + past perfect</strong> = lítost minulost.<span class="cs-ex">I wish I were taller. / I wish I had tried harder.</span></div></div>
+    <div class="cs-row"><span class="cs-icon">🔀</span><div><strong>Mixed conditional</strong>: mix času podmínky a výsledku. Ptej se: kdy je podmínka? Kdy je výsledek?<span class="cs-ex">If I had studied → (past) → I would be (now) = mixed A</span></div></div>
+    <div class="cs-row"><span class="cs-icon">📌</span><div><strong>unless</strong> = if not → nepřidávej not navíc.<br><strong>provided / as long as</strong> = pokud (formálnější).<br><strong>in case</strong> = pro případ, že (preventivní).</div></div>
+    <div class="cs-row"><span class="cs-icon">💡</span><div>Pořadí vět je volné. Čárka jen pokud začíná <strong>if-clause</strong>.<span class="cs-ex">If it rains, I'll stay. ✅ &nbsp;|&nbsp; I'll stay if it rains. ✅</span></div></div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ══════════════════════ QUIZ ══════════════════════ -->
+
+<div class="tab-panel" id="quiz">
+  <div id="quiz-container"></div>
+  <div class="score-bar" id="quiz-score">
+    <span class="sc-label">Výsledek</span>
+    <strong id="quiz-score-val"></strong>
+  </div>
+</div>
+
+<!-- ══════════════════════ FILL ══════════════════════ -->
+
+<div class="tab-panel" id="fill">
+  <div class="ex-wrap fill-wrap">
+    <h2>Doplň správný tvar slovesa</h2>
+    <span class="ex-hint">Dopiš správný gramatický tvar do prázdného pole.</span>
+    <div id="fill-container"></div>
+    <button class="check-btn" id="check-fill-btn">Zkontrolovat</button>
+    <div class="score-bar" id="fill-score">
+      <span class="sc-label">Výsledek</span>
+      <strong id="fill-score-val"></strong>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ MISTAKES ══════════════════════ -->
+
+<div class="tab-panel" id="mistakes">
+  <div class="ex-wrap mis-wrap">
+    <h2>Oprav chybu ve větě</h2>
+    <span class="ex-hint">Každá věta obsahuje přesně jednu chybu. Vyber opravenou verzi.</span>
+    <div id="mistakes-container"></div>
+    <div class="score-bar" id="mistakes-score">
+      <span class="sc-label">Výsledek</span>
+      <strong id="mistakes-score-val"></strong>
+    </div>
+  </div>
+</div>
+
+</div><!-- /cond-root -->
+
+<script>
+(function () {
+
+  /* ── DATA ── */
+  var quizData = [
+    { s: "If I ___ more time, I would travel more.", o: ["have","had","would have","will have"], a: "had", e: "2nd conditional: if-clause = past simple (had). Would NIKDY po if." },
+    { s: "If you heat ice, it ___.", o: ["melts","will melt","melted","would melt"], a: "melts", e: "Zero conditional: obecná pravda → present simple v obou větách." },
+    { s: "She ___ the exam if she had revised.", o: ["would pass","would have passed","will pass","passed"], a: "would have passed", e: "3rd conditional: minulá hypotéza → would have + past participle." },
+    { s: "If it rains this afternoon, we ___ inside.", o: ["stay","stayed","would stay","will stay"], a: "will stay", e: "1st conditional: reálná budoucnost → will + infinitive." },
+    { s: "I wish I ___ a better singer.", o: ["am","was","were","will be"], a: "were", e: "Wish + present situation → past simple (were pro všechny osoby)." },
+    { s: "If I ___ you, I would apologise immediately.", o: ["am","was","were","be"], a: "were", e: "2nd conditional: If I were you = klasická rada. Vždy were, ne was." },
+    { s: "Unless you ___, you won't improve.", o: ["practise","don't practise","will practise","practised"], a: "practise", e: "Unless = if not. Nepřidávej další negaci. = If you don't practise..." },
+    { s: "If she had left earlier, she ___ the train.", o: ["catches","would catch","would have caught","had caught"], a: "would have caught", e: "3rd conditional: past perfect → would have + past participle." },
+    { s: "___ you need any help, please call me.", o: ["If","Should","Were","Had"], a: "Should", e: "Inversion: Should you need = If you need. Formální alternativa 1st conditional." },
+    { s: "If I had studied medicine, I ___ a doctor now.", o: ["am","would be","would have been","was"], a: "would be", e: "Mixed conditional (A): minulá podmínka → přítomný výsledek → would + inf." },
+    { s: "I wish he ___ talking so loudly.", o: ["stops","would stop","stopped","had stopped"], a: "would stop", e: "Wish + would = přání změny chování jiné osoby (dráždí mě)." },
+    { s: "___ I known, I would have told you.", o: ["Should","Were","Had","If"], a: "Had", e: "Inversion 3rd conditional: Had I known = If I had known (formální)." }
+  ];
+
+  var fillData = [
+    { b: "If she", blank: "hadn't missed", a: "the bus, she would have been on time.", h: "3rd cond. – miss → záporný past perfect", accept: ["hadn't missed", "had not missed"] },
+    { b: "I wish I", blank: "could speak", a: "five languages.", h: "wish + could + inf. (schopnost – přítomnost)", accept: ["could speak"] },
+    { b: "Unless you", blank: "hurry", a: ", we will be late.", h: "unless + present simple (1st cond.)", accept: ["hurry"] },
+    { b: "If water", blank: "reaches", a: "100°C, it boils.", h: "zero conditional – present simple", accept: ["reaches"] },
+    { b: "If I were you, I", blank: "would apologise", a: "immediately.", h: "2nd cond. – would + infinitive", accept: ["would apologise", "would apologize"] },
+    { b: "Had they", blank: "arrived", a: "earlier, they would have caught the train.", h: "inversion 3rd cond. – past participle", accept: ["arrived"] },
+    { b: "She wouldn't be so tired now if she", blank: "had slept", a: "better last night.", h: "mixed cond. A – past perfect", accept: ["had slept"] },
+    { b: "I'd rather you", blank: "didn't come", a: "to the party.", h: "would rather + past simple (jiná osoba)", accept: ["didn't come", "did not come"] }
+  ];
+
+  var misData = [
+    {
+      w: "If I would have more time, I would exercise every day.",
+      o: ["If I will have more time, I would exercise every day.", "If I had more time, I would exercise every day.", "If I have more time, I would exercise every day."],
+      a: 1,
+      e: "Would NIKDY v if-clause. 2nd conditional: if + past simple (had)."
+    },
+    {
+      w: "If it will snow tomorrow, we won't go skiing.",
+      o: ["If it snows tomorrow, we won't go skiing.", "If it snowed tomorrow, we won't go skiing.", "If it would snow tomorrow, we won't go skiing."],
+      a: 0,
+      e: "1st conditional: if-clause = present simple, i když mluvíme o budoucnosti."
+    },
+    {
+      w: "I wish I speak better English.",
+      o: ["I wish I will speak better English.", "I wish I have spoken better English.", "I wish I spoke better English."],
+      a: 2,
+      e: "Wish + přítomnost → past simple (spoke). Ne present simple!"
+    },
+    {
+      w: "If I was you, I wouldn't take that job.",
+      o: ["If I am you, I wouldn't take that job.", "If I were you, I wouldn't take that job.", "If I would be you, I wouldn't take that job."],
+      a: 1,
+      e: "2nd conditional: If I were you (ne was). Were se používá pro všechny osoby."
+    },
+    {
+      w: "Unless you don't hurry, you'll miss the train.",
+      o: ["Unless you hurry, you'll miss the train.", "If you don't hurry, you won't miss the train.", "Unless you will hurry, you'll miss the train."],
+      a: 0,
+      e: "Unless už je samo o sobě negativní = if not. Nepřidávej not navíc!"
+    },
+    {
+      w: "If she had studied harder, she would pass the exam.",
+      o: ["If she studied harder, she would pass the exam.", "If she has studied harder, she would pass the exam.", "If she had studied harder, she would have passed the exam."],
+      a: 2,
+      e: "3rd conditional: minulá hypotéza → would HAVE + past participle (would have passed)."
+    }
+  ];
+
+  /* ── TABS ── */
+  document.getElementById('tabs').addEventListener('click', function (e) {
+    var btn = e.target;
+    if (!btn.classList.contains('tab-btn')) return;
+    var name = btn.getAttribute('data-tab');
+    document.querySelectorAll('#cond-root .tab-panel').forEach(function (p) { p.classList.remove('active'); });
+    document.querySelectorAll('#cond-root .tab-btn').forEach(function (b) { b.classList.remove('active'); });
+    document.getElementById(name).classList.add('active');
+    btn.classList.add('active');
+  });
+
+  /* ── QUIZ ── */
+  var qAns = quizData.map(function () { return false; }), qOk = 0;
+  var qc = document.getElementById('quiz-container');
+  qc.innerHTML = quizData.map(function (q, i) {
+    var opts = q.o.map(function (o) {
+      return '<button class="obtn" data-qi="' + i + '" data-ans="' + o + '">' + o + '</button>';
+    }).join('');
+    var sent = q.s.replace('___', '<u style="text-decoration:none;border-bottom:2px solid #7c3aed;padding:0 4px;font-family:JetBrains Mono,monospace;font-weight:600">___</u>');
+    return '<div class="qblock" id="qb' + i + '"><span class="qnum">Otázka ' + (i+1) + ' / ' + quizData.length + '</span><span class="qsentence">' + sent + '</span><div class="opts">' + opts + '</div><div class="feedback" id="fb' + i + '"></div></div>';
+  }).join('');
+
+  qc.addEventListener('click', function (e) {
+    var btn = e.target;
+    if (!btn.hasAttribute('data-qi')) return;
+    var i = parseInt(btn.getAttribute('data-qi')), chosen = btn.getAttribute('data-ans');
+    if (qAns[i]) return; qAns[i] = true;
+    var q = quizData[i], block = document.getElementById('qb' + i), fb = document.getElementById('fb' + i);
+    block.querySelectorAll('[data-qi]').forEach(function (b) {
+      b.disabled = true;
+      if (b.getAttribute('data-ans') === q.a) b.classList.add('correct');
+    });
+    if (chosen === q.a) {
+      btn.classList.add('correct');
+      fb.textContent = '✅ Správně! ' + q.e;
+      fb.className = 'feedback ok show';
+      qOk++;
+    } else {
+      btn.classList.add('wrong');
+      fb.textContent = '❌ Správná odpověď: „' + q.a + '" – ' + q.e;
+      fb.className = 'feedback bad show';
+    }
+    if (qAns.every(function (v) { return v; })) {
+      document.getElementById('quiz-score-val').textContent = qOk + ' / ' + quizData.length;
+      document.getElementById('quiz-score').classList.add('show');
+    }
+  });
+
+  /* ── FILL IN ── */
+  var fc = document.getElementById('fill-container');
+  fc.innerHTML = fillData.map(function (f, i) {
+    return '<div class="qblock" style="margin-bottom:10px;"><span class="qnum">' + (i+1) + '. nápověda: ' + f.h + '</span><span class="fill-sentence">' + f.b + ' <input class="fill-input" id="fi' + i + '" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="..."> ' + f.a + '</span></div>';
+  }).join('');
+
+  document.getElementById('check-fill-btn').addEventListener('click', function () {
+    var ok = 0;
+    fillData.forEach(function (f, i) {
+      var inp = document.getElementById('fi' + i);
+      var val = inp.value.trim().toLowerCase();
+      inp.classList.remove('correct', 'wrong');
+      var accepted = f.accept.map(function(a){ return a.toLowerCase(); });
+      if (accepted.indexOf(val) !== -1) {
+        inp.classList.add('correct');
+        ok++;
+      } else {
+        inp.classList.add('wrong');
+        inp.value = '';
+        inp.setAttribute('placeholder', f.blank);
+      }
+    });
+    document.getElementById('fill-score-val').textContent = ok + ' / ' + fillData.length;
+    document.getElementById('fill-score').classList.add('show');
+  });
+
+  /* ── MISTAKES ── */
+  var mAns = misData.map(function () { return false; }), mOk = 0;
+  var mc = document.getElementById('mistakes-container');
+  mc.innerHTML = misData.map(function (m, i) {
+    var opts = m.o.map(function (o, j) {
+      return '<button class="obtn" data-mi="' + i + '" data-mj="' + j + '">' + o + '</button>';
+    }).join('');
+    return '<div class="qblock" id="mb' + i + '"><span class="qnum">Věta ' + (i+1) + '</span><span class="qsentence" style="color:#b91c1c;text-decoration:line-through;font-style:italic;">' + m.w + '</span><div class="mis-opts">' + opts + '</div><div class="feedback" id="mfb' + i + '"></div></div>';
+  }).join('');
+
+  mc.addEventListener('click', function (e) {
+    var btn = e.target;
+    if (!btn.hasAttribute('data-mi')) return;
+    var i = parseInt(btn.getAttribute('data-mi')), j = parseInt(btn.getAttribute('data-mj'));
+    if (mAns[i]) return; mAns[i] = true;
+    var m = misData[i], block = document.getElementById('mb' + i), fb = document.getElementById('mfb' + i);
+    block.querySelectorAll('[data-mi]').forEach(function (b) {
+      b.disabled = true;
+      if (parseInt(b.getAttribute('data-mj')) === m.a) b.classList.add('correct');
+    });
+    if (j === m.a) {
+      btn.classList.add('correct');
+      fb.textContent = '✅ Správně! ' + m.e;
+      fb.className = 'feedback ok show';
+      mOk++;
+    } else {
+      btn.classList.add('wrong');
+      fb.textContent = '❌ ' + m.e;
+      fb.className = 'feedback bad show';
+    }
+    if (mAns.every(function (v) { return v; })) {
+      document.getElementById('mistakes-score-val').textContent = mOk + ' / ' + misData.length;
+      document.getElementById('mistakes-score').classList.add('show');
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
