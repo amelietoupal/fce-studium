@@ -5,562 +5,621 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Relative Clauses – FCE Grammar</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  /* palette */
-  --navy:     #0d1b2a;
-  --navy2:    #162236;
-  --navy3:    #1e3050;
-  --indigo:   #4f6ef7;
-  --indigo2:  #3a56e0;
-  --indigo-l: #eef1fe;
-  --mint:     #2ecfb0;
-  --mint-l:   #e4faf6;
-  --amber:    #f5a623;
-  --amber-l:  #fff6e5;
-  --rose:     #f25f6a;
-  --rose-l:   #feeaeb;
-  --ink:      #0d1b2a;
-  --mid:      #5a7394;
-  --border:   #dde4f0;
-  --bg:       #f4f7fb;
-  --white:    #ffffff;
+
+/* ── HARD RESET – prevents parent page styles leaking in ── */
+#rc-root, #rc-root * {
+box-sizing: border-box !important;
+font-family: ‘Sora’, sans-serif !important;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Sora', sans-serif;
-  background: var(--bg);
-  color: var(--ink);
-  line-height: 1.65;
-  padding: 2rem 1rem 5rem;
-  max-width: 840px;
-  margin: 0 auto;
-  font-size: 15px;
+#rc-root {
+all: initial;
+display: block;
+background-color: #f0f4ff !important;
+color: #0d1b2a !important;
+padding: 20px 16px 60px !important;
+max-width: 840px !important;
+margin: 0 auto !important;
+font-size: 15px !important;
+line-height: 1.65 !important;
 }
 
 /* ── HEADER ── */
-.page-header {
-text-align: center;
-padding: 2.5rem 1rem 1.5rem;
-background: linear-gradient(145deg, var(–navy) 0%, var(–navy3) 100%);
-border-radius: 20px;
-margin-bottom: 1.8rem;
-position: relative;
-overflow: hidden;
+#rc-root .hdr {
+background-color: #1a2e5a !important;
+border-radius: 18px !important;
+padding: 36px 24px 28px !important;
+margin-bottom: 20px !important;
+text-align: center !important;
+position: relative !important;
+overflow: hidden !important;
 }
-.page-header::before {
-content: ‘’;
-position: absolute;
-width: 280px; height: 280px;
-background: radial-gradient(circle, var(–indigo) 0%, transparent 70%);
-top: -80px; right: -60px;
-opacity: 0.35;
+#rc-root .hdr-accent-a {
+position: absolute !important;
+width: 240px !important; height: 240px !important;
+background-color: #3d5af1 !important;
+border-radius: 50% !important;
+top: -80px !important; right: -60px !important;
+opacity: 0.25 !important;
 }
-.page-header::after {
-content: ‘’;
-position: absolute;
-width: 200px; height: 200px;
-background: radial-gradient(circle, var(–mint) 0%, transparent 70%);
-bottom: -60px; left: -40px;
-opacity: 0.25;
+#rc-root .hdr-accent-b {
+position: absolute !important;
+width: 180px !important; height: 180px !important;
+background-color: #2ecfb0 !important;
+border-radius: 50% !important;
+bottom: -60px !important; left: -40px !important;
+opacity: 0.2 !important;
 }
-.page-header h1 {
-font-size: clamp(1.9rem, 5vw, 3rem);
-font-weight: 800;
-color: #fff;
-letter-spacing: -1px;
-position: relative;
-z-index: 1;
+#rc-root .hdr h1 {
+font-size: 2.4rem !important;
+font-weight: 800 !important;
+color: #ffffff !important;
+letter-spacing: -1px !important;
+margin: 0 0 6px !important;
+position: relative !important;
+z-index: 2 !important;
+line-height: 1.15 !important;
 }
-.page-header h1 span { color: var(–mint); }
-.page-header .sub {
-color: rgba(255,255,255,0.55);
-font-size: 0.78rem;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-margin-top: 0.4rem;
-position: relative;
-z-index: 1;
+#rc-root .hdr h1 span { color: #2ecfb0 !important; }
+#rc-root .hdr .hsub {
+color: #8aadd4 !important;
+font-size: 0.75rem !important;
+letter-spacing: 0.12em !important;
+text-transform: uppercase !important;
+margin: 0 0 16px !important;
+position: relative !important;
+z-index: 2 !important;
+display: block !important;
 }
-.header-pills {
-display: flex;
-justify-content: center;
-gap: 0.6rem;
-flex-wrap: wrap;
-margin-top: 1.2rem;
-position: relative;
-z-index: 1;
+#rc-root .hdr-pills {
+display: flex !important;
+justify-content: center !important;
+gap: 8px !important;
+flex-wrap: wrap !important;
+position: relative !important;
+z-index: 2 !important;
 }
-.header-pill {
-background: rgba(255,255,255,0.1);
-border: 1px solid rgba(255,255,255,0.18);
-color: rgba(255,255,255,0.85);
-border-radius: 999px;
-padding: 0.28rem 0.85rem;
-font-size: 0.75rem;
-font-weight: 600;
-backdrop-filter: blur(4px);
+#rc-root .hdr-pill {
+background-color: rgba(255,255,255,0.12) !important;
+border: 1px solid rgba(255,255,255,0.22) !important;
+color: #cfe0f8 !important;
+border-radius: 999px !important;
+padding: 4px 12px !important;
+font-size: 0.72rem !important;
+font-weight: 600 !important;
+display: inline-block !important;
 }
 
 /* ── TABS ── */
-.tabs {
-display: flex;
-gap: 0.4rem;
-background: var(–white);
-border-radius: 14px;
-padding: 0.4rem;
-margin-bottom: 1.8rem;
-box-shadow: 0 2px 12px rgba(13,27,42,0.08);
-flex-wrap: wrap;
+#rc-root .tabs {
+display: flex !important;
+gap: 4px !important;
+background-color: #ffffff !important;
+border-radius: 14px !important;
+padding: 5px !important;
+margin-bottom: 24px !important;
+box-shadow: 0 2px 14px rgba(26,46,90,0.1) !important;
+flex-wrap: wrap !important;
 }
-.tab-btn {
-font-family: ‘Sora’, sans-serif;
-font-size: 0.82rem;
-font-weight: 600;
-padding: 0.55rem 1.1rem;
-border: none;
-border-radius: 10px;
-background: transparent;
-color: var(–mid);
-cursor: pointer;
-transition: all 0.18s;
-flex: 1;
-white-space: nowrap;
+#rc-root .tab-btn {
+font-family: ‘Sora’, sans-serif !important;
+font-size: 0.8rem !important;
+font-weight: 600 !important;
+padding: 9px 14px !important;
+border: none !important;
+border-radius: 10px !important;
+background-color: transparent !important;
+color: #5a7394 !important;
+cursor: pointer !important;
+flex: 1 !important;
+white-space: nowrap !important;
+transition: background-color 0.15s, color 0.15s !important;
 }
-.tab-btn:hover { background: var(–indigo-l); color: var(–indigo); }
-.tab-btn.active { background: var(–indigo); color: #fff; box-shadow: 0 3px 10px rgba(79,110,247,0.35); }
-
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-
-/* ── SECTION HEADERS ── */
-.sec {
-display: flex;
-align-items: center;
-gap: 0.8rem;
-margin: 2rem 0 0.9rem;
+#rc-root .tab-btn:hover {
+background-color: #eef1fe !important;
+color: #3d5af1 !important;
 }
-.sec:first-child { margin-top: 0; }
-.sec-num {
-width: 30px; height: 30px;
-border-radius: 8px;
-background: var(–indigo);
-color: #fff;
-font-weight: 700;
-font-size: 0.82rem;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-shrink: 0;
-font-family: ‘JetBrains Mono’, monospace;
-}
-.sec-title {
-font-size: 1.05rem;
-font-weight: 700;
-color: var(–ink);
-}
-.sec-tag {
-margin-left: auto;
-font-size: 0.72rem;
-font-weight: 600;
-color: var(–mid);
-background: var(–border);
-padding: 0.2rem 0.6rem;
-border-radius: 999px;
-white-space: nowrap;
-}
-.divider { height: 1px; background: var(–border); margin-bottom: 1rem; }
-
-/* ── CARDS ── */
-.card {
-background: var(–white);
-border-radius: 16px;
-padding: 1.5rem;
-margin-bottom: 1rem;
-box-shadow: 0 2px 12px rgba(13,27,42,0.06);
+#rc-root .tab-btn.active {
+background-color: #3d5af1 !important;
+color: #ffffff !important;
+box-shadow: 0 3px 10px rgba(61,90,241,0.3) !important;
 }
 
-/* ── WHAT-IS ── */
-.what-is {
-background: linear-gradient(135deg, var(–navy) 0%, var(–navy3) 100%);
-color: #fff;
-border-radius: 16px;
-padding: 1.6rem;
-margin-bottom: 1rem;
-position: relative;
-overflow: hidden;
+#rc-root .tab-panel { display: none !important; }
+#rc-root .tab-panel.active { display: block !important; }
+
+/* ── SECTION LABEL ── */
+#rc-root .sec {
+display: flex !important;
+align-items: center !important;
+gap: 10px !important;
+margin: 28px 0 10px !important;
 }
-.what-is::after {
-content: ‘{ }’;
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 5rem;
-position: absolute;
-right: 1.2rem; bottom: -0.5rem;
-opacity: 0.07;
-color: var(–mint);
-font-weight: 600;
+#rc-root .sec:first-child { margin-top: 0 !important; }
+#rc-root .sec-num {
+width: 30px !important; height: 30px !important;
+border-radius: 8px !important;
+background-color: #3d5af1 !important;
+color: #ffffff !important;
+font-family: ‘JetBrains Mono’, monospace !important;
+font-weight: 600 !important;
+font-size: 0.78rem !important;
+display: flex !important;
+align-items: center !important;
+justify-content: center !important;
+flex-shrink: 0 !important;
 }
-.what-is p { font-size: 0.9rem; opacity: 0.9; line-height: 1.75; }
-.what-is strong { color: var(–mint); font-weight: 700; }
-.wi-pills {
-display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem;
+#rc-root .sec-title {
+font-size: 1rem !important;
+font-weight: 700 !important;
+color: #0d1b2a !important;
 }
-.wi-pill {
-background: rgba(255,255,255,0.1);
-border: 1px solid rgba(255,255,255,0.18);
-border-radius: 999px;
-padding: 0.28rem 0.8rem;
-font-size: 0.75rem;
-font-weight: 600;
-color: rgba(255,255,255,0.9);
+#rc-root .sec-tag {
+margin-left: auto !important;
+font-size: 0.7rem !important;
+font-weight: 600 !important;
+color: #5a7394 !important;
+background-color: #dde4f0 !important;
+padding: 3px 9px !important;
+border-radius: 999px !important;
+white-space: nowrap !important;
+}
+#rc-root .divider {
+height: 1px !important;
+background-color: #dde4f0 !important;
+margin-bottom: 14px !important;
+border: none !important;
+}
+
+/* ── WHAT-IS BOX ── */
+#rc-root .what-is {
+background-color: #1a2e5a !important;
+border-radius: 14px !important;
+padding: 22px 22px 20px !important;
+margin-bottom: 14px !important;
+}
+#rc-root .what-is p {
+color: #cfe0f8 !important;
+font-size: 0.88rem !important;
+line-height: 1.75 !important;
+margin: 0 0 8px !important;
+}
+#rc-root .what-is strong { color: #2ecfb0 !important; font-weight: 700 !important; }
+#rc-root .wi-pills { display: flex !important; flex-wrap: wrap !important; gap: 7px !important; margin-top: 14px !important; }
+#rc-root .wi-pill {
+background-color: rgba(255,255,255,0.1) !important;
+border: 1px solid rgba(255,255,255,0.2) !important;
+color: #cfe0f8 !important;
+border-radius: 999px !important;
+padding: 4px 11px !important;
+font-size: 0.72rem !important;
+font-weight: 600 !important;
+display: inline-block !important;
 }
 
 /* ── PRONOUN TABLE ── */
-.ptable {
-width: 100%;
-border-collapse: collapse;
-font-size: 0.86rem;
-background: var(–white);
-border-radius: 14px;
-overflow: hidden;
-box-shadow: 0 2px 10px rgba(13,27,42,0.06);
+#rc-root .ptable {
+width: 100% !important;
+border-collapse: collapse !important;
+font-size: 0.84rem !important;
+background-color: #ffffff !important;
+border-radius: 12px !important;
+overflow: hidden !important;
+box-shadow: 0 2px 12px rgba(26,46,90,0.08) !important;
 }
-.ptable thead th {
-background: var(–navy);
-color: rgba(255,255,255,0.7);
-font-size: 0.7rem;
-font-weight: 700;
-text-transform: uppercase;
-letter-spacing: 0.08em;
-padding: 0.65rem 0.9rem;
-text-align: left;
+#rc-root .ptable thead th {
+background-color: #1a2e5a !important;
+color: #8aadd4 !important;
+font-size: 0.68rem !important;
+font-weight: 700 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.08em !important;
+padding: 10px 12px !important;
+text-align: left !important;
 }
-.ptable tbody tr { border-bottom: 1px solid var(–border); transition: background 0.12s; }
-.ptable tbody tr:last-child { border-bottom: none; }
-.ptable tbody tr:hover { background: var(–indigo-l); }
-.ptable td { padding: 0.6rem 0.9rem; vertical-align: middle; }
-.ptable .pw { font-family: ‘JetBrains Mono’, monospace; font-size: 1rem; font-weight: 600; color: var(–indigo); width: 80px; }
-.ptable .pu { color: var(–mid); font-size: 0.8rem; width: 130px; }
-.ptable .pe { font-style: italic; font-size: 0.84rem; }
-.ptable .pe em { font-style: normal; font-weight: 700; color: var(–indigo); }
-.ptable .pn { font-size: 0.74rem; color: var(–mid); }
-.only-tag {
-display: inline-block;
-background: var(–rose-l);
-color: var(–rose);
-font-size: 0.68rem;
-font-weight: 700;
-padding: 0.1rem 0.45rem;
-border-radius: 5px;
-font-family: ‘JetBrains Mono’, monospace;
+#rc-root .ptable tbody tr { border-bottom: 1px solid #dde4f0 !important; }
+#rc-root .ptable tbody tr:last-child { border-bottom: none !important; }
+#rc-root .ptable tbody tr:hover { background-color: #eef1fe !important; }
+#rc-root .ptable td { padding: 9px 12px !important; vertical-align: middle !important; color: #0d1b2a !important; }
+#rc-root .ptable .pw {
+font-family: ‘JetBrains Mono’, monospace !important;
+font-size: 0.95rem !important;
+font-weight: 600 !important;
+color: #3d5af1 !important;
+width: 75px !important;
+}
+#rc-root .ptable .pu { color: #5a7394 !important; font-size: 0.78rem !important; width: 125px !important; }
+#rc-root .ptable .pe { font-style: italic !important; font-size: 0.83rem !important; color: #0d1b2a !important; }
+#rc-root .ptable .pe em { font-style: normal !important; font-weight: 700 !important; color: #3d5af1 !important; }
+#rc-root .ptable .pn { font-size: 0.73rem !important; color: #5a7394 !important; }
+#rc-root .only-tag {
+display: inline-block !important;
+background-color: #feeaeb !important;
+color: #c0303b !important;
+font-size: 0.66rem !important;
+font-weight: 700 !important;
+padding: 2px 7px !important;
+border-radius: 5px !important;
+font-family: ‘JetBrains Mono’, monospace !important;
 }
 
 /* ── DEFINING CARDS ── */
-.def-row {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 0.9rem;
+#rc-root .def-row {
+display: grid !important;
+grid-template-columns: 1fr 1fr !important;
+gap: 12px !important;
 }
-@media (max-width: 560px) { .def-row { grid-template-columns: 1fr; } }
+@media (max-width: 560px) {
+#rc-root .def-row { grid-template-columns: 1fr !important; }
+}
+#rc-root .def-card {
+border-radius: 14px !important;
+padding: 16px !important;
+}
+#rc-root .def-card.defining {
+background-color: #e4faf6 !important;
+border-top: 4px solid #2ecfb0 !important;
+}
+#rc-root .def-card.non-def {
+background-color: #fff6e5 !important;
+border-top: 4px solid #f5a623 !important;
+}
+#rc-root .dc-head {
+font-size: 0.7rem !important;
+font-weight: 800 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.08em !important;
+margin-bottom: 9px !important;
+display: block !important;
+}
+#rc-root .defining .dc-head { color: #1a9b82 !important; }
+#rc-root .non-def .dc-head  { color: #c07800 !important; }
+#rc-root .dc-desc { font-size: 0.85rem !important; margin-bottom: 10px !important; line-height: 1.55 !important; color: #0d1b2a !important; }
 
-.def-card {
-border-radius: 14px;
-padding: 1.2rem;
-border-top: 4px solid transparent;
+#rc-root .ex-box {
+background-color: rgba(255,255,255,0.8) !important;
+border-radius: 8px !important;
+padding: 7px 10px !important;
+font-style: italic !important;
+font-size: 0.82rem !important;
+margin-bottom: 6px !important;
+line-height: 1.5 !important;
+border-left: 3px solid #3d5af1 !important;
+color: #0d1b2a !important;
 }
-.def-card.defining    { background: var(–mint-l);   border-color: var(–mint); }
-.def-card.non-def     { background: var(–amber-l);  border-color: var(–amber); }
+#rc-root .ex-box em { font-style: normal !important; font-weight: 700 !important; color: #3d5af1 !important; }
+#rc-root .ex-box small { display: block !important; font-style: normal !important; color: #5a7394 !important; font-size: 0.72rem !important; margin-top: 2px !important; }
 
-.dc-head {
-font-size: 0.72rem;
-font-weight: 800;
-text-transform: uppercase;
-letter-spacing: 0.08em;
-margin-bottom: 0.65rem;
+#rc-root .rpills { display: flex !important; flex-direction: column !important; gap: 5px !important; margin-top: 10px !important; }
+#rc-root .rpill {
+font-size: 0.76rem !important;
+padding: 4px 9px !important;
+border-radius: 6px !important;
+font-weight: 600 !important;
+display: block !important;
 }
-.defining .dc-head { color: #1a9b82; }
-.non-def  .dc-head { color: #c07800; }
+#rc-root .rpill.ok  { background-color: #ccf5ee !important; color: #1a9b82 !important; }
+#rc-root .rpill.bad { background-color: #fcdde0 !important; color: #c0303b !important; }
 
-.dc-desc { font-size: 0.86rem; margin-bottom: 0.7rem; line-height: 1.55; }
-
-.ex-box {
-background: rgba(255,255,255,0.75);
-border-radius: 8px;
-padding: 0.45rem 0.75rem;
-font-style: italic;
-font-size: 0.83rem;
-margin-bottom: 0.4rem;
-line-height: 1.5;
-border-left: 3px solid var(–indigo);
+/* ── INSIGHT ── */
+#rc-root .insight {
+background-color: #ffffff !important;
+border-left: 4px solid #3d5af1 !important;
+border-radius: 0 10px 10px 0 !important;
+padding: 12px 15px !important;
+margin-top: 12px !important;
+font-size: 0.84rem !important;
+box-shadow: 0 2px 8px rgba(26,46,90,0.06) !important;
+color: #0d1b2a !important;
 }
-.ex-box em { font-style: normal; font-weight: 700; color: var(–indigo); }
-.ex-box small { display: block; font-style: normal; color: var(–mid); font-size: 0.73rem; margin-top: 0.1rem; }
-
-.rpills { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.7rem; }
-.rpill {
-font-size: 0.78rem;
-padding: 0.22rem 0.6rem;
-border-radius: 6px;
-font-weight: 600;
-display: flex;
-align-items: center;
-gap: 0.35rem;
+#rc-root .insight strong { color: #3d5af1 !important; }
+#rc-root .insight code {
+background-color: #eef1fe !important;
+color: #2a40c0 !important;
+padding: 2px 6px !important;
+border-radius: 5px !important;
+font-family: ‘JetBrains Mono’, monospace !important;
+font-size: 0.79rem !important;
 }
-.rpill.ok  { background: rgba(46,207,176,0.15); color: #1a9b82; }
-.rpill.bad { background: rgba(242,95,106,0.12); color: #c0303b; }
-
-/* insight */
-.insight {
-background: var(–white);
-border-left: 4px solid var(–indigo);
-border-radius: 0 10px 10px 0;
-padding: 0.85rem 1.1rem;
-margin-top: 0.9rem;
-font-size: 0.85rem;
-box-shadow: 0 2px 8px rgba(13,27,42,0.05);
-}
-.insight strong { color: var(–indigo); }
-.insight code {
-background: var(–indigo-l);
-color: var(–indigo2);
-padding: 0.1rem 0.4rem;
-border-radius: 5px;
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.8rem;
-}
-.insight .ins-row { margin-top: 0.45rem; line-height: 1.7; }
+#rc-root .ins-row { margin-top: 6px !important; line-height: 1.7 !important; color: #0d1b2a !important; }
+#rc-root .ins-muted { color: #5a7394 !important; font-size: 0.79rem !important; }
 
 /* ── OMISSION TABLE ── */
-.otable {
-width: 100%;
-border-collapse: collapse;
-font-size: 0.85rem;
-background: var(–white);
-border-radius: 14px;
-overflow: hidden;
-box-shadow: 0 2px 10px rgba(13,27,42,0.06);
+#rc-root .otable {
+width: 100% !important;
+border-collapse: collapse !important;
+font-size: 0.84rem !important;
+background-color: #ffffff !important;
+border-radius: 12px !important;
+overflow: hidden !important;
+box-shadow: 0 2px 12px rgba(26,46,90,0.08) !important;
 }
-.otable thead th {
-background: var(–navy);
-color: rgba(255,255,255,0.7);
-font-size: 0.7rem;
-font-weight: 700;
-text-transform: uppercase;
-letter-spacing: 0.07em;
-padding: 0.6rem 0.9rem;
-text-align: left;
+#rc-root .otable thead th {
+background-color: #1a2e5a !important;
+color: #8aadd4 !important;
+font-size: 0.68rem !important;
+font-weight: 700 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.07em !important;
+padding: 10px 12px !important;
+text-align: left !important;
 }
-.otable tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(–border); vertical-align: middle; }
-.otable tbody tr:last-child td { border-bottom: none; }
-.badge { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.18rem 0.55rem; border-radius: 999px; font-family: ‘JetBrains Mono’, monospace; }
-.badge.yes { background: var(–mint-l); color: #1a9b82; }
-.badge.no  { background: var(–rose-l); color: #c0303b; }
+#rc-root .otable tbody td {
+padding: 9px 12px !important;
+border-bottom: 1px solid #dde4f0 !important;
+vertical-align: middle !important;
+color: #0d1b2a !important;
+}
+#rc-root .otable tbody tr:last-child td { border-bottom: none !important; }
+#rc-root .badge {
+display: inline-block !important;
+font-size: 0.69rem !important;
+font-weight: 700 !important;
+padding: 3px 8px !important;
+border-radius: 999px !important;
+font-family: ‘JetBrains Mono’, monospace !important;
+}
+#rc-root .badge.yes { background-color: #ccf5ee !important; color: #1a9b82 !important; }
+#rc-root .badge.no  { background-color: #fcdde0 !important; color: #c0303b !important; }
 
 /* ── PREPOSITIONS ── */
-.prep-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-@media (max-width: 500px) { .prep-split { grid-template-columns: 1fr; } }
-.prep-block { border-radius: 12px; padding: 1rem 1.1rem; font-size: 0.85rem; }
-.prep-block.formal   { background: var(–indigo-l); border-top: 3px solid var(–indigo); }
-.prep-block.informal { background: var(–mint-l);   border-top: 3px solid var(–mint); }
-.pb-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.4rem; }
-.formal   .pb-label { color: var(–indigo2); }
-.informal .pb-label { color: #1a9b82; }
-.pb-ex { font-style: italic; line-height: 1.7; }
-.pb-ex em { font-style: normal; font-weight: 700; color: var(–indigo); }
-
-.warn-box {
-background: var(–amber-l);
-border-left: 4px solid var(–amber);
-border-radius: 0 10px 10px 0;
-padding: 0.65rem 1rem;
-font-size: 0.83rem;
-margin-top: 0.8rem;
-color: #7a5000;
+#rc-root .prep-split {
+display: grid !important;
+grid-template-columns: 1fr 1fr !important;
+gap: 10px !important;
 }
-.warn-box em { font-style: normal; font-family: ‘JetBrains Mono’, monospace; font-size: 0.8rem; }
-
-/* ── WHICH = COŽ ── */
-.which-box {
-background: var(–white);
-border-radius: 14px;
-padding: 1.2rem 1.4rem;
-box-shadow: 0 2px 10px rgba(13,27,42,0.06);
-font-size: 0.88rem;
+@media (max-width: 500px) {
+#rc-root .prep-split { grid-template-columns: 1fr !important; }
 }
-.which-box p { margin-bottom: 0.7rem; }
-.which-box strong { color: var(–indigo); font-family: ‘JetBrains Mono’, monospace; }
+#rc-root .prep-block {
+border-radius: 12px !important;
+padding: 14px 15px !important;
+font-size: 0.84rem !important;
+}
+#rc-root .prep-block.formal {
+background-color: #eef1fe !important;
+border-top: 3px solid #3d5af1 !important;
+}
+#rc-root .prep-block.informal {
+background-color: #e4faf6 !important;
+border-top: 3px solid #2ecfb0 !important;
+}
+#rc-root .pb-label {
+font-size: 0.68rem !important;
+font-weight: 800 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.07em !important;
+margin-bottom: 7px !important;
+display: block !important;
+}
+#rc-root .formal .pb-label   { color: #2a40c0 !important; }
+#rc-root .informal .pb-label { color: #1a9b82 !important; }
+#rc-root .pb-ex { font-style: italic !important; line-height: 1.7 !important; color: #0d1b2a !important; }
+#rc-root .pb-ex em { font-style: normal !important; font-weight: 700 !important; color: #3d5af1 !important; }
+
+#rc-root .warn-box {
+background-color: #fff6e5 !important;
+border-left: 4px solid #f5a623 !important;
+border-radius: 0 10px 10px 0 !important;
+padding: 10px 14px !important;
+font-size: 0.82rem !important;
+margin-top: 12px !important;
+color: #7a5000 !important;
+}
+
+/* ── WHICH=COŽ ── */
+#rc-root .which-box {
+background-color: #ffffff !important;
+border-radius: 14px !important;
+padding: 18px 20px !important;
+box-shadow: 0 2px 12px rgba(26,46,90,0.07) !important;
+font-size: 0.87rem !important;
+color: #0d1b2a !important;
+}
+#rc-root .which-box p { margin-bottom: 10px !important; }
+#rc-root .which-box strong { color: #3d5af1 !important; font-family: ‘JetBrains Mono’, monospace !important; }
 
 /* ── TRAPS ── */
-.trap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
-@media (max-width: 500px) { .trap-grid { grid-template-columns: 1fr; } }
-.trap {
-background: var(–white);
-border-radius: 12px;
-padding: 1rem 1.1rem;
-border-top: 3px solid var(–rose);
-box-shadow: 0 2px 8px rgba(13,27,42,0.05);
-font-size: 0.83rem;
+#rc-root .trap-grid {
+display: grid !important;
+grid-template-columns: 1fr 1fr !important;
+gap: 10px !important;
 }
-.trap .tn { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(–rose); margin-bottom: 0.45rem; }
-.trap .bad { color: #c0303b; text-decoration: line-through; font-style: italic; display: block; }
-.trap .good { color: #1a9b82; font-style: italic; display: block; margin-top: 0.25rem; font-weight: 600; }
-.trap .note { color: var(–mid); font-size: 0.73rem; margin-top: 0.3rem; display: block; }
+@media (max-width: 500px) {
+#rc-root .trap-grid { grid-template-columns: 1fr !important; }
+}
+#rc-root .trap {
+background-color: #ffffff !important;
+border-radius: 12px !important;
+padding: 14px 15px !important;
+border-top: 3px solid #f25f6a !important;
+box-shadow: 0 2px 8px rgba(26,46,90,0.06) !important;
+font-size: 0.82rem !important;
+}
+#rc-root .trap .tn {
+font-size: 0.67rem !important;
+font-weight: 800 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.06em !important;
+color: #f25f6a !important;
+margin-bottom: 7px !important;
+display: block !important;
+}
+#rc-root .trap .bad { color: #c0303b !important; text-decoration: line-through !important; font-style: italic !important; display: block !important; }
+#rc-root .trap .good { color: #1a9b82 !important; font-style: italic !important; display: block !important; margin-top: 5px !important; font-weight: 600 !important; }
+#rc-root .trap .note { color: #5a7394 !important; font-size: 0.72rem !important; margin-top: 5px !important; display: block !important; }
 
 /* ── CHEAT SHEET ── */
-.cheat {
-background: var(–white);
-border-radius: 14px;
-overflow: hidden;
-box-shadow: 0 2px 12px rgba(13,27,42,0.06);
+#rc-root .cheat {
+background-color: #ffffff !important;
+border-radius: 14px !important;
+overflow: hidden !important;
+box-shadow: 0 2px 12px rgba(26,46,90,0.07) !important;
 }
-.cs-row {
-display: flex;
-align-items: flex-start;
-gap: 0.9rem;
-padding: 0.9rem 1.2rem;
-border-bottom: 1px solid var(–border);
-font-size: 0.86rem;
+#rc-root .cs-row {
+display: flex !important;
+align-items: flex-start !important;
+gap: 12px !important;
+padding: 13px 16px !important;
+border-bottom: 1px solid #dde4f0 !important;
+font-size: 0.85rem !important;
+color: #0d1b2a !important;
 }
-.cs-row:last-child { border-bottom: none; }
-.cs-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
-.cs-body strong { color: var(–indigo); }
-.cs-ex { font-style: italic; color: var(–mid); font-size: 0.8rem; display: block; margin-top: 0.2rem; }
-.cs-wrong { color: #c0303b; text-decoration: line-through; font-size: 0.8rem; display: block; font-style: italic; }
-.cs-right { color: #1a9b82; font-size: 0.8rem; display: block; font-weight: 600; font-style: italic; }
+#rc-root .cs-row:last-child { border-bottom: none !important; }
+#rc-root .cs-icon { font-size: 1rem !important; flex-shrink: 0 !important; margin-top: 2px !important; }
+#rc-root .cs-body strong { color: #3d5af1 !important; }
+#rc-root .cs-ex    { font-style: italic !important; color: #5a7394 !important; font-size: 0.79rem !important; display: block !important; margin-top: 3px !important; }
+#rc-root .cs-wrong { color: #c0303b !important; text-decoration: line-through !important; font-size: 0.79rem !important; display: block !important; font-style: italic !important; margin-top: 2px !important; }
+#rc-root .cs-right { color: #1a9b82 !important; font-size: 0.79rem !important; display: block !important; font-weight: 600 !important; font-style: italic !important; }
 
-/* ── QUIZ / EXERCISES ── */
-.ex-wrap {
-background: var(–white);
-border-radius: 16px;
-padding: 1.6rem;
-box-shadow: 0 2px 12px rgba(13,27,42,0.06);
-border-top: 4px solid var(–mint);
+/* ── EXERCISE WRAPPER ── */
+#rc-root .ex-wrap {
+background-color: #ffffff !important;
+border-radius: 16px !important;
+padding: 22px !important;
+box-shadow: 0 2px 14px rgba(26,46,90,0.08) !important;
+border-top: 4px solid #2ecfb0 !important;
 }
-.ex-wrap.mis { border-top-color: var(–amber); }
-.ex-wrap h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
-.ex-hint { font-size: 0.81rem; color: var(–mid); margin-bottom: 1.3rem; font-family: ‘JetBrains Mono’, monospace; }
+#rc-root .ex-wrap.mis { border-top-color: #f5a623 !important; }
+#rc-root .ex-wrap h2 { font-size: 1.05rem !important; font-weight: 700 !important; margin: 0 0 5px !important; color: #0d1b2a !important; }
+#rc-root .ex-hint { font-size: 0.78rem !important; color: #5a7394 !important; margin-bottom: 18px !important; font-family: ‘JetBrains Mono’, monospace !important; display: block !important; }
 
-.qblock {
-background: var(–bg);
-border-radius: 12px;
-padding: 1.2rem;
-margin-bottom: 1rem;
-border: 1px solid var(–border);
+/* ── QUESTION BLOCK ── */
+#rc-root .qblock {
+background-color: #f0f4ff !important;
+border-radius: 12px !important;
+padding: 16px !important;
+margin-bottom: 12px !important;
+border: 1px solid #dde4f0 !important;
 }
-.qnum {
-font-size: 0.68rem;
-font-weight: 700;
-text-transform: uppercase;
-letter-spacing: 0.09em;
-color: var(–mid);
-margin-bottom: 0.5rem;
-font-family: ‘JetBrains Mono’, monospace;
+#rc-root .qnum {
+font-size: 0.67rem !important;
+font-weight: 700 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.09em !important;
+color: #5a7394 !important;
+margin-bottom: 8px !important;
+font-family: ‘JetBrains Mono’, monospace !important;
+display: block !important;
 }
-.qsentence { font-size: 0.95rem; margin-bottom: 0.9rem; line-height: 1.7; }
+#rc-root .qsentence { font-size: 0.93rem !important; margin-bottom: 12px !important; line-height: 1.7 !important; color: #0d1b2a !important; display: block !important; }
 
-.opts { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-.obtn {
-font-family: ‘Sora’, sans-serif;
-font-size: 0.84rem;
-font-weight: 600;
-padding: 0.45rem 1rem;
-border: 2px solid var(–border);
-border-radius: 8px;
-background: var(–white);
-cursor: pointer;
-transition: all 0.14s;
-color: var(–ink);
+#rc-root .opts { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; }
+#rc-root .obtn {
+font-family: ‘Sora’, sans-serif !important;
+font-size: 0.82rem !important;
+font-weight: 600 !important;
+padding: 7px 15px !important;
+border: 2px solid #dde4f0 !important;
+border-radius: 8px !important;
+background-color: #ffffff !important;
+cursor: pointer !important;
+color: #0d1b2a !important;
+transition: background-color 0.12s, border-color 0.12s, color 0.12s !important;
 }
-.obtn:hover:not(:disabled) { border-color: var(–indigo); color: var(–indigo); background: var(–indigo-l); }
-.obtn.correct { background: var(–mint-l); border-color: var(–mint); color: #1a9b82; }
-.obtn.wrong   { background: var(–rose-l); border-color: var(–rose); color: #c0303b; }
-.obtn:disabled { cursor: default; opacity: 0.85; }
-
-.feedback {
-margin-top: 0.8rem;
-font-size: 0.83rem;
-padding: 0.6rem 0.9rem;
-border-radius: 8px;
-display: none;
-line-height: 1.5;
-font-weight: 500;
+#rc-root .obtn:hover:not(:disabled) {
+border-color: #3d5af1 !important;
+color: #3d5af1 !important;
+background-color: #eef1fe !important;
 }
-.feedback.show { display: block; }
-.feedback.ok  { background: var(–mint-l);  color: #1a9b82; border-left: 3px solid var(–mint); }
-.feedback.bad { background: var(–rose-l);  color: #c0303b; border-left: 3px solid var(–rose); }
-
-.fill-sentence { font-size: 0.95rem; line-height: 2.6; }
-.fill-input {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.88rem;
-border: none;
-border-bottom: 2px solid var(–indigo);
-background: transparent;
-padding: 0 0.3rem;
-width: 88px;
-text-align: center;
-color: var(–ink);
-outline: none;
-transition: border-color 0.15s;
+#rc-root .obtn.correct {
+background-color: #ccf5ee !important;
+border-color: #2ecfb0 !important;
+color: #1a9b82 !important;
 }
-.fill-input:focus { border-color: var(–indigo2); }
-.fill-input.correct { border-color: var(–mint); color: #1a9b82; }
-.fill-input.wrong   { border-color: var(–rose); color: #c0303b; }
-
-.check-btn {
-font-family: ‘Sora’, sans-serif;
-margin-top: 1.3rem;
-padding: 0.65rem 2rem;
-background: var(–indigo);
-color: white;
-border: none;
-border-radius: 10px;
-font-size: 0.88rem;
-font-weight: 700;
-cursor: pointer;
-transition: background 0.18s, transform 0.1s;
-display: block;
-box-shadow: 0 4px 14px rgba(79,110,247,0.3);
+#rc-root .obtn.wrong {
+background-color: #fcdde0 !important;
+border-color: #f25f6a !important;
+color: #c0303b !important;
 }
-.check-btn:hover   { background: var(–indigo2); }
-.check-btn:active  { transform: scale(0.98); }
+#rc-root .obtn:disabled { cursor: default !important; opacity: 0.85 !important; }
 
-.score-bar {
-text-align: center;
-padding: 1.2rem;
-background: var(–navy);
-color: rgba(255,255,255,0.7);
-border-radius: 12px;
-margin-top: 1.3rem;
-font-size: 0.9rem;
-display: none;
+#rc-root .feedback {
+margin-top: 10px !important;
+font-size: 0.82rem !important;
+padding: 9px 13px !important;
+border-radius: 8px !important;
+display: none !important;
+line-height: 1.5 !important;
+font-weight: 500 !important;
 }
-.score-bar.show { display: block; }
-.score-bar strong { font-size: 1.6rem; color: var(–mint); font-family: ‘JetBrains Mono’, monospace; display: block; }
+#rc-root .feedback.show { display: block !important; }
+#rc-root .feedback.ok  { background-color: #ccf5ee !important; color: #1a9b82 !important; border-left: 3px solid #2ecfb0 !important; }
+#rc-root .feedback.bad { background-color: #fcdde0 !important; color: #c0303b !important; border-left: 3px solid #f25f6a !important; }
 
-.mis-opts { display: flex; flex-direction: column; gap: 0.45rem; }
-.mis-opts .obtn { text-align: left; white-space: normal; height: auto; padding: 0.55rem 1rem; }
+#rc-root .fill-sentence { font-size: 0.93rem !important; line-height: 2.7 !important; color: #0d1b2a !important; display: block !important; }
+#rc-root .fill-input {
+font-family: ‘JetBrains Mono’, monospace !important;
+font-size: 0.86rem !important;
+border: none !important;
+border-bottom: 2px solid #3d5af1 !important;
+background-color: transparent !important;
+padding: 0 5px !important;
+width: 86px !important;
+text-align: center !important;
+color: #0d1b2a !important;
+outline: none !important;
+}
+#rc-root .fill-input.correct { border-bottom-color: #2ecfb0 !important; color: #1a9b82 !important; }
+#rc-root .fill-input.wrong   { border-bottom-color: #f25f6a !important; color: #c0303b !important; }
+
+#rc-root .check-btn {
+font-family: ‘Sora’, sans-serif !important;
+margin-top: 18px !important;
+padding: 10px 28px !important;
+background-color: #3d5af1 !important;
+color: #ffffff !important;
+border: none !important;
+border-radius: 10px !important;
+font-size: 0.87rem !important;
+font-weight: 700 !important;
+cursor: pointer !important;
+display: block !important;
+box-shadow: 0 4px 14px rgba(61,90,241,0.3) !important;
+transition: background-color 0.15s !important;
+}
+#rc-root .check-btn:hover { background-color: #2a40c0 !important; }
+
+#rc-root .score-bar {
+text-align: center !important;
+padding: 18px !important;
+background-color: #1a2e5a !important;
+border-radius: 12px !important;
+margin-top: 18px !important;
+display: none !important;
+}
+#rc-root .score-bar.show { display: block !important; }
+#rc-root .score-bar .sc-label { color: #8aadd4 !important; font-size: 0.85rem !important; display: block !important; margin-bottom: 4px !important; }
+#rc-root .score-bar strong { font-size: 1.8rem !important; color: #2ecfb0 !important; font-family: ‘JetBrains Mono’, monospace !important; display: block !important; font-weight: 600 !important; }
+
+#rc-root .mis-opts { display: flex !important; flex-direction: column !important; gap: 6px !important; }
+#rc-root .mis-opts .obtn { text-align: left !important; white-space: normal !important; height: auto !important; padding: 8px 14px !important; }
+
+#rc-root em { font-style: italic !important; }
+#rc-root strong { font-weight: 700 !important; }
 </style>
 
 </head>
 <body>
+<div id="rc-root">
 
-<!-- ══ HEADER ══ -->
+<!-- HEADER -->
 
-<div class="page-header">
+<div class="hdr">
+  <div class="hdr-accent-a"></div>
+  <div class="hdr-accent-b"></div>
   <h1>Relative <span>Clauses</span></h1>
-  <p class="sub">FCE Grammar · B2 · Unit 6 · Vztažné věty</p>
-  <div class="header-pills">
-    <span class="header-pill">📌 2 typy</span>
-    <span class="header-pill">🔤 8 zájmen</span>
-    <span class="header-pill">✂️ vypouštění</span>
-    <span class="header-pill">⚠️ 4 FCE pasti</span>
+  <span class="hsub">FCE Grammar · B2 · Unit 6 · Vztažné věty</span>
+  <div class="hdr-pills">
+    <span class="hdr-pill">📌 2 typy</span>
+    <span class="hdr-pill">🔤 8 zájmen</span>
+    <span class="hdr-pill">✂️ vypouštění</span>
+    <span class="hdr-pill">⚠️ 4 FCE pasti</span>
   </div>
 </div>
 
-<!-- ══ TABS ══ -->
+<!-- TABS -->
 
 <div class="tabs" id="tabs">
   <button class="tab-btn active" data-tab="theory">📖 Teorie</button>
@@ -569,17 +628,15 @@ display: none;
   <button class="tab-btn" data-tab="mistakes">🔍 Oprav chyby</button>
 </div>
 
-<!-- ══════════ THEORY ══════════ -->
+<!-- ═══════════ THEORY ═══════════ -->
 
 <div class="tab-panel active" id="theory">
-
-  <!-- 1 -->
 
   <div class="sec"><span class="sec-num">01</span><span class="sec-title">Co jsou vztažné věty?</span></div>
   <div class="divider"></div>
   <div class="what-is">
     <p>Vztažné věty jsou <strong>vedlejší věty</strong>, které říkají víc o podstatném jménu v hlavní větě – kdo to je, o které věci mluvíme, kde, kdy nebo proč. Bez nich by angličtina zněla trhavě a opakovaně.</p>
-    <p style="margin-top:0.5rem; opacity:0.85; font-size:0.85rem;">Na FCE se testují v <strong>Part 4 (key word transformations)</strong> a ve <strong>Writing</strong>. Správné non-defining clause = znak B2 úrovně.</p>
+    <p>Na FCE se testují v <strong>Part 4 (key word transformations)</strong> a ve <strong>Writing</strong>. Správné non-defining clause = znak B2 úrovně.</p>
     <div class="wi-pills">
       <span class="wi-pill">2 typy: defining / non-defining</span>
       <span class="wi-pill">8 vztažných výrazů</span>
@@ -587,14 +644,10 @@ display: none;
     </div>
   </div>
 
-  <!-- 2 -->
-
   <div class="sec"><span class="sec-num">02</span><span class="sec-title">Vztažná zájmena a příslovce</span><span class="sec-tag">Který výraz?</span></div>
   <div class="divider"></div>
   <table class="ptable">
-    <thead>
-      <tr><th>Výraz</th><th>Kdy ho použít</th><th>Příklad</th><th>Poznámka</th></tr>
-    </thead>
+    <thead><tr><th>Výraz</th><th>Kdy ho použít</th><th>Příklad</th><th>Poznámka</th></tr></thead>
     <tbody>
       <tr><td class="pw">who</td><td class="pu">osoby (podmět)</td><td class="pe">the woman <em>who</em> called</td><td class="pn">nelze vypustit jako podmět</td></tr>
       <tr><td class="pw">which</td><td class="pu">věci, zvířata</td><td class="pe">the book <em>which</em> inspired me</td><td class="pn">nebo „což" po čárce</td></tr>
@@ -607,41 +660,37 @@ display: none;
     </tbody>
   </table>
 
-  <!-- 3 -->
-
   <div class="sec"><span class="sec-num">03</span><span class="sec-title">Defining vs Non-defining</span><span class="sec-tag">Nejdůležitější rozdíl</span></div>
   <div class="divider"></div>
   <div class="def-row">
     <div class="def-card defining">
-      <div class="dc-head">✅ Defining (vymezující)</div>
+      <span class="dc-head">✅ Defining (vymezující)</span>
       <p class="dc-desc">Určuje, <strong>o které konkrétní</strong> osobě nebo věci mluvíme. Věta bez ní ztratí smysl.</p>
       <div class="ex-box">The book <em>that</em> I borrowed is overdue.<small>→ který konkrétní book?</small></div>
       <div class="ex-box">The woman <em>who</em> lives next door is a doctor.</div>
       <div class="rpills">
-        <div class="rpill bad">❌ žádná čárka</div>
-        <div class="rpill ok">✅ lze použít that</div>
-        <div class="rpill ok">✅ zájmeno lze vypustit (je-li předmět)</div>
+        <span class="rpill bad">❌ žádná čárka</span>
+        <span class="rpill ok">✅ lze použít that</span>
+        <span class="rpill ok">✅ zájmeno lze vypustit (je-li předmět)</span>
       </div>
     </div>
     <div class="def-card non-def">
-      <div class="dc-head">ℹ️ Non-defining (doplňující)</div>
+      <span class="dc-head">ℹ️ Non-defining (doplňující)</span>
       <p class="dc-desc">Přidává <strong>info navíc</strong> – víme, o kom mluvíme i bez ní. Vsuvka v čárkách.</p>
       <div class="ex-box">My book, <em>which</em> I bought last month, is full of notes.<small>→ mám jen jednu knihu</small></div>
       <div class="ex-box">My grandfather, <em>who</em> is 87, swims every day.</div>
       <div class="rpills">
-        <div class="rpill ok">✅ čárky vždy – před i za větou</div>
-        <div class="rpill bad">❌ that nelze nikdy</div>
-        <div class="rpill bad">❌ zájmeno nelze vypustit</div>
+        <span class="rpill ok">✅ čárky vždy – před i za větou</span>
+        <span class="rpill bad">❌ that nelze nikdy</span>
+        <span class="rpill bad">❌ zájmeno nelze vypustit</span>
       </div>
     </div>
   </div>
   <div class="insight">
     <strong>💡 Jak poznat, který typ to je?</strong>
-    <div class="ins-row">→ <code>My brother who lives in Cardiff</code> is older. <span style="color:var(--mid); font-size:0.8rem;">(mám víc bratrů → defining)</span></div>
-    <div class="ins-row">→ <code>My brother, who lives in Cardiff,</code> is older. <span style="color:var(--mid); font-size:0.8rem;">(mám jen jednoho → non-defining)</span></div>
+    <div class="ins-row">→ <code>My brother who lives in Cardiff</code> is older. <span class="ins-muted">(mám víc bratrů → defining)</span></div>
+    <div class="ins-row">→ <code>My brother, who lives in Cardiff,</code> is older. <span class="ins-muted">(mám jen jednoho → non-defining)</span></div>
   </div>
-
-  <!-- 4 -->
 
   <div class="sec"><span class="sec-num">04</span><span class="sec-title">Kdy lze zájmeno vypustit?</span><span class="sec-tag">FCE Part 4 ❤️</span></div>
   <div class="divider"></div>
@@ -649,113 +698,90 @@ display: none;
     <thead><tr><th>Situace</th><th>Vypustit?</th><th>Příklad</th></tr></thead>
     <tbody>
       <tr><td>Defining + zájmeno je <strong>předmět</strong></td><td><span class="badge yes">✅ Ano</span></td><td><em>The book (that) I read was great.</em></td></tr>
-      <tr><td>Defining + zájmeno je <strong>podmět</strong></td><td><span class="badge no">❌ Ne</span></td><td><em>The woman <u>who</u> called is here.</em></td></tr>
-      <tr><td>Non-defining (čárky)</td><td><span class="badge no">❌ Ne</span></td><td><em>My sister, <u>who</u> is a doctor, called.</em></td></tr>
-      <tr><td>Po předložce</td><td><span class="badge no">❌ Ne</span></td><td><em>the person to <u>whom</u> I spoke</em></td></tr>
+      <tr><td>Defining + zájmeno je <strong>podmět</strong></td><td><span class="badge no">❌ Ne</span></td><td><em>The woman who called is here.</em></td></tr>
+      <tr><td>Non-defining (čárky)</td><td><span class="badge no">❌ Ne</span></td><td><em>My sister, who is a doctor, called.</em></td></tr>
+      <tr><td>Po předložce</td><td><span class="badge no">❌ Ne</span></td><td><em>the person to whom I spoke</em></td></tr>
     </tbody>
   </table>
-  <div class="insight" style="margin-top:0.8rem;">
+  <div class="insight" style="border-left-color:#2ecfb0 !important; margin-top:12px;">
     <strong>💡 Rychlý test:</strong> Za zájmenem hned <strong>sloveso</strong>? → podmět → nelze vypustit. Za zájmenem <strong>podmět + sloveso</strong>? → předmět → lze vypustit.
   </div>
-
-  <!-- 5 -->
 
   <div class="sec"><span class="sec-num">05</span><span class="sec-title">Předložky ve vztažných větách</span><span class="sec-tag">Formální vs běžné</span></div>
   <div class="divider"></div>
   <div class="prep-split">
     <div class="prep-block formal">
-      <div class="pb-label">Formální (písemný styl)</div>
+      <span class="pb-label">Formální (písemný styl)</span>
       <div class="pb-ex">the car <em>for which</em> he paid a fortune<br>the person <em>to whom</em> I spoke</div>
     </div>
     <div class="prep-block informal">
-      <div class="pb-label">Běžná angličtina</div>
-      <div class="pb-ex">the car (which) he paid a fortune <em>for</em><br>the person (who) I spoke <em>to</em></div>
+      <span class="pb-label">Běžná angličtina</span>
+      <div class="pb-ex">the car (which) he paid for<br>the person (who) I spoke to</div>
     </div>
   </div>
-  <div class="warn-box">⚠️ Po předložce NIKDY <strong>who</strong> ani <strong>that</strong> – jedině <strong>whom</strong> nebo <strong>which</strong>.<br><em>❌ the person to who I spoke &nbsp;·&nbsp; ✅ the person to whom I spoke</em></div>
-
-  <!-- 6 -->
+  <div class="warn-box">⚠️ Po předložce NIKDY <strong>who</strong> ani <strong>that</strong> – jedině <strong>whom</strong> nebo <strong>which</strong>.<br>❌ the person to who I spoke &nbsp;·&nbsp; ✅ the person to whom I spoke</div>
 
   <div class="sec"><span class="sec-num">06</span><span class="sec-title">„which" jako „což"</span><span class="sec-tag">Speciální případ</span></div>
   <div class="divider"></div>
   <div class="which-box">
     <p>Když <strong>which</strong> stojí po čárce a odkazuje na <em>celou předchozí větu</em> (ne jen jedno slovo), překládáme ho jako <strong>„což"</strong>. Vždy non-defining, vždy jen <strong>which</strong>.</p>
-    <div class="ex-box" style="border-left-color:var(--mint);">She passed the exam, <em>which</em> surprised everyone.<small>→ which = to, že složila (odkazuje na celou větu)</small></div>
-    <div class="ex-box" style="border-left-color:var(--mint);">He offered to help, <em>which</em> was very kind of him.</div>
-    <div class="warn-box" style="margin-top:0.7rem;">❌ Nelze: <em>She passed the exam, <u>that</u> surprised everyone.</em></div>
+    <div class="ex-box" style="border-left-color:#2ecfb0 !important;">She passed the exam, <em>which</em> surprised everyone.<small>→ which = to, že složila (odkazuje na celou větu)</small></div>
+    <div class="ex-box" style="border-left-color:#2ecfb0 !important;">He offered to help, <em>which</em> was very kind of him.</div>
+    <div class="warn-box" style="margin-top:10px;">❌ Nelze: She passed the exam, <u>that</u> surprised everyone.</div>
   </div>
-
-  <!-- 7 -->
 
   <div class="sec"><span class="sec-num">07</span><span class="sec-title">Nejčastější chyby ve FCE</span><span class="sec-tag">4 pasti</span></div>
   <div class="divider"></div>
   <div class="trap-grid">
-    <div class="trap">
-      <div class="tn">Past 1 · „that" po čárce</div>
-      <span class="bad">My sister, that lives in Prague...</span>
-      <span class="good">My sister, who lives in Prague... ✅</span>
-    </div>
-    <div class="trap">
-      <div class="tn">Past 2 · Chybí podmětové zájmeno</div>
-      <span class="bad">The woman lives next door is nice.</span>
-      <span class="good">The woman who lives next door... ✅</span>
-    </div>
-    <div class="trap">
-      <div class="tn">Past 3 · whose vs who's</div>
-      <span class="bad">a man who's name was Tom</span>
-      <span class="good">a man whose name was Tom ✅</span>
-      <span class="note">whose = přivlastnění · who's = who is</span>
-    </div>
-    <div class="trap">
-      <div class="tn">Past 4 · which pro osoby</div>
-      <span class="bad">the people which were there</span>
-      <span class="good">the people who were there ✅</span>
-    </div>
+    <div class="trap"><span class="tn">Past 1 · „that" po čárce</span><span class="bad">My sister, that lives in Prague...</span><span class="good">My sister, who lives in Prague... ✅</span></div>
+    <div class="trap"><span class="tn">Past 2 · Chybí podmětové zájmeno</span><span class="bad">The woman lives next door is nice.</span><span class="good">The woman who lives next door... ✅</span></div>
+    <div class="trap"><span class="tn">Past 3 · whose vs who's</span><span class="bad">a man who's name was Tom</span><span class="good">a man whose name was Tom ✅</span><span class="note">whose = přivlastnění · who's = who is</span></div>
+    <div class="trap"><span class="tn">Past 4 · which pro osoby</span><span class="bad">the people which were there</span><span class="good">the people who were there ✅</span></div>
   </div>
-
-  <!-- 8 -->
 
   <div class="sec"><span class="sec-num">08</span><span class="sec-title">Cheat sheet – celý přehled</span><span class="sec-tag">Ulož si!</span></div>
   <div class="divider"></div>
   <div class="cheat">
-    <div class="cs-row"><span class="cs-icon">🚫</span><div class="cs-body">Před <strong>that</strong> se čárka nepíše NIKDY.<span class="cs-wrong">My sister, that lives in Prague...</span></div></div>
-    <div class="cs-row"><span class="cs-icon">👤</span><div class="cs-body"><strong>whom</strong> = předmětová forma „who". Povinná po předložkách.<span class="cs-ex">to whom · with whom · for whom · the person whom I respect</span></div></div>
-    <div class="cs-row"><span class="cs-icon">📍</span><div class="cs-body"><strong>where / when / why</strong> jsou příslovce, ne zájmena.<span class="cs-ex">the place where = the place in which &nbsp;·&nbsp; the reason why = the reason for which</span></div></div>
-    <div class="cs-row"><span class="cs-icon">➕</span><div class="cs-body">Nikdy dva podměty v jedné větě!<span class="cs-wrong">I saw a man who he was very tall.</span><span class="cs-right">I saw a man who was very tall. ✅</span></div></div>
-    <div class="cs-row"><span class="cs-icon">💡</span><div class="cs-body">Non-defining = čárky + nikdy <strong>that</strong> + nikdy bez zájmena.<span class="cs-ex">Vlastní jméno (Anna, London...) → téměř vždy non-defining.</span></div></div>
+    <div class="cs-row"><span class="cs-icon">🚫</span><div><strong>Před that se čárka nepíše NIKDY.</strong><span class="cs-wrong">My sister, that lives in Prague...</span></div></div>
+    <div class="cs-row"><span class="cs-icon">👤</span><div><strong>whom</strong> = předmětová forma „who". Povinná po předložkách.<span class="cs-ex">to whom · with whom · the person whom I respect</span></div></div>
+    <div class="cs-row"><span class="cs-icon">📍</span><div><strong>where / when / why</strong> jsou příslovce, ne zájmena.<span class="cs-ex">the place where = the place in which · the reason why = the reason for which</span></div></div>
+    <div class="cs-row"><span class="cs-icon">➕</span><div>Nikdy dva podměty v jedné větě!<span class="cs-wrong">I saw a man who he was very tall.</span><span class="cs-right">I saw a man who was very tall. ✅</span></div></div>
+    <div class="cs-row"><span class="cs-icon">💡</span><div>Non-defining = čárky + nikdy <strong>that</strong> + nikdy bez zájmena.<span class="cs-ex">Vlastní jméno (Anna, London...) → téměř vždy non-defining.</span></div></div>
   </div>
 
 </div><!-- /theory -->
 
-<!-- ══════════ QUIZ ══════════ -->
+<!-- ═══════════ QUIZ ═══════════ -->
 
 <div class="tab-panel" id="quiz">
   <div id="quiz-container"></div>
-  <div class="score-bar" id="quiz-score"></div>
+  <div class="score-bar" id="quiz-score"><span class="sc-label">Výsledek</span><strong id="quiz-score-val"></strong></div>
 </div>
 
-<!-- ══════════ FILL ══════════ -->
+<!-- ═══════════ FILL ═══════════ -->
 
 <div class="tab-panel" id="fill">
   <div class="ex-wrap">
     <h2>Doplň správné zájmeno</h2>
-    <p class="ex-hint">who · which · whose · where · when · why · whom · that</p>
+    <span class="ex-hint">who · which · whose · where · when · why · whom · that</span>
     <div id="fill-container"></div>
     <button class="check-btn" id="check-fill-btn">Zkontrolovat</button>
-    <div class="score-bar" id="fill-score"></div>
+    <div class="score-bar" id="fill-score"><span class="sc-label">Výsledek</span><strong id="fill-score-val"></strong></div>
   </div>
 </div>
 
-<!-- ══════════ MISTAKES ══════════ -->
+<!-- ═══════════ MISTAKES ═══════════ -->
 
 <div class="tab-panel" id="mistakes">
   <div class="ex-wrap mis">
     <h2>Oprav chybu ve větě</h2>
-    <p class="ex-hint">Najdi chybu a vyber opravenou verzi – Exercise 6 z učebnice</p>
+    <span class="ex-hint">Najdi chybu a vyber opravenou verzi – Exercise 6 z učebnice</span>
     <div id="mistakes-container"></div>
-    <div class="score-bar" id="mistakes-score"></div>
+    <div class="score-bar" id="mistakes-score"><span class="sc-label">Výsledek</span><strong id="mistakes-score-val"></strong></div>
   </div>
 </div>
+
+</div><!-- /rc-root -->
 
 <script>
 (function () {
@@ -767,9 +793,9 @@ display: none;
     { s: "I remember the summer ___ we first met.", o: ["where","why","when","which"], a: "when", e: "when pro čas (= during which)" },
     { s: "He's the student ___ essay won first prize.", o: ["who","whom","whose","which"], a: "whose", e: "whose = přivlastnění (essay patří studentovi)" },
     { s: "That's the reason ___ she didn't come.", o: ["when","where","why","which"], a: "why", e: "why se pojí s the reason (= for which)" },
-    { s: "The man ___ I spoke to was very helpful.", o: ["who","whom","whose","which"], a: "whom", e: "whom = předmět (I spoke to HIM) – typické ve FCE Part 4" },
+    { s: "The man ___ I spoke to was very helpful.", o: ["who","whom","whose","which"], a: "whom", e: "whom = předmět – typické ve FCE Part 4" },
     { s: "She passed the exam, ___ surprised everyone.", o: ["that","who","which","whose"], a: "which", e: "Čárka = non-defining = that nelze, jen which (= což)" },
-    { s: "The film ___ we watched last night was boring.", o: ["who","whose","where","that"], a: "that", e: "Defining clause o věci, předmět = that i which jsou správně" },
+    { s: "The film ___ we watched last night was boring.", o: ["who","whose","where","that"], a: "that", e: "Defining clause o věci, předmět = that i which správně" },
     { s: "My sister, ___ lives in Prague, is a doctor.", o: ["that","which","who","whose"], a: "who", e: "Non-defining o osobě = who; that nelze po čárce!" }
   ];
 
@@ -789,7 +815,7 @@ display: none;
     { w: "You should visit in June, where the weather is usually nice.", o: ["...in June, which the weather is usually nice.","...in June, when the weather is usually nice.","...in June, whose the weather is usually nice."], a: 1, e: "where = místo. June je čas = when" },
     { w: "I don't like people which are unkind to their friends.", o: ["...people who are unkind...","...people whose are unkind...","...people, which are unkind..."], a: 0, e: "which je pro věci, ne osoby = who" },
     { w: "There is a new gym which we can do spin classes.", o: ["...a new gym who we can do spin classes.","...a new gym where we can do spin classes.","...a new gym that we can do spin classes."], a: 1, e: "Gym je místo, kde se něco děje = where" },
-    { w: "The wallet belonged to a man who name was Giacomo.", o: ["...a man which name was Giacomo.","...a man that name was Giacomo.","...a man whose name was Giacomo."], a: 2, e: "Přivlastnění = whose. Pozor: whose ≠ who's (= who is)!" },
+    { w: "The wallet belonged to a man who name was Giacomo.", o: ["...a man which name was Giacomo.","...a man that name was Giacomo.","...a man whose name was Giacomo."], a: 2, e: "Přivlastnění = whose. Pozor: whose ≠ who's!" },
     { w: "Anna who is keen on painting saw some brilliant artwork in the gallery.", o: ["Anna, who is keen on painting, saw some brilliant artwork...","Anna that is keen on painting saw some brilliant artwork...","Anna which is keen on painting saw some brilliant artwork..."], a: 0, e: "Vlastní jméno = non-defining = čárky kolem věty" }
   ];
 
@@ -798,98 +824,76 @@ display: none;
     var btn = e.target;
     if (!btn.classList.contains('tab-btn')) return;
     var name = btn.getAttribute('data-tab');
-    document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
-    document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+    document.querySelectorAll('#rc-root .tab-panel').forEach(function (p) { p.classList.remove('active'); });
+    document.querySelectorAll('#rc-root .tab-btn').forEach(function (b) { b.classList.remove('active'); });
     document.getElementById(name).classList.add('active');
     btn.classList.add('active');
   });
 
   // QUIZ
-  var qAns = quizData.map(function () { return false; });
-  var qOk = 0;
+  var qAns = quizData.map(function () { return false; }), qOk = 0;
   var qc = document.getElementById('quiz-container');
   qc.innerHTML = quizData.map(function (q, i) {
     var opts = q.o.map(function (o) {
       return '<button class="obtn" data-qi="' + i + '" data-ans="' + o + '">' + o + '</button>';
     }).join('');
-    var sent = q.s.replace('___', '<span style="border-bottom:2px solid var(--indigo);padding:0 0.4rem;font-family:\'JetBrains Mono\',monospace">___</span>');
-    return '<div class="qblock" id="qb' + i + '"><div class="qnum">Otázka ' + (i+1) + ' / ' + quizData.length + '</div><div class="qsentence">' + sent + '</div><div class="opts">' + opts + '</div><div class="feedback" id="fb' + i + '"></div></div>';
+    var sent = q.s.replace('___', '<u style="text-decoration:none;border-bottom:2px solid #3d5af1;padding:0 4px;font-family:JetBrains Mono,monospace">___</u>');
+    return '<div class="qblock" id="qb' + i + '"><span class="qnum">Otázka ' + (i+1) + ' / ' + quizData.length + '</span><span class="qsentence">' + sent + '</span><div class="opts">' + opts + '</div><div class="feedback" id="fb' + i + '"></div></div>';
   }).join('');
 
   qc.addEventListener('click', function (e) {
-    var btn = e.target;
-    if (!btn.hasAttribute('data-qi')) return;
-    var i = parseInt(btn.getAttribute('data-qi'));
-    var chosen = btn.getAttribute('data-ans');
-    if (qAns[i]) return;
-    qAns[i] = true;
-    var q = quizData[i];
-    var block = document.getElementById('qb' + i);
-    var fb = document.getElementById('fb' + i);
-    block.querySelectorAll('[data-qi]').forEach(function (b) {
-      b.disabled = true;
-      if (b.getAttribute('data-ans') === q.a) b.classList.add('correct');
-    });
+    var btn = e.target; if (!btn.hasAttribute('data-qi')) return;
+    var i = parseInt(btn.getAttribute('data-qi')), chosen = btn.getAttribute('data-ans');
+    if (qAns[i]) return; qAns[i] = true;
+    var q = quizData[i], block = document.getElementById('qb' + i), fb = document.getElementById('fb' + i);
+    block.querySelectorAll('[data-qi]').forEach(function (b) { b.disabled = true; if (b.getAttribute('data-ans') === q.a) b.classList.add('correct'); });
     if (chosen === q.a) { btn.classList.add('correct'); fb.textContent = '✅ Správně! ' + q.e; fb.className = 'feedback ok show'; qOk++; }
     else { btn.classList.add('wrong'); fb.textContent = '❌ Správná odpověď: ' + q.a + ' – ' + q.e; fb.className = 'feedback bad show'; }
     if (qAns.every(function (v) { return v; })) {
-      var sc = document.getElementById('quiz-score');
-      sc.innerHTML = '<strong>' + qOk + ' / ' + quizData.length + '</strong>správně';
-      sc.className = 'score-bar show';
+      document.getElementById('quiz-score-val').textContent = qOk + ' / ' + quizData.length;
+      document.getElementById('quiz-score').classList.add('show');
     }
   });
 
   // FILL
   var fc = document.getElementById('fill-container');
   fc.innerHTML = fillData.map(function (f, i) {
-    return '<div class="qblock" style="margin-bottom:0.8rem;"><div class="qnum">' + (i+1) + '. nápověda: ' + f.h + '</div><div class="fill-sentence">' + f.b + ' <input class="fill-input" id="fi' + i + '" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"> ' + f.a + '</div></div>';
+    return '<div class="qblock" style="margin-bottom:10px;"><span class="qnum">' + (i+1) + '. nápověda: ' + f.h + '</span><span class="fill-sentence">' + f.b + ' <input class="fill-input" id="fi' + i + '" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"> ' + f.a + '</span></div>';
   }).join('');
 
   document.getElementById('check-fill-btn').addEventListener('click', function () {
     var ok = 0;
     fillData.forEach(function (f, i) {
-      var inp = document.getElementById('fi' + i);
-      var val = inp.value.trim().toLowerCase();
+      var inp = document.getElementById('fi' + i), val = inp.value.trim().toLowerCase();
       inp.classList.remove('correct', 'wrong');
       if (val === f.blank) { inp.classList.add('correct'); ok++; }
       else { inp.classList.add('wrong'); inp.value = ''; inp.setAttribute('placeholder', f.blank); }
     });
-    var sc = document.getElementById('fill-score');
-    sc.innerHTML = '<strong>' + ok + ' / ' + fillData.length + '</strong>správně';
-    sc.className = 'score-bar show';
+    document.getElementById('fill-score-val').textContent = ok + ' / ' + fillData.length;
+    document.getElementById('fill-score').classList.add('show');
   });
 
   // MISTAKES
-  var mAns = misData.map(function () { return false; });
-  var mOk = 0;
+  var mAns = misData.map(function () { return false; }), mOk = 0;
   var mc = document.getElementById('mistakes-container');
   mc.innerHTML = misData.map(function (m, i) {
     var opts = m.o.map(function (o, j) {
-      return '<button class="obtn" data-mi="' + i + '" data-mj="' + j + '" style="text-align:left;white-space:normal;height:auto;padding:0.55rem 1rem;">' + o + '</button>';
+      return '<button class="obtn" data-mi="' + i + '" data-mj="' + j + '">' + o + '</button>';
     }).join('');
-    return '<div class="qblock" id="mb' + i + '"><div class="qnum">Věta ' + (i+1) + '</div><div class="qsentence" style="color:var(--rose);text-decoration:line-through;font-size:0.88rem;margin-bottom:0.6rem;">' + m.w + '</div><div class="mis-opts">' + opts + '</div><div class="feedback" id="mfb' + i + '"></div></div>';
+    return '<div class="qblock" id="mb' + i + '"><span class="qnum">Věta ' + (i+1) + '</span><span class="qsentence" style="color:#c0303b;text-decoration:line-through;font-style:italic;">' + m.w + '</span><div class="mis-opts">' + opts + '</div><div class="feedback" id="mfb' + i + '"></div></div>';
   }).join('');
 
   mc.addEventListener('click', function (e) {
-    var btn = e.target;
-    if (!btn.hasAttribute('data-mi')) return;
-    var i = parseInt(btn.getAttribute('data-mi'));
-    var j = parseInt(btn.getAttribute('data-mj'));
-    if (mAns[i]) return;
-    mAns[i] = true;
-    var m = misData[i];
-    var block = document.getElementById('mb' + i);
-    var fb = document.getElementById('mfb' + i);
-    block.querySelectorAll('[data-mi]').forEach(function (b) {
-      b.disabled = true;
-      if (parseInt(b.getAttribute('data-mj')) === m.a) b.classList.add('correct');
-    });
+    var btn = e.target; if (!btn.hasAttribute('data-mi')) return;
+    var i = parseInt(btn.getAttribute('data-mi')), j = parseInt(btn.getAttribute('data-mj'));
+    if (mAns[i]) return; mAns[i] = true;
+    var m = misData[i], block = document.getElementById('mb' + i), fb = document.getElementById('mfb' + i);
+    block.querySelectorAll('[data-mi]').forEach(function (b) { b.disabled = true; if (parseInt(b.getAttribute('data-mj')) === m.a) b.classList.add('correct'); });
     if (j === m.a) { btn.classList.add('correct'); fb.textContent = '✅ Správně! ' + m.e; fb.className = 'feedback ok show'; mOk++; }
     else { btn.classList.add('wrong'); fb.textContent = '❌ ' + m.e; fb.className = 'feedback bad show'; }
     if (mAns.every(function (v) { return v; })) {
-      var sc = document.getElementById('mistakes-score');
-      sc.innerHTML = '<strong>' + mOk + ' / ' + misData.length + '</strong>správně';
-      sc.className = 'score-bar show';
+      document.getElementById('mistakes-score-val').textContent = mOk + ' / ' + misData.length;
+      document.getElementById('mistakes-score').classList.add('show');
     }
   });
 
