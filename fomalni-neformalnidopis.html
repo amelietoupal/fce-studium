@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FCE B2 – Průvodce psaním dopisů</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap');
+
+:root {
+–cream: #F5F0E8;
+–ink: #1A1714;
+–rust: #C8522A;
+–sage: #4A6741;
+–gold: #C4993A;
+–pale: #EDE7D9;
+–formal-bg: #E8EFF4;
+–informal-bg: #F4EBE0;
+}
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–cream);
+color: var(–ink);
+font-family: ‘DM Sans’, sans-serif;
+font-weight: 300;
+line-height: 1.7;
+padding: 2rem 1rem 4rem;
+}
+
+/* HEADER */
+header {
+text-align: center;
+padding: 3rem 1rem 2rem;
+position: relative;
+}
+header::after {
+content: ‘’;
+display: block;
+width: 60px;
+height: 3px;
+background: var(–rust);
+margin: 1.5rem auto 0;
+}
+.badge {
+display: inline-block;
+font-family: ‘DM Mono’, monospace;
+font-size: 0.65rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(–rust);
+border: 1px solid var(–rust);
+padding: 0.3em 0.9em;
+border-radius: 2px;
+margin-bottom: 1rem;
+}
+h1 {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(2rem, 6vw, 3.2rem);
+font-weight: 700;
+line-height: 1.15;
+color: var(–ink);
+}
+h1 em {
+font-style: italic;
+color: var(–rust);
+}
+header p {
+margin-top: 0.8rem;
+font-size: 0.95rem;
+color: #666;
+}
+
+/* LAYOUT */
+.grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 2.5rem;
+max-width: 860px;
+margin: 2.5rem auto 0;
+}
+
+/* CARD */
+.card {
+border-radius: 4px;
+overflow: hidden;
+box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+}
+.card-header {
+padding: 1.4rem 1.8rem;
+display: flex;
+align-items: center;
+gap: 0.8rem;
+}
+.card-header.formal { background: #2B4A6B; color: white; }
+.card-header.informal { background: var(–rust); color: white; }
+.card-header h2 {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.35rem;
+font-weight: 700;
+}
+.card-header .icon {
+font-size: 1.5rem;
+opacity: 0.85;
+}
+.card-body {
+background: white;
+padding: 1.8rem;
+}
+
+/* SECTIONS INSIDE CARD */
+.section-label {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.62rem;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+font-weight: 400;
+margin-bottom: 0.5rem;
+display: block;
+}
+.formal .section-label { color: #2B4A6B; }
+.informal .section-label { color: var(–rust); }
+
+.step {
+padding: 1.1rem 0;
+border-bottom: 1px solid #EEE;
+display: grid;
+grid-template-columns: 28px 1fr;
+gap: 0.8rem;
+align-items: start;
+}
+.step:last-child { border-bottom: none; }
+
+.step-num {
+width: 26px;
+height: 26px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: ‘Playfair Display’, serif;
+font-size: 0.85rem;
+font-weight: 700;
+flex-shrink: 0;
+margin-top: 2px;
+}
+.formal .step-num { background: #2B4A6B; color: white; }
+.informal .step-num { background: var(–rust); color: white; }
+
+.step-title {
+font-weight: 500;
+font-size: 0.95rem;
+margin-bottom: 0.25rem;
+color: var(–ink);
+}
+.step-desc {
+font-size: 0.875rem;
+color: #555;
+line-height: 1.6;
+}
+
+/* PHRASES BOX */
+.phrases {
+background: var(–pale);
+border-radius: 3px;
+padding: 1.2rem 1.4rem;
+margin-top: 1.5rem;
+}
+.phrases h3 {
+font-family: ‘Playfair Display’, serif;
+font-size: 1rem;
+font-weight: 700;
+margin-bottom: 0.9rem;
+}
+.phrase-row {
+display: flex;
+flex-direction: column;
+gap: 0.35rem;
+margin-bottom: 0.9rem;
+}
+.phrase-row:last-child { margin-bottom: 0; }
+.phrase-cat {
+font-family: ‘DM Mono’, monospace;
+font-size: 0.62rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: #888;
+}
+.phrase-list {
+display: flex;
+flex-wrap: wrap;
+gap: 0.4rem;
+}
+.phrase-chip {
+font-size: 0.82rem;
+padding: 0.25em 0.75em;
+border-radius: 2px;
+font-style: italic;
+border: 1px solid;
+}
+.formal .phrase-chip { border-color: #2B4A6B44; background: white; color: #2B4A6B; }
+.informal .phrase-chip { border-color: #C8522A44; background: white; color: var(–rust); }
+
+/* COMPARISON TABLE */
+.compare {
+max-width: 860px;
+margin: 2.5rem auto 0;
+background: white;
+border-radius: 4px;
+box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+overflow: hidden;
+}
+.compare-header {
+background: var(–ink);
+color: white;
+padding: 1.2rem 1.8rem;
+display: flex;
+align-items: center;
+gap: 0.6rem;
+}
+.compare-header h2 {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.15rem;
+font-weight: 700;
+}
+table {
+width: 100%;
+border-collapse: collapse;
+font-size: 0.875rem;
+}
+thead tr { background: var(–pale); }
+thead th {
+padding: 0.8rem 1.2rem;
+text-align: left;
+font-family: ‘DM Mono’, monospace;
+font-size: 0.65rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+font-weight: 400;
+color: #555;
+}
+tbody tr { border-bottom: 1px solid #F0F0F0; }
+tbody tr:last-child { border-bottom: none; }
+tbody td { padding: 0.75rem 1.2rem; vertical-align: top; }
+tbody td:first-child { color: #888; font-size: 0.8rem; font-family: ‘DM Mono’, monospace; }
+.ok { color: var(–sage); font-weight: 500; }
+.no { color: var(–rust); font-style: italic; }
+
+/* TIPS BOX */
+.tips {
+max-width: 860px;
+margin: 2.5rem auto 0;
+background: #2B4A6B;
+color: white;
+border-radius: 4px;
+padding: 1.8rem;
+}
+.tips h2 {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.2rem;
+font-weight: 700;
+margin-bottom: 1.1rem;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.tip-item {
+display: flex;
+align-items: flex-start;
+gap: 0.7rem;
+margin-bottom: 0.7rem;
+font-size: 0.875rem;
+line-height: 1.6;
+opacity: 0.92;
+}
+.tip-icon { flex-shrink: 0; margin-top: 1px; }
+
+/* WORD LIST */
+.vocab {
+max-width: 860px;
+margin: 2.5rem auto 0;
+background: white;
+border-radius: 4px;
+box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+overflow: hidden;
+}
+.vocab-header {
+background: var(–gold);
+color: var(–ink);
+padding: 1.2rem 1.8rem;
+}
+.vocab-header h2 {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.15rem;
+font-weight: 700;
+}
+.vocab-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+gap: 0;
+}
+.vocab-item {
+padding: 0.8rem 1.4rem;
+border-right: 1px solid #F0F0F0;
+border-bottom: 1px solid #F0F0F0;
+font-size: 0.855rem;
+}
+.vocab-item strong { color: var(–ink); display: block; }
+.vocab-item span { color: #888; font-size: 0.8rem; }
+
+footer {
+text-align: center;
+margin-top: 3.5rem;
+font-family: ‘DM Mono’, monospace;
+font-size: 0.65rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: #AAA;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="badge">Cambridge B2 First · Writing Part 2</div>
+  <h1>Formální &amp; <em>Neformální</em><br>dopis / e-mail</h1>
+  <p>Kompletní průvodce strukturou, frázemi a tipy pro zkoušku FCE</p>
+</header>
+
+<div class="grid">
+
+  <!-- FORMAL -->
+
+  <div class="card formal">
+    <div class="card-header formal">
+      <span class="icon">✉️</span>
+      <div>
+        <h2>Formální dopis / e-mail</h2>
+        <div style="font-size:0.78rem;opacity:0.8;margin-top:2px;">Formal letter / email</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+```
+  <span class="section-label">Kdy psát</span>
+  <p style="font-size:0.87rem;color:#555;margin-bottom:1.3rem;">Přihlášení do práce, stížnost, dotaz organizaci, žádost o informace — tedy vždy, když <strong>neznáš</strong> adresáta osobně.</p>
+
+  <!-- Steps -->
+  <div class="step">
+    <div class="step-num">1</div>
+    <div>
+      <div class="step-title">Oslovení (Salutation)</div>
+      <div class="step-desc">
+        Znáš jméno → <em>Dear Ms Ross, / Dear Mr Meyer,</em><br>
+        Neznáš jméno → <em>Dear Sir or Madam,</em><br>
+        ⚠️ Nikdy <em>Dear Manager</em> nebo <em>Dear Organiser</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div>
+      <div class="step-title">Úvod – důvod psaní</div>
+      <div class="step-desc">Hned v první větě vysvětli, proč píšeš a odkud znáš inzerát/situaci.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div>
+      <div class="step-title">Hlavní část (2–3 odstavce)</div>
+      <div class="step-desc">Odpověz na všechny otázky v zadání. Každý odstavec = jedno téma. Použij trpný rod a formální slovní zásobu.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div>
+      <div class="step-title">Závěr – nabídka pomoci / interview</div>
+      <div class="step-desc">Nabídni, že jsi k dispozici pro další informace nebo pohovor.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div>
+      <div class="step-title">Rozloučení (Sign-off)</div>
+      <div class="step-desc">
+        Znáš jméno → <em>Yours sincerely,</em><br>
+        Neznáš jméno → <em>Yours faithfully,</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phrases -->
+  <div class="phrases">
+    <h3>📋 Klíčové fráze</h3>
+
+    <div class="phrase-row">
+      <span class="phrase-cat">Úvod / důvod psaní</span>
+      <div class="phrase-list">
+        <span class="phrase-chip">I am writing to apply for...</span>
+        <span class="phrase-chip">I would like to apply for the post of...</span>
+        <span class="phrase-chip">I am writing with regard to...</span>
+        <span class="phrase-chip">I am writing in response to...</span>
+      </div>
+    </div>
+
+    <div class="phrase-row">
+      <span class="phrase-cat">Odkud znáš inzerát</span>
+      <div class="phrase-list">
+        <span class="phrase-chip">as advertised in the newspaper on...</span>
+        <span class="phrase-chip">as I saw in your advertisement...</span>
+      </div>
+    </div>
+
+    <div class="phrase-row">
+      <span class="phrase-cat">Schopnosti / zkušenosti</span>
+      <div class="phrase-list">
+        <span class="phrase-chip">I feel capable of...</span>
+        <span class="phrase-chip">I believe I am capable of...</span>
+        <span class="phrase-chip">I have experience of...</span>
+        <span class="phrase-chip">I have always enjoyed...</span>
+      </div>
+    </div>
+
+    <div class="phrase-row">
+      <span class="phrase-cat">Dotazy</span>
+      <div class="phrase-list">
+        <span class="phrase-chip">Could you please tell me how much I would be paid?</span>
+        <span class="phrase-chip">I would be grateful if you could inform me whether...</span>
+      </div>
+    </div>
+
+    <div class="phrase-row">
+      <span class="phrase-cat">Závěrečné věty</span>
+      <div class="phrase-list">
+        <span class="phrase-chip">I look forward to hearing from you.</span>
+        <span class="phrase-chip">Please do not hesitate to contact me.</span>
+        <span class="phrase-chip">I enclose my curriculum vitae.</span>
+        <span class="phrase-chip">I would be available for interview at any time.</span>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- INFORMAL -->
+
+  <div class="card informal">
+    <div class="card-header informal">
+      <span class="icon">💌</span>
+      <div>
+        <h2>Neformální dopis / e-mail</h2>
+        <div style="font-size:0.78rem;opacity:0.8;margin-top:2px;">Informal letter / email</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+```
+  <span class="section-label">Kdy psát</span>
+  <p style="font-size:0.87rem;color:#555;margin-bottom:1.3rem;">Kamarád, příbuzný, pen-pal — kdokoliv, koho <strong>znáš</strong> a s kým jsi na „ty".</p>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div>
+      <div class="step-title">Oslovení</div>
+      <div class="step-desc">
+        <em>Dear Tom, / Hi Maria, / Hello!</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div>
+      <div class="step-title">Úvod – zahaj přátelsky</div>
+      <div class="step-desc">Zmiň poslední kontakt nebo se zeptej, jak se kamarád má. Může být odkaz na předchozí dopis.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div>
+      <div class="step-title">Hlavní část</div>
+      <div class="step-desc">Odpověz na vše ze zadání. Piš přirozeně, používej hovorové výrazy a kratší věty. Sdílej své pocity a názory.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div>
+      <div class="step-title">Závěr – výhled</div>
+      <div class="step-desc">Zmíň, na co se těšíš, nebo proč musíš končit.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div>
+      <div class="step-title">Rozloučení</div>
+      <div class="step-desc">
+        <em>Best wishes, / Take care, / Lots of love, / Cheers,</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="phrases">
+    <h3>📋 Klíčové fráze</h3>
+
+    <div class="phrase-row">
+      <span class="phrase-cat">Zahájení</span>
+      <div class="phrase-list">
+        <span class="phrase-chip">Thanks so much for your letter!</span>
+        <span class="phrase-chip">It was great to hear from you.</span>
+        <span class="phrase-chip">Sorry I haven't written for ages.</span>
+        <span class="phrase-chip">How are things?</span>
+      </div>
+    </div>
+
+    <div class="phrase-row">
+      <span class="phrase-cat">Sdílení novinek</span>
+      <div class="phrase-list">
+        <span class="phrase-chip">Guess what happened!</span>
+        <span class="phrase-chip">You won't believe it, but...</span>
+        <span class="phrase-chip">I've been really busy lately because...</span>
+      </div>
+    </div>
+
+    <div class="phrase-row">
+      <span class="phrase-cat">Vyjádření pocitů</span>
+      <div class="phrase-list">
+        <span class="phrase-chip">I'm so excited about...</span>
+        <span class="phrase-chip">I can't wait to...</span>
+        <span class="phrase-chip">Honestly, I think...</span>
+        <span class="phrase-chip">To be honest,...</span>
+      </div>
+    </div>
+
+    <div class="phrase-row">
+      <span class="phrase-cat">Závěrečné věty</span>
+      <div class="phrase-list">
+        <span class="phrase-chip">I look forward to hearing from you soon.</span>
+        <span class="phrase-chip">Write back soon!</span>
+        <span class="phrase-chip">Can't wait to catch up!</span>
+        <span class="phrase-chip">I'd better go now – speak soon!</span>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+</div>
+
+<!-- COMPARISON TABLE -->
+
+<div class="compare">
+  <div class="compare-header">
+    <span>⚖️</span>
+    <h2>Formální vs. Neformální — přehledná tabulka</h2>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Prvek</th>
+        <th>✅ Formální</th>
+        <th>💌 Neformální</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>zkratky</td>
+        <td class="no">❌ I'm → I am, can't → cannot</td>
+        <td class="ok">✅ I'm, can't, it's</td>
+      </tr>
+      <tr>
+        <td>začátek</td>
+        <td class="ok">Dear Ms Ross, / Dear Sir or Madam,</td>
+        <td class="ok">Hi Tom! / Dear Sarah,</td>
+      </tr>
+      <tr>
+        <td>konec</td>
+        <td class="ok">Yours sincerely, / Yours faithfully,</td>
+        <td class="ok">Best wishes, / Lots of love,</td>
+      </tr>
+      <tr>
+        <td>fráze can</td>
+        <td class="no">❌ I can → I am capable of / I am able to</td>
+        <td class="ok">✅ I can, I could</td>
+      </tr>
+      <tr>
+        <td>hovorové výrazy</td>
+        <td class="no">❌ Žádné phrasal verbs, žargon</td>
+        <td class="ok">✅ hang out, get back to me, loads of</td>
+      </tr>
+      <tr>
+        <td>pasivum</td>
+        <td class="ok">✅ Doporučeno (I am writing → it is written)</td>
+        <td class="no">Spíše nepotřebné</td>
+      </tr>
+      <tr>
+        <td>délka vět</td>
+        <td>Delší, složitější souvětí</td>
+        <td>Kratší, přirozené věty</td>
+      </tr>
+      <tr>
+        <td>délka dopisu (FCE)</td>
+        <td>140–190 slov</td>
+        <td>140–190 slov</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- TIPS -->
+
+<div class="tips">
+  <h2>🎯 Exam tipy – nezapomeň!</h2>
+  <div class="tip-item"><span class="tip-icon">✦</span><span>Nikdy nepíš <em>Dear Manager</em> nebo <em>Dear Organiser</em> — vždy <em>Dear Sir or Madam</em>, pokud neznáš jméno.</span></div>
+  <div class="tip-item"><span class="tip-icon">✦</span><span>Odpověz na <strong>všechny body</strong> zadání — za každý vynechaný bod ztratíš body za obsah (Content).</span></div>
+  <div class="tip-item"><span class="tip-icon">✦</span><span>Nepoužívej stále stejné slovo — místo <em>I can</em> střídej <em>I am capable of / I am able to / I feel confident that</em>.</span></div>
+  <div class="tip-item"><span class="tip-icon">✦</span><span>Formální dopis = <strong>žádné zkratky</strong> (I am, cannot, it is, do not).</span></div>
+  <div class="tip-item"><span class="tip-icon">✦</span><span>Trpný rod (passive) ve formálním dopise = plus. <em>Duties will include giving advice</em> → <em>Advice would be given by me.</em></span></div>
+  <div class="tip-item"><span class="tip-icon">✦</span><span>Zkontroluj počet slov. Pod 140 nebo nad 190 = body dolů.</span></div>
+  <div class="tip-item"><span class="tip-icon">✦</span><span>Neformální dopis: piš přirozeně, ale <strong>nepoužívej textovou mluvu</strong> (lol, omg, u instead of you).</span></div>
+</div>
+
+<!-- VOCAB -->
+
+<div class="vocab">
+  <div class="vocab-header">
+    <h2>📖 Slovní zásoba pro formální dopis (z lekce)</h2>
+  </div>
+  <div class="vocab-grid">
+    <div class="vocab-item"><strong>require → requirement</strong><span>vyžadovat → požadavek</span></div>
+    <div class="vocab-item"><strong>include → inclusion / inclusive</strong><span>zahrnovat → zahrnutí</span></div>
+    <div class="vocab-item"><strong>be willing to do sth</strong><span>být ochoten něco dělat (= good will)</span></div>
+    <div class="vocab-item"><strong>apply (for sth) → application</strong><span>ucházet se → přihláška</span></div>
+    <div class="vocab-item"><strong>applicant / applied</strong><span>uchazeč / aplikovaný</span></div>
+    <div class="vocab-item"><strong>suitable → suit</strong><span>vhodný → hodit se</span></div>
+    <div class="vocab-item"><strong>capable → capability / ability</strong><span>schopný → schopnost</span></div>
+    <div class="vocab-item"><strong>místo „can" → able / capable of</strong><span>formálnější alternativa</span></div>
+    <div class="vocab-item"><strong>relevant</strong><span>podstatný, důležitý, relevantní</span></div>
+    <div class="vocab-item"><strong>hesitate → do not hesitate to</strong><span>váhat → neváhejte...</span></div>
+    <div class="vocab-item"><strong>enclose → I enclose</strong><span>přikládám (k dopisu)</span></div>
+    <div class="vocab-item"><strong>curriculum vitae (CV)</strong><span>životopis</span></div>
+  </div>
+</div>
+
+<footer>
+  Cambridge B2 First · Writing · Formal &amp; Informal Letter / Email · FCE Guide
+</footer>
+
+</body>
+</html>
